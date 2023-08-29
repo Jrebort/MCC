@@ -1,0 +1,15 @@
+# Binaries
+**/bin/
+**/bin-int
+
+**.png
+**.dll
+**.lib
+
+# Visual Studio files and folder
+.vs/
+**.sln
+**.vcxproj
+**.vcxproj.filters
+**.vcxproj.user
+**.csproj

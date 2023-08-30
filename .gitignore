@@ -5,7 +5,7 @@
 **.png
 **.dll
 **.lib
-ventor/cvSources
+vendor/cvSources
 
 # Visual Studio files and folder
 .vs/

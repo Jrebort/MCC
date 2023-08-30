@@ -27,7 +27,7 @@ project "CamCalibration"
    }
 
    links {
-       "./vendor/opencv/lib/opencv_world480d.lib",
+       "./vendor/opencv/lib/opencv_world480d.lib"
    }
 
    filter { "system:windows" }

@@ -1,0 +1,8 @@
+# ninja log v5
+10	1030	7151738197310467	src/CMakeFiles/cameraCalibration.dir/multiCameraCalibration.cpp.obj	369f3bbaa70ae860
+3	1133	7151738198340457	src/CMakeFiles/cameraCalibration.dir/Settings.cpp.obj	b04027d3cc0773b4
+16	236	7151793587493055	build.ninja	202827316a10502d
+7	1225	7151738199261398	src/CMakeFiles/cameraCalibration.dir/monoCameraCalibration.cpp.obj	63c0266147842508
+1771	2702	7151765871572915	src/cameraCalibration.exe	68aca15b58bd0888
+18	1770	7151765870057144	src/CMakeFiles/cameraCalibration.dir/ceres.cpp.obj	7af932e673838b6b
+16	866	7151793776220679	ceres_custombundle/CMakeFiles/ParseCmd.dir/common/flags/command_args.cpp.obj	b0059c7c9ec68c1f

@@ -30,17 +30,19 @@ monoCameraCalibration::monoCameraCalibration(const std::string& settingFilePath,
 		CamCaliASSERT(true, "Could not open the configuration file");
 	}
 
+	// read setting file 
 	fs["Settings"] >> s;
 	fs.release();
 
+	// interrupt running if setting format is wrong
 	if (!s.goodInput)
 	{
 		CamCaliASSERT( !s.goodInput ,"Invalid input detected. Application stopping.");
 	}
 	
-	init();
-	
+	init();	
 }
+
 void monoCameraCalibration::init()
 {
 	grid_width = s.squareSize * (s.boardSize.width - 1);
@@ -98,7 +100,6 @@ void monoCameraCalibration::init()
 	}
 }
 
-
 monoCameraCalibration::~monoCameraCalibration()
 {
 
@@ -106,19 +107,10 @@ monoCameraCalibration::~monoCameraCalibration()
 
 bool monoCameraCalibration::calibrate()
 {
-	const cv::Scalar RED(0, 0, 255), GREEN(0, 255, 0);
-	for (;;)
+	while ( imagePoints.size() < (size_t)s.nrFrames )
 	{
-		cv::Mat view;
+		cv::Mat view; // calibration image
 		view = s.nextImage();
-
-		if (mode == CAPTURING && imagePoints.size() >= (size_t)s.nrFrames)
-		{
-			if (runCalibrationAndSave(s, imageSize, cameraMatrix, distCoeffs, imagePoints, grid_width,
-				release_object))
-				mode = CALIBRATED;
-			return 0;
-		}
 
 		imageSize = view.size();  // Format input image.
 
@@ -127,7 +119,7 @@ bool monoCameraCalibration::calibrate()
 		//! [find_pattern]
 		std::vector<cv::Point2f> pointBuf;
 
-		bool found;
+		bool found; // true if corner found by detector
 
 		int chessBoardFlags = cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_NORMALIZE_IMAGE;
 
@@ -170,12 +162,13 @@ bool monoCameraCalibration::calibrate()
 					cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.0001));
 			}
 
-			if (mode == CAPTURING &&  // For camera only take new samples after delay time
+			if (mode == DETECTING &&  // For camera only take new samples after delay time
 				(clock() - prevTimestamp > s.delay * 1e-3 * CLOCKS_PER_SEC))
 			{
 				imagePoints.push_back(pointBuf);
 				prevTimestamp = clock();
 			}
+
 			//------------------------- Video capture  output  undistorted ------------------------------
 			//! [output_undistorted]
 			if (mode == CALIBRATED && s.showUndistorted)
@@ -234,7 +227,17 @@ bool monoCameraCalibration::calibrate()
 		}
 		//! [show_results]
 	}
-	return 0;
+
+	if (mode == DETECTING && imagePoints.size() >= (size_t)s.nrFrames)
+	{
+		if (runCalibrationAndSave(s, imageSize, cameraMatrix, distCoeffs, imagePoints, grid_width,
+			release_object))
+		{
+			mode = CALIBRATED;
+			return 0;
+		}
+	}
+	return 1;
 }
 
 //! [compute_errors]

@@ -9,10 +9,10 @@ enum DISPLAY { DETECTION, UNDISTORT};
 class monoCameraCalibration
 {
 private:
-	enum {CAPTURING = 1, CALIBRATED = 2 };
+	enum {DETECTING = 1, CALIBRATED = 2 };
 	Settings s;
 	cv::aruco::Dictionary dictionary;
-	int mode = CAPTURING;
+	int mode = DETECTING;
 	bool release_object = false;
     clock_t prevTimestamp = 0;
     const char ESC_KEY = 27;

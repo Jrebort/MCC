@@ -6,6 +6,7 @@
 **.dll
 **.lib
 vendor/cvSources
+.out
 
 # Visual Studio files and folder
 .vs/

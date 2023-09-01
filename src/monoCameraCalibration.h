@@ -14,7 +14,7 @@ private:
 	Settings s;
 	cv::aruco::Dictionary dictionary;
 	int mode = DETECTING;
-	float scaleFactor = 1;
+	float scaleFactor = 4;
 	bool release_object = false;
     clock_t prevTimestamp = 0;
     const char ESC_KEY = 27;

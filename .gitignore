@@ -1,12 +1,10 @@
 # Binaries
 **/bin/
-**/bin-int
+**/out/
 
 **.png
 **.dll
 **.lib
-vendor/cvSources
-.out
 
 # Visual Studio files and folder
 .vs/

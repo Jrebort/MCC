@@ -1,5 +1,0 @@
-E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/ch9/out/build/x64-Debug/CMakeFiles/bal_common.dir
-E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/ch9/out/build/x64-Debug/CMakeFiles/bundle_adjustment_g2o.dir
-E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/ch9/out/build/x64-Debug/CMakeFiles/bundle_adjustment_ceres.dir
-E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/ch9/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/ch9/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

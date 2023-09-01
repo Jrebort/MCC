@@ -39,7 +39,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
       
       The C compiler identification is MSVC, found in:
-        E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdC/CMakeCCompilerId.exe
+        E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdC/CMakeCCompilerId.exe
       
   -
     kind: "message-v1"
@@ -51,7 +51,7 @@ events:
     message: |
       Detecting C compiler /showIncludes prefix:
         main.c
-        注意: 包含文件:  E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        注意: 包含文件:  E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "注意: 包含文件:  "
   -
@@ -85,7 +85,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
       
       The CXX compiler identification is MSVC, found in:
-        E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdCXX/CMakeCXXCompilerId.exe
+        E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdCXX/CMakeCXXCompilerId.exe
       
   -
     kind: "message-v1"
@@ -97,7 +97,7 @@ events:
     message: |
       Detecting CXX compiler /showIncludes prefix:
         main.c
-        注意: 包含文件:  E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        注意: 包含文件:  E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "注意: 包含文件:  "
   -
@@ -109,8 +109,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yg06x1"
-      binary: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yg06x1"
+      source: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2m3yjw"
+      binary: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2m3yjw"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -122,10 +122,10 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yg06x1
+        Change Dir: E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2m3yjw
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_ad640 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_ad640.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_ad640.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_ad640.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_ad640.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_ad640.exe /implib:cmTC_ad640.lib /pdb:cmTC_ad640.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yg06x1" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yg06x1/cmTC_ad640.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_11c4c && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_11c4c.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_11c4c.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_11c4c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_11c4c.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_11c4c.exe /implib:cmTC_11c4c.lib /pdb:cmTC_11c4c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2m3yjw && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2m3yjw/cmTC_11c4c.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -137,8 +137,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-827bdr"
-      binary: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-827bdr"
+      source: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-irgo0b"
+      binary: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-irgo0b"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -150,10 +150,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-827bdr
+        Change Dir: E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-irgo0b
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_1c1d5 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_1c1d5.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_1c1d5.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_1c1d5.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_1c1d5.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_1c1d5.exe /implib:cmTC_1c1d5.lib /pdb:cmTC_1c1d5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-827bdr" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-827bdr/cmTC_1c1d5.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_797b5 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_797b5.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_797b5.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_797b5.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_797b5.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_797b5.exe /implib:cmTC_797b5.lib /pdb:cmTC_797b5.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-irgo0b && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-irgo0b/cmTC_797b5.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -172,8 +172,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zmfhul"
-      binary: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zmfhul"
+      source: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-eokj3y"
+      binary: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-eokj3y"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -185,12 +185,12 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-zmfhul
+        Change Dir: E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-eokj3y
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_e82e0 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e82e0.dir\\src.c.obj /FdCMakeFiles\\cmTC_e82e0.dir\\ /FS -c "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zmfhul\\src.c"
-        FAILED: CMakeFiles/cmTC_e82e0.dir/src.c.obj 
-        C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e82e0.dir\\src.c.obj /FdCMakeFiles\\cmTC_e82e0.dir\\ /FS -c "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zmfhul\\src.c"
-        E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-zmfhul\\src.c(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_b3a08 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_b3a08.dir\\src.c.obj /FdCMakeFiles\\cmTC_b3a08.dir\\ /FS -c E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-eokj3y\\src.c
+        FAILED: CMakeFiles/cmTC_b3a08.dir/src.c.obj 
+        C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_b3a08.dir\\src.c.obj /FdCMakeFiles\\cmTC_b3a08.dir\\ /FS -c E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-eokj3y\\src.c
+        E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-eokj3y\\src.c(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -209,8 +209,8 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xnv0lq"
-      binary: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xnv0lq"
+      source: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gdxowc"
+      binary: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gdxowc"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -222,13 +222,13 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xnv0lq
+        Change Dir: E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gdxowc
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_e7476 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_e7476.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_e7476.dir\\ /FS -c "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xnv0lq\\CheckFunctionExists.c"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e7476.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e7476.dir\\CheckFunctionExists.c.obj  /out:cmTC_e7476.exe /implib:cmTC_e7476.lib /pdb:cmTC_e7476.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xnv0lq" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xnv0lq/cmTC_e7476.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_e7476.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_e7476.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e7476.dir\\CheckFunctionExists.c.obj  /out:cmTC_e7476.exe /implib:cmTC_e7476.lib /pdb:cmTC_e7476.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xnv0lq" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xnv0lq/cmTC_e7476.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_e7476.dir\\CheckFunctionExists.c.obj /out:cmTC_e7476.exe /implib:cmTC_e7476.lib /pdb:cmTC_e7476.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_e7476.dir/intermediate.manifest CMakeFiles\\cmTC_e7476.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_b5abb && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_b5abb.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_b5abb.dir\\ /FS -c E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gdxowc\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_b5abb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5abb.dir\\CheckFunctionExists.c.obj  /out:cmTC_b5abb.exe /implib:cmTC_b5abb.lib /pdb:cmTC_b5abb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gdxowc && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gdxowc/cmTC_b5abb.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_b5abb.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_b5abb.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5abb.dir\\CheckFunctionExists.c.obj  /out:cmTC_b5abb.exe /implib:cmTC_b5abb.lib /pdb:cmTC_b5abb.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gdxowc && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gdxowc/cmTC_b5abb.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_b5abb.dir\\CheckFunctionExists.c.obj /out:cmTC_b5abb.exe /implib:cmTC_b5abb.lib /pdb:cmTC_b5abb.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_b5abb.dir/intermediate.manifest CMakeFiles\\cmTC_b5abb.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthreads.lib”\x0d
         ninja: build stopped: subcommand failed.
         
@@ -248,8 +248,8 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wbdcll"
-      binary: "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wbdcll"
+      source: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8247eg"
+      binary: "E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8247eg"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -261,13 +261,13 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wbdcll
+        Change Dir: E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8247eg
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_0c260 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_0c260.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_0c260.dir\\ /FS -c "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wbdcll\\CheckFunctionExists.c"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0c260.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0c260.dir\\CheckFunctionExists.c.obj  /out:cmTC_0c260.exe /implib:cmTC_0c260.lib /pdb:cmTC_0c260.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wbdcll" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wbdcll/cmTC_0c260.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_0c260.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0c260.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0c260.dir\\CheckFunctionExists.c.obj  /out:cmTC_0c260.exe /implib:cmTC_0c260.lib /pdb:cmTC_0c260.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D "E:\\OneDrive - mails.ucas.edu.cn\\Study\\Academy\\Project\\reconstruction\\src\\cameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wbdcll" && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wbdcll/cmTC_0c260.exe" -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0c260.dir\\CheckFunctionExists.c.obj /out:cmTC_0c260.exe /implib:cmTC_0c260.lib /pdb:cmTC_0c260.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_0c260.dir/intermediate.manifest CMakeFiles\\cmTC_0c260.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_7f730 && [1/2] C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_7f730.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_7f730.dir\\ /FS -c E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8247eg\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_7f730.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_7f730.dir\\CheckFunctionExists.c.obj  /out:cmTC_7f730.exe /implib:cmTC_7f730.lib /pdb:cmTC_7f730.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8247eg && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8247eg/cmTC_7f730.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_7f730.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_7f730.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\100220~1.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_7f730.dir\\CheckFunctionExists.c.obj  /out:cmTC_7f730.exe /implib:cmTC_7f730.lib /pdb:cmTC_7f730.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D E:\\dev\\CameraCalibration\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8247eg && C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -noprofile -executionpolicy Bypass -file C:/Users/jrebo/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary E:/dev/CameraCalibration/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8247eg/cmTC_7f730.exe -installedDir C:/Users/jrebo/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MICROS~3\\2022\\COMMUN~1\\VC\\Tools\\MSVC\\1437~1.328\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_7f730.dir\\CheckFunctionExists.c.obj /out:cmTC_7f730.exe /implib:cmTC_7f730.lib /pdb:cmTC_7f730.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_7f730.dir/intermediate.manifest CMakeFiles\\cmTC_7f730.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthread.lib”\x0d
         ninja: build stopped: subcommand failed.
         

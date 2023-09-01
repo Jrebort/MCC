@@ -1,6 +1,0 @@
-# ninja log v5
-5	733	7152580957178168	src/CMakeFiles/cameraCalibration.dir/Settings.cpp.obj	8248f7207c11630c
-7	767	7152580957533586	src/CMakeFiles/cameraCalibration.dir/monoCameraCalibration.cpp.obj	cf1f75af6a07e5a6
-2	821	7152580958059638	src/CMakeFiles/cameraCalibration.dir/Dataset.cpp.obj	b3f63dfbb6f4b837
-9	876	7152580958604515	src/CMakeFiles/cameraCalibration.dir/multiCameraCalibration.cpp.obj	d6057053b9cda267
-876	1972	7152580961164070	src/cameraCalibration.exe	b1ed2ccb8e1c1a3c

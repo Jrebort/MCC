@@ -9,10 +9,12 @@ enum DISPLAY { DETECTION, UNDISTORT};
 class monoCameraCalibration
 {
 private:
-	enum {DETECTING = 1, CALIBRATED = 2 };
+	enum { DETECTING = 1, CALIBRATED = 2 };
+	std::string settingFilePath;
 	Settings s;
 	cv::aruco::Dictionary dictionary;
 	int mode = DETECTING;
+	float scaleFactor = 1;
 	bool release_object = false;
     clock_t prevTimestamp = 0;
     const char ESC_KEY = 27;
@@ -40,18 +42,26 @@ private:
 	bool runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 		std::vector<std::vector<cv::Point2f>> imagePoints, float grid_width, bool release_object);
 
-	void init();
+
 public:
 	const int winSize;
-	float grid_width;
+	float grid_width = 0;
 
+	std::vector<cv::Point3f> gridPoints;
     std::vector<std::vector<cv::Point2f> > imagePoints;
+	std::vector<cv::Mat> rvecs, tvecs;
     cv::Mat cameraMatrix, distCoeffs;
     cv::Size imageSize;
 
 public:
-	monoCameraCalibration(const std::string& settingFilePath, const int& Size);
+	monoCameraCalibration():winSize(11){};
+	monoCameraCalibration(const std::string& filePath, const int& Size);
+	void init();
+	void addSettingFilePath(const std::string& settingFilePath);
 	~monoCameraCalibration();
+	float getScaleFactor() { return scaleFactor; }
+	void readResultXml(const std::string& xmlFilename);
+	void setScaleFactor(float scale) { scaleFactor = scale; }
 	bool calibrate();
 	bool showCalibrationResults(DISPLAY displayMode);
 };

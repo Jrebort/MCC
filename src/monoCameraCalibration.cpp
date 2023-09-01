@@ -18,9 +18,19 @@ static inline void read(const cv::FileNode& node, Settings& x, const Settings& d
 		x.read(node);
 }
 
-monoCameraCalibration::monoCameraCalibration(const std::string& settingFilePath, const int& Size)
-	: winSize(Size)
+void monoCameraCalibration::addSettingFilePath(const std::string& filePath)
 {
+	settingFilePath = filePath;
+}
+
+monoCameraCalibration::monoCameraCalibration(const std::string& filePath, const int& Size)
+	: settingFilePath(settingFilePath), winSize(Size)
+{	
+}
+
+void monoCameraCalibration::init()
+{
+
 	cv::FileStorage fs(settingFilePath, cv::FileStorage::READ);
 	if (!fs.isOpened())
 	{
@@ -39,12 +49,7 @@ monoCameraCalibration::monoCameraCalibration(const std::string& settingFilePath,
 	{
 		CamCaliASSERT( !s.goodInput ,"Invalid input detected. Application stopping.");
 	}
-	
-	init();	
-}
 
-void monoCameraCalibration::init()
-{
 	grid_width = s.squareSize * (s.boardSize.width - 1);
 	if (s.calibrationPattern == Settings::Pattern::CHARUCOBOARD) 
 	{
@@ -130,23 +135,23 @@ bool monoCameraCalibration::calibrate()
 
 		switch (s.calibrationPattern) // Find feature points on the input format
 		{
-		case Settings::CHESSBOARD:
-			found = findChessboardCorners(view, s.boardSize, pointBuf, chessBoardFlags);
-			break;
-			//[TODO]
-			//case Settings::CHARUCOBOARD:
-			//    ch_detector.detectBoard( view, pointBuf, markerIds);
-			//    found = pointBuf.size() == (size_t)((s.boardSize.height - 1)*(s.boardSize.width - 1));
-			//    break;
-		case Settings::CIRCLES_GRID:
-			found = findCirclesGrid(view, s.boardSize, pointBuf);
-			break;
-		case Settings::ASYMMETRIC_CIRCLES_GRID:
-			found = findCirclesGrid(view, s.boardSize, pointBuf, cv::CALIB_CB_ASYMMETRIC_GRID);
-			break;
-		default:
-			found = false;
-			break;
+			case Settings::CHESSBOARD:
+				found = findChessboardCorners(view, s.boardSize, pointBuf, chessBoardFlags);
+				break;
+				//[TODO]
+				//case Settings::CHARUCOBOARD:
+				//    ch_detector.detectBoard( view, pointBuf, markerIds);
+				//    found = pointBuf.size() == (size_t)((s.boardSize.height - 1)*(s.boardSize.width - 1));
+				//    break;
+			case Settings::CIRCLES_GRID:
+				found = findCirclesGrid(view, s.boardSize, pointBuf);
+				break;
+			case Settings::ASYMMETRIC_CIRCLES_GRID:
+				found = findCirclesGrid(view, s.boardSize, pointBuf, cv::CALIB_CB_ASYMMETRIC_GRID);
+				break;
+			default:
+				found = false;
+				break;
 		}
 		//! [find_pattern]
 
@@ -162,8 +167,15 @@ bool monoCameraCalibration::calibrate()
 					cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.0001));
 			}
 
-			if (mode == DETECTING &&  // For camera only take new samples after delay time
-				(clock() - prevTimestamp > s.delay * 1e-3 * CLOCKS_PER_SEC))
+			// scale 
+			for (auto& point : pointBuf)
+			{
+				point.x *= 1 / scaleFactor;
+				point.y *= 1 / scaleFactor;
+			}
+
+
+			if (mode == DETECTING)
 			{
 				imagePoints.push_back(pointBuf);
 				prevTimestamp = clock();
@@ -187,6 +199,10 @@ bool monoCameraCalibration::calibrate()
 			//! [output_undistorted]
 			//------------------------------ Show image and check for input commands -------------------
 			//! [await_input]
+		}
+		else
+		{
+			__debugbreak;
 		}
 
 		// -----------------------Show the undistorted image for the image list ------------------------
@@ -507,7 +523,6 @@ void monoCameraCalibration::saveCameraParams(Settings& s, cv::Size& imageSize, c
 bool monoCameraCalibration::runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	std::vector<std::vector<cv::Point2f>> imagePoints, float grid_width, bool release_object)
 {
-	std::vector<cv::Mat> rvecs, tvecs;
 	std::vector<float> reprojErrs;
 	double totalAvgErr = 0;
 	std::vector<cv::Point3f> newObjPoints;
@@ -563,3 +578,46 @@ bool monoCameraCalibration::showCalibrationResults(DISPLAY displayMode)
 	}
 	return 0;
 }
+
+void monoCameraCalibration::readResultXml(const std::string& xmlFilename)
+{
+	cv::FileStorage fs(xmlFilename, cv::FileStorage::READ);
+	if (!fs.isOpened()) {
+		std::cerr << "Failed to open " << xmlFilename << std::endl;
+		return;
+	}
+
+    // Read data from the file
+	cv::Mat bigmat, imagePtMat;
+
+	fs["grid_points"] >> gridPoints;
+	fs["extrinsic_parameters"] >> bigmat; 
+    fs["image_points"] >> imagePtMat;  
+
+	// Convert imagePtMat to std::vector<std::vector<cv::Point2f>>
+	imagePoints.resize(imagePtMat.rows);
+	for (int i = 0; i < imagePtMat.rows; i++) {
+		imagePoints[i] = imagePtMat.row(i);
+	}
+
+	// Convert bigmat to rvecs and tvecs
+	rvecs.resize(bigmat.rows);
+	tvecs.resize(bigmat.rows);
+	for (int i = 0; i < bigmat.rows; i++) {
+		rvecs[i] = bigmat(cv::Range(i, i + 1), cv::Range(0, 3));
+		tvecs[i] = bigmat(cv::Range(i, i + 1), cv::Range(3, 6));
+	}
+	
+    fs["image_width"] >> imageSize.width;
+    fs["image_height"] >> imageSize.height;
+    fs["camera_matrix"] >> cameraMatrix;
+    fs["distortion_coefficients"] >> distCoeffs;
+	// Close the file storage
+	fs.release();
+
+	// You can print or process the variables as needed
+	std::cout << "Image Size: " << imageSize << std::endl;
+	std::cout << "Camera Matrix:\n" << cameraMatrix << std::endl;
+	std::cout << "Distortion Coefficients:\n" << distCoeffs << std::endl;
+}
+

@@ -7,8 +7,8 @@
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 #include "opencv2/objdetect/charuco_detector.hpp"
-
 #include <iostream>
+
 #include "Settings.h"
 
 Settings::Settings() : goodInput(false) {}

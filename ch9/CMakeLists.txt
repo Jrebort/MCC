@@ -4,8 +4,12 @@ project(bundle_adjustment)
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-O3 -std=c++11")
 
+set(Sophus_DIR  ${_VCPKG_INSTALLED_DIR}/x64-windows-static/share/sophus/)
+set(fmt_DIR  ${_VCPKG_INSTALLED_DIR}/x64-windows-static/share/fmt/)
+
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
+find_package(fmt CONFIG REQUIRED)
 Find_Package(G2O REQUIRED)
 Find_Package(Eigen3 REQUIRED)
 Find_Package(Ceres REQUIRED)

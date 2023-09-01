@@ -1,8 +1,8 @@
-# Install script for directory: E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/src
+# Install script for directory: H:/Engine/CameraCalibration/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/src/cameraCalibration/out/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "H:/Engine/CameraCalibration/out/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

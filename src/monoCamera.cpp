@@ -1,5 +1,5 @@
 #include <iostream>
-#include "monoCameraCalibration.h"
+#include "monoCamera.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/core/utility.hpp>
@@ -18,17 +18,17 @@ static inline void read(const cv::FileNode& node, Settings& x, const Settings& d
 		x.read(node);
 }
 
-void monoCameraCalibration::addSettingFilePath(const std::string& filePath)
+void monoCamera::addSettingFilePath(const std::string& filePath)
 {
 	settingFilePath = filePath;
 }
 
-monoCameraCalibration::monoCameraCalibration(const std::string& filePath, const int& Size)
+monoCamera::monoCamera(const std::string& filePath, const int& Size)
 	: settingFilePath(settingFilePath), winSize(Size)
 {	
 }
 
-void monoCameraCalibration::init()
+void monoCamera::init()
 {
 
 	cv::FileStorage fs(settingFilePath, cv::FileStorage::READ);
@@ -105,12 +105,12 @@ void monoCameraCalibration::init()
 	}
 }
 
-monoCameraCalibration::~monoCameraCalibration()
+monoCamera::~monoCamera()
 {
 
 }
 
-bool monoCameraCalibration::calibrate()
+bool monoCamera::calibrate()
 {
 	while ( imagePoints.size() < (size_t)s.nrFrames )
 	{
@@ -178,7 +178,6 @@ bool monoCameraCalibration::calibrate()
 			if (mode == DETECTING)
 			{
 				imagePoints.push_back(pointBuf);
-				prevTimestamp = clock();
 			}
 
 			//------------------------- Video capture  output  undistorted ------------------------------
@@ -257,7 +256,7 @@ bool monoCameraCalibration::calibrate()
 }
 
 //! [compute_errors]
-double monoCameraCalibration::computeReprojectionErrors(const std::vector<std::vector<cv::Point3f> >& objectPoints,
+double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::Point3f> >& objectPoints,
 	const std::vector<std::vector<cv::Point2f> >& imagePoints,
 	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
 	const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
@@ -292,7 +291,7 @@ double monoCameraCalibration::computeReprojectionErrors(const std::vector<std::v
 //! [compute_errors]
 
 //! [board_corners]
-void monoCameraCalibration::calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
+void monoCamera::calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
 	Settings::Pattern patternType /*= Settings::CHESSBOARD*/)
 {
 	corners.clear();
@@ -327,7 +326,7 @@ void monoCameraCalibration::calcBoardCornerPositions(cv::Size boardSize, float s
 }
 //! [board_corners]
 
-bool monoCameraCalibration::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
+bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	std::vector<std::vector<cv::Point2f> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
 	std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3f>& newObjPoints,
 	float grid_width, bool release_object)
@@ -401,7 +400,7 @@ bool monoCameraCalibration::runCalibration(Settings& s, cv::Size& imageSize, cv:
 }
 
 // Print camera parameters to the output file
-void monoCameraCalibration::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
+void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
 	const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2f> >& imagePoints,
 	double totalAvgErr, const std::vector<cv::Point3f>& newObjPoints)
@@ -520,7 +519,7 @@ void monoCameraCalibration::saveCameraParams(Settings& s, cv::Size& imageSize, c
 }
 
 //! [run_and_save]
-bool monoCameraCalibration::runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
+bool monoCamera::runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	std::vector<std::vector<cv::Point2f>> imagePoints, float grid_width, bool release_object)
 {
 	std::vector<float> reprojErrs;
@@ -539,7 +538,7 @@ bool monoCameraCalibration::runCalibrationAndSave(Settings& s, cv::Size imageSiz
 }
 //! [run_and_save]
 
-bool monoCameraCalibration::showCalibrationResults(DISPLAY displayMode)
+bool monoCamera::showCalibrationResults(DISPLAY displayMode)
 {
 	switch (displayMode)
 	{
@@ -579,7 +578,7 @@ bool monoCameraCalibration::showCalibrationResults(DISPLAY displayMode)
 	return 0;
 }
 
-void monoCameraCalibration::readResultXml(const std::string& xmlFilename)
+void monoCamera::readResultXml(const std::string& xmlFilename)
 {
 	cv::FileStorage fs(xmlFilename, cv::FileStorage::READ);
 	if (!fs.isOpened()) {

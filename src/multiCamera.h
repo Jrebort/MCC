@@ -10,4 +10,5 @@ public:
 	multiCamera();
 	~multiCamera();
 	void addCamera(monoCamera& camera);
+	void writeCameraParamter();
 };

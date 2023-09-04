@@ -4,13 +4,14 @@
 #include <boost/filesystem.hpp>
 
 #include "Dataset.h"
-#include "monoCameraCalibration.h"
+#include "monoCamera.h"
+#include "multiCamera.h"
 
 
-std::vector<std::string> addView(const std::string& foldername)
+bool addView(std::vector<std::string>& viewFolders, const std::string& foldername)
 {
 	using namespace boost::filesystem;
-	std::vector<std::string> viewFolders;
+	;
 	path p(foldername);
 	std::cout << "Exist camera folder as follow: " << std::endl;
 	// Use boost::filesystem::recursive_directory_iterator for recursive search
@@ -18,20 +19,18 @@ std::vector<std::string> addView(const std::string& foldername)
 		if (boost::filesystem::is_directory(it->status())) {
 			if (it->path().filename().string().find("view") != std::string::npos) {
 				viewFolders.push_back(it->path().string()); 
-				std::cout << it->path().string() << std::endl;
 			}
 		}
 	}
-	return viewFolders;
+	return 0;
 }
 
-std::vector<monoCameraCalibration> addCamera(std::vector<std::string> viewFolders)
+bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 {
-	std::vector<monoCameraCalibration> cameraMatrix;
 	for (size_t i = 0; i < viewFolders.size(); i++)
 	{
 		std::string datasetFolder = viewFolders[i] + "/filter";
-		monoCameraCalibration camera;
+		monoCamera camera;
 		Dataset dataset(datasetFolder);
 		if (!dataset.isCalibrated())
 		{
@@ -53,17 +52,19 @@ std::vector<monoCameraCalibration> addCamera(std::vector<std::string> viewFolder
 			camera.init();
 			camera.readResultXml(dataset.getCameraParamPath());
 		}
-		cameraMatrix.push_back(camera);
+		multicamera.addCamera(camera);
 	}
-	return cameraMatrix;
+	return 0;
 }
 
 int main()
 {
+	multiCamera multicamera;
 	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
-	std::vector<std::string> viewFolders = addView(dataPath);
-	
-	std::vector<monoCameraCalibration> cameraMetrix = addCamera(viewFolders);
+	std::vector<std::string> viewFolders;
+
+	addView(viewFolders, dataPath);	
+	addCamera(multicamera, viewFolders);
 
 
 	//calibrater.showCalibrationResults(DETECTION);

@@ -5,19 +5,18 @@
 #include "opencv2/objdetect/charuco_detector.hpp"
 
 enum DISPLAY { DETECTION, UNDISTORT};
+enum { DETECTING = 1, CALIBRATED = 2 };
+const char ESC_KEY = 27;
 
-class monoCameraCalibration
+class monoCamera
 {
 private:
-	enum { DETECTING = 1, CALIBRATED = 2 };
-	std::string settingFilePath;
 	Settings s;
+	std::string settingFilePath;
 	cv::aruco::Dictionary dictionary;
 	int mode = DETECTING;
 	float scaleFactor = 4;
 	bool release_object = false;
-    clock_t prevTimestamp = 0;
-    const char ESC_KEY = 27;
 
 private:	
 	double computeReprojectionErrors(const std::vector<std::vector<cv::Point3f> >& objectPoints,
@@ -54,11 +53,11 @@ public:
     cv::Size imageSize;
 
 public:
-	monoCameraCalibration():winSize(11){};
-	monoCameraCalibration(const std::string& filePath, const int& Size);
+	monoCamera():winSize(11){};
+	monoCamera(const std::string& filePath, const int& Size);
 	void init();
 	void addSettingFilePath(const std::string& settingFilePath);
-	~monoCameraCalibration();
+	~monoCamera();
 	float getScaleFactor() { return scaleFactor; }
 	void readResultXml(const std::string& xmlFilename);
 	void setScaleFactor(float scale) { scaleFactor = scale; }

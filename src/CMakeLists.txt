@@ -18,7 +18,6 @@ find_package(Boost COMPONENTS filesystem REQUIRED)
 # Sophus
 find_package(Sophus REQUIRED)
 
-
 # monoCalibration
 add_executable(${PROJECT_NAME} ${MyCSources})
 

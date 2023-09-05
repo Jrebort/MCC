@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <opencv2/core.hpp>
+#include <opencv2/objdetect/charuco_detector.hpp>
 #include "Settings.h"
-#include "opencv2/objdetect/charuco_detector.hpp"
 
 enum DISPLAY { DETECTION, UNDISTORT};
 enum { DETECTING = 1, CALIBRATED = 2 };
@@ -49,6 +49,8 @@ public:
 	std::vector<cv::Point3f> gridPoints;
     std::vector<std::vector<cv::Point2f> > imagePoints;
 	std::vector<cv::Mat> rvecs, tvecs;
+	cv::Mat R;
+	cv::Mat T;
     cv::Mat cameraMatrix, distCoeffs;
     cv::Size imageSize;
 

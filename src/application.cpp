@@ -3,6 +3,7 @@
 #include <fstream>
 #include <boost/filesystem.hpp>
 
+#include "Core.h"
 #include "Dataset.h"
 #include "monoCamera.h"
 #include "multiCamera.h"
@@ -10,13 +11,11 @@
 
 bool addView(std::vector<std::string>& viewFolders, const std::string& foldername)
 {
-	using namespace boost::filesystem;	
+	using namespace boost::filesystem;
 	path p(foldername);
-	if (exists(p) && is_directory(p))
-		std::cout << "Opening Data folder" << p << std::endl;
-	else
-		std::cout << "Data folder is not exist! Please check ..." << std::endl;
-		__debugbreak();
+	ASSERT(!(exists(p) && is_directory(p)), "Data folder is not exist! Please check ...")
+
+	std::cout << "Opening Data folder: " << p << std::endl;
 
 	std::cout << "Exist camera folder as follow: " << std::endl;
 	// Use boost::filesystem::recursive_directory_iterator for recursive search
@@ -65,12 +64,14 @@ bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
 	std::vector<std::string> viewFolders;
 
 	addView(viewFolders, dataPath);	
 	addCamera(multicamera, viewFolders);
-
+	
+	multicamera.pnpOptimization();
+	multicamera.writeCameraParamter();
 
 	//calibrater.showCalibrationResults(DETECTION);
 }

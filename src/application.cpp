@@ -10,9 +10,14 @@
 
 bool addView(std::vector<std::string>& viewFolders, const std::string& foldername)
 {
-	using namespace boost::filesystem;
-	;
+	using namespace boost::filesystem;	
 	path p(foldername);
+	if (exists(p) && is_directory(p))
+		std::cout << "Opening Data folder" << p << std::endl;
+	else
+		std::cout << "Data folder is not exist! Please check ..." << std::endl;
+		__debugbreak();
+
 	std::cout << "Exist camera folder as follow: " << std::endl;
 	// Use boost::filesystem::recursive_directory_iterator for recursive search
 	for (directory_iterator it(p); it != directory_iterator(); ++it) {

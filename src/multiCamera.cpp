@@ -32,20 +32,20 @@ void multiCamera::pnpOptimization()
 	const monoCamera& cameraBase = cameraMatrix[0];
 	for (int i = 0; i < patternNum; i++)
 	{
+		// set local variable
 		Mat r;
+		Mat t = cameraBase.tvecs[i].t();
+		Mat point3d(cameraBase.gridPoints);
+		point3d = point3d.reshape(3, 88);
+
 		Rodrigues(cameraBase.rvecs[i], r, noArray());
-		Mat t = cameraBase.tvecs[i];
-		const std::vector<cv::Point3f>& gridPoints = cameraBase.gridPoints;
-		unsigned int gridPointNum = gridPoints.size();
-		std::vector<Vec4f> points3dHomo;
-		convertPointsToHomogeneous(gridPoints, points3dHomo);
 
+		Mat T(3, 4, r.type());
+		r.copyTo( T(Rect(0, 0, 3, 3)));
+		t.copyTo( T(Rect(3, 0, 1, 3)));
 
-		//for (int j = 0; j < gridPointNum; j++) 
-		//{
-		//	Mat point3d(gridPoints[j]);
-
-		//}
+		worldPoint = r.mul(point3d) + repeat(t, 1, 88);
+		transform(point3d, worldPoint, T);
 	}
 }
 

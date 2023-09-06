@@ -9,7 +9,7 @@ class multiCamera
 {
 private:
 	std::vector<monoCamera> cameraMatrix;
-	cv::Mat worldPoint;
+	std::vector<std::vector<cv::Point3f>> worldPoint;
 
 public:
 	multiCamera();
@@ -17,5 +17,7 @@ public:
 	void addCamera(monoCamera& camera);
 	void writeCameraParamter();
 	void pnpOptimization();
+	std::vector<cv::Point3f> getWorldPointVec() const;
+	cv::Mat getWorldPointMat() const;
 	void visCameraPose();
 };

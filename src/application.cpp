@@ -64,7 +64,7 @@ bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
 	std::vector<std::string> viewFolders;
 
 	addView(viewFolders, dataPath);	

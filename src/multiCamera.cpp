@@ -67,6 +67,7 @@ void multiCamera::addCamera(monoCamera& camera)
 
 void multiCamera::writeCameraParamter()
 {
+
 }
 
 void multiCamera::pnpOptimization()
@@ -137,7 +138,7 @@ void multiCamera::pnpOptimization()
 			20.0,
 			0.99,
 			inlier,
-			SOLVEPNP_ITERATIVE
+			SOLVEPNP_EPNP
 		);
 
 		double error = computeReprojectionErrors(worldPointVec,
@@ -188,33 +189,34 @@ cv::Mat multiCamera::getWorldPointMat() const
 
 void multiCamera::visCameraPose()
 {
-	//using namespace cv;
-	//using namespace std;
-	//	
-	//viz::Viz3d window("Coordinate Frame");
-	//window.setWindowSize(Size(500, 500));
-	//window.setWindowPosition(Point(150, 150));
-	//window.setBackgroundColor(); // black by default
+	using namespace cv;
+	using namespace std;
+		
+	viz::Viz3d window("Coordinate Frame");
+	window.setWindowSize(Size(500, 500));
+	window.setWindowPosition(Point(150, 150));
+	window.setBackgroundColor(); // black by default
 
-	//cout << "Recovering cameras ... ";
-	//vector<Affine3d> path;
-	//for (size_t i = 0; i < Rs_est.size(); ++i)
-	//path.push_back(Affine3d(Rs_est[i],ts_est[i]));
-	//cout << "[DONE]" << endl;
+	cout << "Recovering cameras ... ";
+	vector<Affine3d> path;
+	for (size_t i = 0; i < getCameraNum(); ++i)
+	path.push_back(Affine3d(cameraMatrix[i].R, cameraMatrix[i].T));
+	cout << "[DONE]" << endl;
 
-	//if (path.size() > 0)
-	//{
-	//	cout << "Rendering Cameras ... ";
-	//	window.showWidget("cameras_frames_and_lines", viz::WTrajectory(path, viz::WTrajectory::BOTH, 0.1, viz::Color::green()));
-	//	window.showWidget("cameras_frustums", viz::WTrajectoryFrustums(path, K, 0.1, viz::Color::yellow()));
-	//	window.setViewerPose(path[0]);
-	//	cout << "[DONE]" << endl;
-	//}
-	//else
-	//{
-	//	cout << "Cannot render the cameras: Empty path" << endl;
-	//}
-	//cout << endl << "Press 'q' to close each windows ... " << endl;
-	//window.spin();
+	if (path.size() > 0)
+	{
+		cout << "Rendering Cameras ... ";
+		Matx33d K = cameraMatrix[1].cameraMatrix;
+		window.showWidget("cameras_frames_and_lines", viz::WTrajectory(path, viz::WTrajectory::BOTH, 0.1, viz::Color::green()));
+		window.showWidget("cameras_frustums", viz::WTrajectoryFrustums(path, K, 1, viz::Color::yellow()));
+		window.setViewerPose(path[0]);
+		cout << "[DONE]" << endl;
+	}
+	else
+	{
+		cout << "Cannot render the cameras: Empty path" << endl;
+	}
+	cout << endl << "Press 'q' to close each windows ... " << endl;
+	window.spin();
 }
 

@@ -5,6 +5,8 @@
 
 #include "Core.h"
 #include "Dataset.h"
+#include "problem.h"
+#include "bundleAdjustment.h"
 #include "monoCamera.h"
 #include "multiCamera.h"
 
@@ -72,6 +74,17 @@ int main()
 	
 	multicamera.pnpOptimization();
 	multicamera.writeCameraParamter();
+	multicamera.visCameraPose();
 
+	Problem multiCCProblem(multiCamera); // multi-Camera Calibration Problem
+	//multiCCProblem.Normalize();
+	//multiCCProblem.Perturb(0.1, 0.5, 0.5);
+	//multiCCProblem.WriteToPLYFile("initial.ply");
+
+	//BASolver ba(multiCCProblem);
+	//ba.Solve();
+
+	//multiCCProblem.WriteToPLYFile("final.ply");
+	return 0;
 	//calibrater.showCalibrationResults(DETECTION);
 }

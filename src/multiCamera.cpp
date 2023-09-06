@@ -189,34 +189,44 @@ cv::Mat multiCamera::getWorldPointMat() const
 
 void multiCamera::visCameraPose()
 {
-	using namespace cv;
-	using namespace std;
-		
-	viz::Viz3d window("Coordinate Frame");
-	window.setWindowSize(Size(500, 500));
-	window.setWindowPosition(Point(150, 150));
-	window.setBackgroundColor(); // black by default
+	// 创建一个viz窗口
+	cv::viz::Viz3d window("Camera Poses Visualization");
 
-	cout << "Recovering cameras ... ";
-	vector<Affine3d> path;
-	for (size_t i = 0; i < getCameraNum(); ++i)
-	path.push_back(Affine3d(cameraMatrix[i].R, cameraMatrix[i].T));
-	cout << "[DONE]" << endl;
+	// 为世界坐标系创建3D坐标轴，长度为0.5
+	window.showWidget("WorldCoordinateSystem", viz::WCoordinateSystem());
 
-	if (path.size() > 0)
-	{
-		cout << "Rendering Cameras ... ";
-		Matx33d K = cameraMatrix[1].cameraMatrix;
-		window.showWidget("cameras_frames_and_lines", viz::WTrajectory(path, viz::WTrajectory::BOTH, 0.1, viz::Color::green()));
-		window.showWidget("cameras_frustums", viz::WTrajectoryFrustums(path, K, 1, viz::Color::yellow()));
-		window.setViewerPose(path[0]);
-		cout << "[DONE]" << endl;
+	unsigned int camNum = getCameraNum();
+	for (size_t i = 0; i < camNum; i++) {
+		// 使用Rodrigues变换从旋转向量获得旋转矩阵
+		monoCamera& camera = cameraMatrix[i];
+		cv::Mat rotation;
+		cv::Rodrigues(camera.R, rotation);
+
+		// 构建4x4的仿射矩阵
+		cv::Mat affine = cv::Mat::zeros(4, 4, CV_64F);
+		rotation.copyTo(affine(cv::Rect(0, 0, 3, 3)));
+		camera.T.copyTo(affine(cv::Rect(3, 0, 1, 3)));
+		affine.at<double>(3, 3) = 1.0;
+		Affine3d pose(affine);
+
+		// 创建一个小立方体来表示相机的体积
+		Matx33d K(camera.cameraMatrix);
+		viz::WCameraPosition cameraModel(K, 200, viz::Color::white());
+		viz::WCube cubeWidget(Point3d(-5, -5, -5), Point3d(5, 5, 5), true, viz::Color::white());
+		window.showWidget("Cube" + std::to_string(i), cameraModel, pose);
+
+		// 使用箭头表示相机的前向方向
+		Point3d start(0, 0, 0);
+		Point3d end(0, 0, 200); 
+		viz::WArrow arrowWidget(start, end, 0.01, viz::Color::red());
+		window.showWidget("Arrow" + std::to_string(i), arrowWidget, pose);
+
+		// 显示编号
+		std::string cameraNumber = "Camera " + std::to_string(i + 1);
+		viz::WText3D cameraLabel(cameraNumber, Point3d(0, -0.1, 0), 10, false, viz::Color::white());
+		window.showWidget("Label" + std::to_string(i), cameraLabel, pose);
 	}
-	else
-	{
-		cout << "Cannot render the cameras: Empty path" << endl;
-	}
-	cout << endl << "Press 'q' to close each windows ... " << endl;
+
 	window.spin();
 }
 

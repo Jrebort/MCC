@@ -13,13 +13,6 @@
 typedef Eigen::Map<Eigen::VectorXd> VectorRef;
 typedef Eigen::Map<const Eigen::VectorXd> ConstVectorRef;
 
-template<typename T>
-void FscanfOrDie(FILE* fptr, const char* format, T* value) {
-	int num_scanned = fscanf(fptr, format, value);
-	if (num_scanned != 1)
-		std::cerr << "Invalid UW data file. ";
-}
-
 void PerturbPoint3(const double sigma, double* point) {
 	for (int i = 0; i < 3; ++i)
 		point[i] += RandNormal() * sigma;
@@ -87,28 +80,28 @@ Problem::Problem(multiCamera& multicamera)
 		
 	}
 
-	if (use_quaternions_) {
-		// Switch the angle-axis rotations to quaternions.
-		num_parameters_ = 10 * num_cameras_ + 3 * num_points_;
-		double* quaternion_parameters = new double[num_parameters_];
-		double* original_cursor = parameters_;
-		double* quaternion_cursor = quaternion_parameters;
-		for (int i = 0; i < num_cameras_; ++i) {
-			AngleAxisToQuaternion(original_cursor, quaternion_cursor);
-			quaternion_cursor += 4;
-			original_cursor += 3;
-			for (int j = 4; j < 10; ++j) {
-				*quaternion_cursor++ = *original_cursor++;
-			}
-		}
-		// Copy the rest of the points.
-		for (int i = 0; i < 3 * num_points_; ++i) {
-			*quaternion_cursor++ = *original_cursor++;
-		}
-		// Swap in the quaternion parameters.
-		delete[]parameters_;
-		parameters_ = quaternion_parameters;
-	}
+	//if (use_quaternions_) {
+	//	// Switch the angle-axis rotations to quaternions.
+	//	num_parameters_ = 10 * num_cameras_ + 3 * num_points_;
+	//	double* quaternion_parameters = new double[num_parameters_];
+	//	double* original_cursor = parameters_;
+	//	double* quaternion_cursor = quaternion_parameters;
+	//	for (int i = 0; i < num_cameras_; ++i) {
+	//		AngleAxisToQuaternion(original_cursor, quaternion_cursor);
+	//		quaternion_cursor += 4;
+	//		original_cursor += 3;
+	//		for (int j = 4; j < 10; ++j) {
+	//			*quaternion_cursor++ = *original_cursor++;
+	//		}
+	//	}
+	//	// Copy the rest of the points.
+	//	for (int i = 0; i < 3 * num_points_; ++i) {
+	//		*quaternion_cursor++ = *original_cursor++;
+	//	}
+	//	// Swap in the quaternion parameters.
+	//	delete[]parameters_;
+	//	parameters_ = quaternion_parameters;
+	//}
 }
 
 void Problem::WriteToFile(const std::string& filename) const {

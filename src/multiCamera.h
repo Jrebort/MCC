@@ -19,7 +19,7 @@ public:
 	void writeCameraParamter();
 	void pnpOptimization();
 	unsigned int getCameraNum() { return cameraMatrix.size(); }
-	unsigned int getPerCameraNum() { return cameraMatrix[1].imagePoints.size(); }
+	unsigned int getPerCameraNum() { return cameraMatrix[1].getImagePointNum(); }
 	inline monoCamera& getCamera(unsigned int i) { return cameraMatrix[i]; }
 	std::vector<cv::Point3f> getWorldPointVec() const;
 	cv::Mat getWorldPointMat() const;

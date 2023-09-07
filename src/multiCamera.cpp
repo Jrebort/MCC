@@ -118,8 +118,9 @@ void multiCamera::pnpOptimization()
 
 	// solve PnP between worldPoint and camera ImagePoint
 	vector<Point3f> worldPointVec = getWorldPointVec();	
-	for (auto& camera : cameraMatrix)
+	for (int i = 0; i < cameraMatrix.size(); i++)
 	{
+		auto& camera = cameraMatrix[i];
 		vector<Point2f> imagePointVec;
 		Mat imagePointHomo;
 		Mat cameraPoint;
@@ -148,6 +149,9 @@ void multiCamera::pnpOptimization()
 			camera.cameraMatrix,
 			camera.distCoeffs,
 			false);
+
+		std::cout << "cameraBase and camera" << i + 1 << 
+			" Pnp Solve error: mean " << error << " pixel" << std::endl;
 	};	
 }
 

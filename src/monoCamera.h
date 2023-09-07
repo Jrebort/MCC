@@ -45,7 +45,6 @@ private:
 public:
 	const int winSize;
 	float grid_width = 0;
-
 	std::vector<cv::Point3f> gridPoints;
     std::vector<std::vector<cv::Point2f> > imagePoints;
 	std::vector<cv::Mat> rvecs, tvecs;
@@ -61,8 +60,11 @@ public:
 	void addSettingFilePath(const std::string& settingFilePath);
 	~monoCamera();
 	float getScaleFactor() { return scaleFactor; }
+	std::vector<cv::Point2f> getImagePoint();
 	void readResultXml(const std::string& xmlFilename);
 	void setScaleFactor(float scale) { scaleFactor = scale; }
+	unsigned int getPatternNum() { return imagePoints.size(); }
+	inline unsigned int getImagePointNum() { return imagePoints[1].size() * getPatternNum(); }
 	bool calibrate();
 	bool showCalibrationResults(DISPLAY displayMode);
 };

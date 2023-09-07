@@ -25,6 +25,7 @@ bool addView(std::vector<std::string>& viewFolders, const std::string& foldernam
 		if (boost::filesystem::is_directory(it->status())) {
 			if (it->path().filename().string().find("view") != std::string::npos) {
 				viewFolders.push_back(it->path().string()); 
+				std::cout << it->path() << std::endl;
 			}
 		}
 	}
@@ -52,6 +53,7 @@ bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 		}
 		else
 		{	
+			std::cout << "Camera "<< i+1 <<" is calibrated!" << std::endl;
 			const std::string filePath = dataset.getSettingPath();
 			const int winSize = 11;
 			camera.addSettingFilePath(filePath);
@@ -66,18 +68,23 @@ bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
 	std::vector<std::string> viewFolders;
 
+	Step("Check camera need to be calibration");
 	addView(viewFolders, dataPath);	
+
+	Step("Calibrate Camera");
 	addCamera(multicamera, viewFolders);
 	
+	Step("Pnp Optimaliztion between two camera");
 	multicamera.pnpOptimization();
-	multicamera.writeCameraParamter();
+	//multicamera.writeCameraParamter();
 	//multicamera.visCameraPose();
 
-	Problem multiCCProblem(multiCamera); // multi-Camera Calibration Problem
-	//multiCCProblem.Normalize();
+	Step("Bundle Adjustment Optimaliztion between all camera");
+	Problem multiCCProblem(multicamera); // multi-Camera Calibration Problem
+	multiCCProblem.Normalize();
 	//multiCCProblem.Perturb(0.1, 0.5, 0.5);
 	//multiCCProblem.WriteToPLYFile("initial.ply");
 

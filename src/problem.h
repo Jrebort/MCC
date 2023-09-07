@@ -4,7 +4,7 @@
 class Problem {
 public:
 	/// load bal data from multicamera model
-	explicit Problem(multiCamera& multicamera);
+	Problem(multiCamera& multicamera);
 
 	~Problem() {
 		delete[] point_index_;

@@ -34,9 +34,9 @@ Problem::Problem(multiCamera& multicamera)
 	num_points_ = multicamera.getWorldPointVec().size(); 
 	num_observations_ = num_cameras_ * num_points_;
 
-	std::cout << "Header: " << num_cameras_
-		<< " " << num_points_
-		<< " " << num_observations_;
+	std::cout << "number of cameras: " << num_cameras_ << std::endl;
+	std::cout << "number of world point: " << num_points_ << std::endl;
+	std::cout << "number of observations point: " << num_observations_ << std::endl;
 
 	// point_index_ : world point index
 	point_index_ = new int[num_observations_];
@@ -51,33 +51,59 @@ Problem::Problem(multiCamera& multicamera)
 	parameters_ = new double[num_parameters_];
 
 	unsigned int cami = 1; // camera index 1,2,3,4,5,6
-	unsigned int camj = 1; // camera index 1,2,3,4,5,6
+	unsigned int pointi = 1; // point index 1 - 88
+	monoCamera& camera = multicamera.getCamera(cami - 1);
+	std::vector<cv::Point2f>& imagepoints = camera.getImagePoint();
 	for (int i = 0; i < num_observations_; ++i) {
-		if (!(i % numPerCameraPoint))
+		if (!(pointi % (numPerCameraPoint+1)))
 		{
 			cami += 1;
-			camj = 1;
+			pointi = 1;
+			monoCamera& camera = multicamera.getCamera(cami - 1);
+			std::vector<cv::Point2f>& imagepoints = camera.getImagePoint();
 		}
-		camera_index_[i] = 1;
-		point_index_[i] = camj;
-		camj += 1;
+		camera_index_[i] = cami;
+		point_index_[i] = pointi;
 
-		for (int j = 0; j < 2; ++j) {
-			observations_[2 * i + j];
-		}
+		observations_[2 * i] = imagepoints[pointi-1].x;
+		observations_[2 * i + 1] = imagepoints[pointi-1].y;
+		pointi += 1;
 	}
 
-	// camera parameter f, k1, k2, k3, cx, cy, p1, p2, rot_3, t_3
+	// camera parameter f, cx, cy, k1, k2, k3, p1, p2, rot_3, t_3
 	cami = 1;
-	for (int i = 0; i < num_parameters_; ++i) 
+	for (int i = 0; i < num_cameras_; i++) 
 	{ 
 		monoCamera& camera = multicamera.getCamera(i);
-		if (!(i % perCameraParamNum))
-		{
-			cami += 1;
-		}
-		//parameters_[i] = camera.
-		
+
+		parameters_[perCameraParamNum * i] = camera.cameraMatrix.at<double>(0, 0); // focal length	
+		parameters_[perCameraParamNum * i + 1] = camera.cameraMatrix.at<double>(0, 2); // cx
+		parameters_[perCameraParamNum * i + 2] = camera.cameraMatrix.at<double>(1, 2); // cy		
+
+		parameters_[perCameraParamNum * i + 3] = camera.distCoeffs.at<double>(0, 0); // k1
+		parameters_[perCameraParamNum * i + 4] = camera.distCoeffs.at<double>(1, 0); // k2
+		parameters_[perCameraParamNum * i + 5] = camera.distCoeffs.at<double>(2, 0); // p1
+		parameters_[perCameraParamNum * i + 6] = camera.distCoeffs.at<double>(3, 0); // p2
+		parameters_[perCameraParamNum * i + 7] = camera.distCoeffs.at<double>(4, 0); // k1
+
+		parameters_[perCameraParamNum * i + 8] = camera.R.at<double>(0, 0); // rvec 1
+		parameters_[perCameraParamNum * i + 9] = camera.R.at<double>(1, 0); // rvec 1
+		parameters_[perCameraParamNum * i + 10] = camera.R.at<double>(2, 0); // rvec 1
+
+		parameters_[perCameraParamNum * i + 11] = camera.T.at<double>(0, 0); // tvec 1
+		parameters_[perCameraParamNum * i + 12] = camera.T.at<double>(1, 0); // tvec 1
+		parameters_[perCameraParamNum * i + 13] = camera.T.at<double>(2, 0); // tvec 1
+	}
+
+	std::vector<cv::Point3f> worldpoints = multicamera.getWorldPointVec();
+	unsigned int worldpointsNum = worldpoints.size();
+	unsigned int parameterPtr = perCameraParamNum * 6;
+	for (int i = 0; i < worldpointsNum; i++)
+	{
+		unsigned int addr = parameterPtr + 3 * i;
+		parameters_[addr] = worldpoints[i].x;
+		parameters_[addr + 1] = worldpoints[i].y;
+		parameters_[addr + 2] = worldpoints[i].z;
 	}
 
 	//if (use_quaternions_) {

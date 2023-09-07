@@ -615,8 +615,21 @@ void monoCamera::readResultXml(const std::string& xmlFilename)
 	fs.release();
 
 	// You can print or process the variables as needed
-	std::cout << "Image Size: " << imageSize << std::endl;
-	std::cout << "Camera Matrix:\n" << cameraMatrix << std::endl;
-	std::cout << "Distortion Coefficients:\n" << distCoeffs << std::endl;
+	//std::cout << "Image Size: " << imageSize << std::endl;
+	//std::cout << "Camera Matrix:\n" << cameraMatrix << std::endl;
+	//std::cout << "Distortion Coefficients:\n" << distCoeffs << std::endl;
 }
 
+std::vector<cv::Point2f> monoCamera::getImagePoint()
+{
+	using namespace std;
+	using namespace cv;
+	vector<Point2f> result;
+	
+	for (auto& patternPoint : imagePoints)
+	{
+		for (auto& point : patternPoint)
+			result.push_back(point);
+	}
+	return result;
+}

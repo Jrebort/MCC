@@ -4,7 +4,7 @@
 class Problem {
 public:
 	/// load bal data from multicamera model
-	Problem(multiCamera& multicamera);
+	Problem(multiCamera& multicamera, bool use_quaternions_ = false);
 
 	~Problem() {
 		delete[] point_index_;
@@ -25,7 +25,7 @@ public:
 		const double translation_sigma,
 		const double point_sigma);
 
-	int camera_block_size() const { return use_quaternions_ ? 10 : 9; }
+	int camera_block_size() const { return 14; }
 
 	int point_block_size() const { return 3; }
 

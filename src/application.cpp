@@ -84,14 +84,12 @@ int main()
 
 	Step("Bundle Adjustment Optimaliztion between all camera");
 	Problem multiCCProblem(multicamera); // multi-Camera Calibration Problem
-	multiCCProblem.Normalize();
+	//multiCCProblem.Normalize();
 	//multiCCProblem.Perturb(0.1, 0.5, 0.5);
-	//multiCCProblem.WriteToPLYFile("initial.ply");
+	multiCCProblem.WriteToPLYFile("initial.ply");
 
-	//BASolver ba(multiCCProblem);
-	//ba.Solve();
+	BASolver::Solve(multiCCProblem);
 
-	//multiCCProblem.WriteToPLYFile("final.ply");
+	multiCCProblem.WriteToPLYFile("final.ply");
 	return 0;
-	//calibrater.showCalibrationResults(DETECTION);
 }

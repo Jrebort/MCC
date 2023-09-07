@@ -5,9 +5,5 @@
 class BASolver
 {
 public:
-	ceres::Problem problem;
-
-public:
-	BASolver(Problem& problem);
-	void Solve() {}
+	static void Solve(Problem& problem);
 };

@@ -108,9 +108,9 @@ inline void AngleAxisRotatePoint(const T angle_axis[3], const T pt[3], T result[
         const T sintheta = sin(theta);
         const T theta_inverse = 1.0 / theta;
 
-        const T w[3] = {angle_axis[0] * theta_inverse,
-                        angle_axis[1] * theta_inverse,
-                        angle_axis[2] * theta_inverse};
+        const T w[3] = {angle_axis[8] * theta_inverse,
+                        angle_axis[9] * theta_inverse,
+                        angle_axis[10] * theta_inverse};
 
         // Explicitly inlined evaluation of the cross product for
         // performance reasons.

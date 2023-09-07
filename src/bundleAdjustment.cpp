@@ -45,7 +45,7 @@ void BASolver::Solve(Problem& multiCCproblem)
 	ceres::Solver::Options options;
 	options.linear_solver_type = ceres::LinearSolverType::SPARSE_SCHUR;
 	options.minimizer_progress_to_stdout = true;
-	options.max_num_iterations = 300;
+	options.max_num_iterations = 1000;
 	ceres::Solver::Summary summary;
 	ceres::Solve(options, &problem, &summary);
 	std::cout << summary.FullReport() << "\n";

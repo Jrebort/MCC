@@ -68,9 +68,10 @@ bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string optimalizationPath = dataPath + "/optimalResult";
 	std::vector<std::string> viewFolders;
-
+  
 	Step("Check camera need to be calibration");
 	addView(viewFolders, dataPath);	
 
@@ -83,13 +84,18 @@ int main()
 	//multicamera.visCameraPose();
 
 	Step("Bundle Adjustment Optimaliztion between all camera");
-	Problem multiCCProblem(multicamera); // multi-Camera Calibration Problem
-	//multiCCProblem.Normalize();
-	//multiCCProblem.Perturb(0.1, 0.5, 0.5);
-	multiCCProblem.WriteToPLYFile("initial.ply");
-
-	BASolver::Solve(multiCCProblem);
-
-	multiCCProblem.WriteToPLYFile("final.ply");
+	boost::filesystem::path p(optimalizationPath);
+	if (!boost::filesystem::is_regular_file(p))
+	{
+		Problem multiCCProblem(multicamera); // multi-Camera Calibration Problem	
+		BASolver::Solve(multiCCProblem);
+		multiCCProblem.WriteToFile(optimalizationPath);
+		multiCCProblem.WriteMultiCamera(multicamera);
+	}
+	else
+	{
+		multicamera.readOptimalResult(optimalizationPath);
+	}
+	multicamera.visCameraPose();
 	return 0;
 }

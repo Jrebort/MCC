@@ -16,6 +16,7 @@ public:
 	multiCamera();
 	~multiCamera();
 	void addCamera(monoCamera& camera);
+	void readOptimalResult(const std::string& filename);
 	void writeCameraParamter();
 	void pnpOptimization();
 	unsigned int getCameraNum() { return cameraMatrix.size(); }

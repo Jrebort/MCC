@@ -7,6 +7,13 @@
 #include "reprojectionError.h"
 #include "typeConverter.h"
 
+template<typename T>
+void FscanfOrDie(FILE* fptr, const char* format, T* value) {
+	int num_scanned = fscanf(fptr, format, value);
+	if (num_scanned != 1)
+		std::cerr << "Invalid UW data file. ";
+}
+
 cv::Mat averageRotationVectors(const std::vector<cv::Mat>& rotationVectors) {
 	cv::Vec4d averageQuat(0, 0, 0, 0);  
 
@@ -234,3 +241,66 @@ void multiCamera::visCameraPose()
 	window.spin();
 }
 
+
+void multiCamera::readOptimalResult(const std::string& filename)
+{
+	FILE* fptr = fopen(filename.c_str(), "r");
+
+	int num_cameras_;
+	int num_points_;
+	int num_observations_;
+	FscanfOrDie(fptr, "%d", &num_cameras_);
+	FscanfOrDie(fptr, "%d", &num_points_);
+	FscanfOrDie(fptr, "%d", &num_observations_);
+
+
+	int* point_index_ = new int[num_observations_];
+	int* camera_index_ = new int[num_observations_];
+	double* observations_ = new double[2 * num_observations_];
+
+	int num_parameters_ = 9 * num_cameras_ + 3 * num_points_;
+	double* parameters_ = new double[num_parameters_];
+
+	for (int i = 0; i < num_observations_; ++i) {
+		FscanfOrDie(fptr, "%d", camera_index_ + i);
+		FscanfOrDie(fptr, "%d", point_index_ + i);
+		for (int j = 0; j < 2; ++j) {
+			FscanfOrDie(fptr, "%lf", observations_ + 2 * i + j);
+		}
+	}
+
+	for (int i = 0; i < num_parameters_; ++i) {
+		FscanfOrDie(fptr, "%lf", parameters_ + i);
+	}
+
+	int perCameraParamNum = 14;
+	for (int i = 0; i < getCameraNum(); ++i)
+	{
+		monoCamera& camera = cameraMatrix[i];
+		camera.cameraMatrix.at<double>(0, 0) = parameters_[perCameraParamNum * i];
+		camera.cameraMatrix.at<double>(1, 1) = parameters_[perCameraParamNum * i];
+		camera.cameraMatrix.at<double>(0, 2) = parameters_[perCameraParamNum * i + 1];
+		camera.cameraMatrix.at<double>(1, 2) = parameters_[perCameraParamNum * i + 2];
+                                       
+		camera.distCoeffs.at<double>(0, 0)   = parameters_[perCameraParamNum * i + 3];
+		camera.distCoeffs.at<double>(1, 0)   = parameters_[perCameraParamNum * i + 4];
+		camera.distCoeffs.at<double>(2, 0)   = parameters_[perCameraParamNum * i + 5];
+		camera.distCoeffs.at<double>(3, 0)   = parameters_[perCameraParamNum * i + 6];
+		camera.distCoeffs.at<double>(4, 0)   = parameters_[perCameraParamNum * i + 7];
+                                       
+		camera.R.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 8];
+		camera.R.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 9];
+		camera.R.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 10];
+
+		camera.T.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 11];
+		camera.T.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 12];
+		camera.T.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 13];
+		std::cout << camera.cameraMatrix << std::endl;
+	}
+	fclose(fptr);
+	
+	delete[] point_index_;
+	delete[] camera_index_;
+	delete[] observations_;
+	delete[] parameters_;
+}

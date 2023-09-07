@@ -16,6 +16,9 @@ public:
 	/// save results to text file
 	void WriteToFile(const std::string& filename) const;
 
+	/// save results to multicamera object
+	void Problem::WriteMultiCamera(multiCamera& multicamera) const;
+
 	/// save results to ply pointcloud
 	void WriteToPLYFile(const std::string& filename) const;
 

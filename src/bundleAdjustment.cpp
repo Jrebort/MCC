@@ -1,7 +1,7 @@
 #include "bundleAdjustment.h"
 #include "reprojectionCost.h"
 
-void BASolver::Solve(Problem& multiCCproblem)
+void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCamera)
 {
 	const int point_block_size = multiCCproblem.point_block_size();
 	const int camera_block_size = multiCCproblem.camera_block_size();
@@ -18,10 +18,6 @@ void BASolver::Solve(Problem& multiCCproblem)
 		//std::cout << i << std::endl;
 		ceres::CostFunction* cost_function;
 
-		// Each Residual block takes a point and a camera as input
-		// and outputs a 2 dimensional Residual
-		cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
-
 		// If enabled use Huber's loss function.
 		ceres::LossFunction* loss_function = new ceres::HuberLoss(1.0);
 
@@ -32,7 +28,15 @@ void BASolver::Solve(Problem& multiCCproblem)
 
 		double* point = points + point_block_size * multiCCproblem.point_index()[i];
 
-		problem.AddResidualBlock(cost_function, loss_function, camera, point);
+		// Each Residual block takes a point and a camera as input
+		// and outputs a 2 dimensional Residual
+		if ( isFixedPoint3d ) 
+			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1], point);
+		else
+			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
+
+
+		problem.AddResidualBlock(cost_function, loss_function, camera);
 	}
 
 	// show some information here ...

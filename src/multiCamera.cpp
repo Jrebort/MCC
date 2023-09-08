@@ -3,6 +3,7 @@
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/sfm/projection.hpp>
+#include "Dataset.h"
 #include "multiCamera.h"
 #include "reprojectionError.h"
 #include "typeConverter.h"
@@ -304,3 +305,39 @@ void multiCamera::readOptimalResult(const std::string& filename)
 	delete[] observations_;
 	delete[] parameters_;
 }
+
+bool multiCamera::addCameraFromData(std::vector<std::string>& viewFolders)
+{
+	for (size_t i = 0; i < viewFolders.size(); i++)
+	{
+		std::string datasetFolder = viewFolders[i] + "/filter";
+		monoCamera camera;
+		Dataset dataset(datasetFolder);
+		if (!dataset.isCalibrated())
+		{
+			std::cout << "Camera "<< i+1 <<" is calibrating!" << std::endl;
+			dataset.traverseFloder();
+			dataset.writeXml();
+			dataset.generateSettingXml();
+			const std::string filePath = dataset.getSettingPath();
+			const int winSize = 11;
+			camera.addSettingFilePath(filePath);
+			camera.init();
+			camera.setScaleFactor(0.25);
+			camera.calibrate();
+			std::cout << "Camera "<< i+1 <<" has finished calibration!" << std::endl;
+		}
+		else
+		{	
+			std::cout << "Camera "<< i+1 <<" is calibrated!" << std::endl;
+			const std::string filePath = dataset.getSettingPath();
+			const int winSize = 11;
+			camera.addSettingFilePath(filePath);
+			camera.init();
+			camera.readResultXml(dataset.getCameraParamPath());
+		}
+		addCamera(camera);
+	}
+	return 0;
+}
+

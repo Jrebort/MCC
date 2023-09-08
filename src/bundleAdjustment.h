@@ -5,5 +5,5 @@
 class BASolver
 {
 public:
-	static void Solve(Problem& problem);
+	static void Solve(Problem& problem, bool isFixedPoint3d, bool isFixCamera);
 };

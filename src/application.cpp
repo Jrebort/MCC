@@ -32,43 +32,11 @@ bool addView(std::vector<std::string>& viewFolders, const std::string& foldernam
 	return 0;
 }
 
-bool addCamera(multiCamera& multicamera, std::vector<std::string>& viewFolders)
-{
-	for (size_t i = 0; i < viewFolders.size(); i++)
-	{
-		std::string datasetFolder = viewFolders[i] + "/filter";
-		monoCamera camera;
-		Dataset dataset(datasetFolder);
-		if (!dataset.isCalibrated())
-		{
-			dataset.traverseFloder();
-			dataset.writeXml();
-			dataset.generateSettingXml();
-			const std::string filePath = dataset.getSettingPath();
-			const int winSize = 11;
-			camera.addSettingFilePath(filePath);
-			camera.init();
-			camera.setScaleFactor(0.25);
-			camera.calibrate();
-		}
-		else
-		{	
-			std::cout << "Camera "<< i+1 <<" is calibrated!" << std::endl;
-			const std::string filePath = dataset.getSettingPath();
-			const int winSize = 11;
-			camera.addSettingFilePath(filePath);
-			camera.init();
-			camera.readResultXml(dataset.getCameraParamPath());
-		}
-		multicamera.addCamera(camera);
-	}
-	return 0;
-}
 
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
 	const std::string optimalizationPath = dataPath + "/optimalResult";
 	std::vector<std::string> viewFolders;
   
@@ -76,7 +44,7 @@ int main()
 	addView(viewFolders, dataPath);	
 
 	Step("Calibrate Camera");
-	addCamera(multicamera, viewFolders);
+	multicamera.addCameraFromData(viewFolders);
 	
 	Step("Pnp Optimaliztion between two camera");
 	multicamera.pnpOptimization();
@@ -88,7 +56,7 @@ int main()
 	if (!boost::filesystem::is_regular_file(p))
 	{
 		Problem multiCCProblem(multicamera); // multi-Camera Calibration Problem	
-		BASolver::Solve(multiCCProblem);
+		BASolver::Solve(multiCCProblem, true, false);
 		multiCCProblem.WriteToFile(optimalizationPath);
 		multiCCProblem.WriteMultiCamera(multicamera);
 	}

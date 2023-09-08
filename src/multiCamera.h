@@ -17,6 +17,7 @@ public:
 	~multiCamera();
 	void addCamera(monoCamera& camera);
 	void readOptimalResult(const std::string& filename);
+	bool multiCamera::addCameraFromData(std::vector<std::string>& viewFolders);
 	void writeCameraParamter();
 	void pnpOptimization();
 	unsigned int getCameraNum() { return cameraMatrix.size(); }

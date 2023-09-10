@@ -49,7 +49,7 @@ int main()
 	multicamera.pnpOptimization();
 	//multicamera.writeCameraParamter();
 	//multicamera.visCameraPose();
-	multicamera.evaluate();
+	//multicamera.evaluate();
 	Step("Bundle Adjustment Optimaliztion between all camera");
 	boost::filesystem::path p(optimalizationPath);
 	if (!boost::filesystem::is_regular_file(p))

@@ -110,8 +110,11 @@ public:
 		T Xtangential = T(2.0) * p1 * xp * yp + p2 * (r2 + T(2.0) * xp * xp);
 		T Ytangential = T(2.0) * p2 * xp * yp + p1 * (r2 + T(2.0) * yp * yp);
 
-		predictions[0] = focal * RadialCoff * xp + Xtangential + cx;
-		predictions[1] = focal * RadialCoff * yp + Ytangential + cy;
+		T xd = RadialCoff * xp + Xtangential;
+		T yd = RadialCoff * yp + Ytangential;
+
+		predictions[0] = focal * xd + cx;
+		predictions[1] = focal * yd + cy;
 
 		return true;
 	}

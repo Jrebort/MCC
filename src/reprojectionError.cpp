@@ -1,4 +1,5 @@
 #include <opencv2/calib3d.hpp>
+#include <iostream>
 
 #include "reprojectionError.h"
 
@@ -95,6 +96,10 @@ double computeReprojectionErrors(const std::vector<cv::Point3f>& objectPoints,
 	{
 		projectPoints(objectPoints, rvecs, tvecs, cameraMatrix, distCoeffs, imagePoints2);
 	}
+	//std::cout << rvecs << std::endl;
+	//std::cout << tvecs << std::endl;
+	//std::cout << cameraMatrix << std::endl;
+	//std::cout << distCoeffs << std::endl;
 	err = norm(imagePoints, imagePoints2, cv::NORM_L2);
 	size_t n = objectPoints.size();
 	err = (float)std::sqrt(err * err / n);

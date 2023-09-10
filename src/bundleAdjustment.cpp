@@ -67,8 +67,8 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 			problem.SetParameterBlockConstant(point);
 			problem.SetParameterBlockConstant(cx);
 			problem.SetParameterBlockConstant(cy);
-			//problem.SetParameterBlockConstant(p1);
-			//problem.SetParameterBlockConstant(p2);
+			problem.SetParameterBlockConstant(p1);
+			problem.SetParameterBlockConstant(p2);
 		}
 		else
 		{

@@ -190,6 +190,7 @@ void Problem::WriteMultiCamera(multiCamera& multicamera) const
 		else 
 		{	
 			camera.cameraMatrix.at<double>(0, 0) = ((double*)parameters_)[14 * i];
+			camera.cameraMatrix.at<double>(1, 1) = ((double*)parameters_)[14 * i];
 			camera.cameraMatrix.at<double>(0, 2) = ((double*)parameters_)[14 * i + 1];
 			camera.cameraMatrix.at<double>(1, 2) = ((double*)parameters_)[14 * i + 2];
 			camera.distCoeffs.at<double>(0, 0) = ((double*)parameters_)[14 * i + 3];

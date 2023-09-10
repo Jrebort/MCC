@@ -40,6 +40,8 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 		double* k3 = camera + 7;
 		double* r = camera + 8;
 		double* t = camera + 11;
+
+		// __debug__Begin
 		//cv::Mat cameraMatrix = (cv::Mat_<double>(3, 3) << *f, 0, *cx, 0, *f, *cy, 0, 0, 1);
 		//cv::Mat distCoeffs = (cv::Mat_<double>(5, 1) << *k1, *k2, 0, 0, *k3);
 		//cv::Mat objectPoints = (cv::Mat_<double>(3, 1) << point[0], point[1], point[2]);
@@ -58,6 +60,8 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 		//);
 		//std::cout << imagePoints << std::endl;	
 		//std::cout << observations[2 * i] <<" "<< observations[2 * i + 1] << std::endl;
+		// __debug__End
+
 		// Each Residual block takes a point and a camera as input
 		// and outputs a 2 dimensional Residual
 		if (isFixedPoint3d)

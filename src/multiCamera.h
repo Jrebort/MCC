@@ -25,5 +25,6 @@ public:
 	inline monoCamera& getCamera(unsigned int i) { return cameraMatrix[i]; }
 	std::vector<cv::Point3f> getWorldPointVec() const;
 	cv::Mat getWorldPointMat() const;
+	void evaluate();
 	void visCameraPose();
 };

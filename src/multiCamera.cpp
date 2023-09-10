@@ -111,7 +111,7 @@ void multiCamera::pnpOptimization()
 	Mat unitTransitionVector = (cv::Mat_<double>(3, 1) << 0.0, 0.0, 0.0);
 	cameraBase.R = unitRotationVector;
 	cameraBase.T = unitTransitionVector;
-
+	
 	std::vector<float> perViewErrors;
 
 	double error = computeReprojectionErrors(worldPoint,
@@ -126,7 +126,8 @@ void multiCamera::pnpOptimization()
 
 	// solve PnP between worldPoint and camera ImagePoint
 	vector<Point3f> worldPointVec = getWorldPointVec();	
-	for (int i = 0; i < cameraMatrix.size(); i++)
+
+	for (int i = 1; i < cameraMatrix.size(); i++)
 	{
 		auto& camera = cameraMatrix[i];
 		vector<Point2f> imagePointVec;
@@ -160,6 +161,7 @@ void multiCamera::pnpOptimization()
 
 		std::cout << "cameraBase and camera" << i + 1 << 
 			" Pnp Solve error: mean " << error << " pixel" << std::endl;
+
 	};	
 }
 
@@ -341,3 +343,22 @@ bool multiCamera::addCameraFromData(std::vector<std::string>& viewFolders)
 	return 0;
 }
 
+void multiCamera::evaluate()
+{	
+	vector<Point3f> worldPointVec = getWorldPointVec();	
+	for (int i = 0; i < getCameraNum(); ++i)
+	{
+		monoCamera& camera = cameraMatrix[i];
+		vector<Point2f> imagePointVec;
+		vv2fToV2f(camera.imagePoints, imagePointVec);	
+		double error = computeReprojectionErrors(worldPointVec,
+			imagePointVec,
+			camera.R,
+			camera.T,
+			camera.cameraMatrix,
+			camera.distCoeffs,
+			false);
+
+		std::cout << "camera" << i << " reprojection error: " << error << " pixel" << std::endl;
+	}
+}

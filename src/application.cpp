@@ -10,7 +10,6 @@
 #include "monoCamera.h"
 #include "multiCamera.h"
 
-
 bool addView(std::vector<std::string>& viewFolders, const std::string& foldername)
 {
 	using namespace boost::filesystem;
@@ -36,7 +35,7 @@ bool addView(std::vector<std::string>& viewFolders, const std::string& foldernam
 int main()
 {
 	multiCamera multicamera;
-	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
 	const std::string optimalizationPath = dataPath + "/optimalResult";
 	std::vector<std::string> viewFolders;
   
@@ -50,7 +49,7 @@ int main()
 	multicamera.pnpOptimization();
 	//multicamera.writeCameraParamter();
 	//multicamera.visCameraPose();
-
+	multicamera.evaluate();
 	Step("Bundle Adjustment Optimaliztion between all camera");
 	boost::filesystem::path p(optimalizationPath);
 	if (!boost::filesystem::is_regular_file(p))
@@ -64,6 +63,9 @@ int main()
 	{
 		multicamera.readOptimalResult(optimalizationPath);
 	}
+
+	multicamera.evaluate();
+
 	multicamera.visCameraPose();
 	return 0;
 }

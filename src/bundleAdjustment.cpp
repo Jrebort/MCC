@@ -15,7 +15,6 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 	ceres::Problem problem;
 
 	for (int i = 0; i < multiCCproblem.num_observations(); ++i) {
-		//std::cout << i << std::endl;
 		ceres::CostFunction* cost_function;
 
 		// If enabled use Huber's loss function.
@@ -28,15 +27,54 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 
 		double* point = points + point_block_size * multiCCproblem.point_index()[i];
 
+		//if (multiCCproblem.camera_index()[i] != 5)
+		//	continue;
+		//using namespace cv;
+		double* f = camera;
+		double* cx = camera + 1;
+		double* cy = camera + 2;
+		double* k1 = camera + 3;
+		double* k2 = camera + 4;
+		double* p1 = camera + 5;
+		double* p2 = camera + 6;
+		double* k3 = camera + 7;
+		double* r = camera + 8;
+		double* t = camera + 11;
+		//cv::Mat cameraMatrix = (cv::Mat_<double>(3, 3) << *f, 0, *cx, 0, *f, *cy, 0, 0, 1);
+		//cv::Mat distCoeffs = (cv::Mat_<double>(5, 1) << *k1, *k2, 0, 0, *k3);
+		//cv::Mat objectPoints = (cv::Mat_<double>(3, 1) << point[0], point[1], point[2]);
+		//cv::Mat rvec = (cv::Mat_<double>(3, 1) << r[0], r[1], r[2]);
+		//cv::Mat tvec = (cv::Mat_<double>(3, 1) << t[0], t[1], t[2]);
+		//cv::Mat imagePoints;
+
+		//cv::projectPoints(objectPoints,
+		//	rvec,
+		//	tvec,
+		//	cameraMatrix,
+		//	distCoeffs,
+		//	imagePoints,
+		//	noArray(),
+		//	0.0
+		//);
+		//std::cout << imagePoints << std::endl;	
+		//std::cout << observations[2 * i] <<" "<< observations[2 * i + 1] << std::endl;
 		// Each Residual block takes a point and a camera as input
 		// and outputs a 2 dimensional Residual
-		if ( isFixedPoint3d ) 
-			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1], point);
-		else
+		if (isFixedPoint3d)
+		{
 			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
-
-
-		problem.AddResidualBlock(cost_function, loss_function, camera);
+			problem.AddResidualBlock(cost_function, loss_function, f, cx, cy, k1, k2, p1, p2, k3, r, t, point);
+			problem.SetParameterBlockConstant(point);
+			problem.SetParameterBlockConstant(cx);
+			problem.SetParameterBlockConstant(cy);
+			//problem.SetParameterBlockConstant(p1);
+			//problem.SetParameterBlockConstant(p2);
+		}
+		else
+		{
+			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
+			problem.AddResidualBlock(cost_function, loss_function, camera, point);
+		}
 	}
 
 	// show some information here ...
@@ -49,7 +87,7 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 	ceres::Solver::Options options;
 	options.linear_solver_type = ceres::LinearSolverType::SPARSE_SCHUR;
 	options.minimizer_progress_to_stdout = true;
-	options.max_num_iterations = 1000;
+	options.max_num_iterations = 150;
 	ceres::Solver::Summary summary;
 	ceres::Solve(options, &problem, &summary);
 	std::cout << summary.FullReport() << "\n";

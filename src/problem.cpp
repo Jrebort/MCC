@@ -53,14 +53,14 @@ Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 	unsigned int cami = 0; // camera index 1,2,3,4,5,6
 	unsigned int pointi = 0; // point index 1 - 88
 	monoCamera& camera = multicamera.getCamera(cami);
-	std::vector<cv::Point2f>& imagepoints = camera.getImagePoint();
+	std::vector<cv::Point2f> imagepoints = camera.getImagePoint();
 	for (int i = 0; i < num_observations_; ++i) {
 		if (!((pointi+1) % (numPerCameraPoint+1)))
 		{
 			cami += 1;
 			pointi = 0;
 			monoCamera& camera = multicamera.getCamera(cami);
-			std::vector<cv::Point2f>& imagepoints = camera.getImagePoint();
+			imagepoints = camera.getImagePoint();
 		}
 		camera_index_[i] = cami;
 		point_index_[i] = pointi;
@@ -104,7 +104,10 @@ Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 		parameters_[addr + 1] = worldpoints[i].y;
 		parameters_[addr + 2] = worldpoints[i].z;
 
-		//std::cout << worldpoints[i] << std::endl;
+		//std::cout << parameters_[addr] << std::endl; 
+		//std::cout << parameters_[addr+1] << std::endl;
+		//std::cout << parameters_[addr+2] << std::endl;
+
 	}
 
 	//if (use_quaternions_) {

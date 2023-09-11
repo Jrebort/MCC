@@ -83,7 +83,7 @@ void multiCamera::pnpOptimization()
 	using namespace cv;
 	using namespace sfm;
 	const unsigned int patternNum = cameraMatrix[0].imagePoints.size();
-	monoCamera& cameraBase = cameraMatrix[0];
+	monoCamera& cameraBase = cameraMatrix[1];
 
 	// Generate worldPoint3d based camera0
 	for (int i = 0; i < patternNum; i++)
@@ -127,7 +127,7 @@ void multiCamera::pnpOptimization()
 	// solve PnP between worldPoint and camera ImagePoint
 	vector<Point3f> worldPointVec = getWorldPointVec();	
 
-	for (int i = 1; i < cameraMatrix.size(); i++)
+	for (int i = 0; i < cameraMatrix.size(); i++)
 	{
 		auto& camera = cameraMatrix[i];
 		vector<Point2f> imagePointVec;

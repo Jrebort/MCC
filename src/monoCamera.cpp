@@ -335,8 +335,8 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 {
 	//! [fixed_aspect]
 	cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
-	cameraMatrix.at<double>(0, 0) = (double)22747; // Set f_x
-	cameraMatrix.at<double>(1, 1) = (double)22747; // Set f_y
+	cameraMatrix.at<double>(0, 0) = (double)22758.30678; // Set f_x
+	cameraMatrix.at<double>(1, 1) = (double)22768.67030; // Set f_y
 	cameraMatrix.at<double>(0, 2) = (double)4096.0; // Set c_x
 	cameraMatrix.at<double>(1, 2) = (double)2732.0; // Set c_y
 

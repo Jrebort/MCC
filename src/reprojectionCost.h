@@ -90,10 +90,13 @@ public:
 		const T* const point, T* predictions) {
 		// Rodrigues' formula
 		T p[3];
-
+		
+		// __debug__Begin
 		//std::cout << point[0] << std::endl;
 		//std::cout << point[1] << std::endl;
 		//std::cout << point[2] << std::endl;
+		// __debug__End
+
 		AngleAxisRotatePoint(r, point, p);
 		// camera[3,4,5] are the translation
 		p[0] += t[0];

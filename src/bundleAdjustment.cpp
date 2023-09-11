@@ -69,10 +69,11 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
 			problem.AddResidualBlock(cost_function, loss_function, f, cx, cy, k1, k2, p1, p2, k3, r, t, point);
 			problem.SetParameterBlockConstant(point);
+			problem.SetParameterBlockConstant(f);
 			problem.SetParameterBlockConstant(cx);
 			problem.SetParameterBlockConstant(cy);
-			problem.SetParameterBlockConstant(p1);
-			problem.SetParameterBlockConstant(p2);
+			//problem.SetParameterBlockConstant(p1);
+			//problem.SetParameterBlockConstant(p2);
 		}
 		else
 		{

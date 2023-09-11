@@ -118,6 +118,8 @@ bool monoCamera::calibrate()
 		view = s.nextImage();
 
 		imageSize = view.size();  // Format input image.
+		imageSize.width = imageSize.width/scaleFactor;
+		imageSize.height = imageSize.height/scaleFactor;
 
 		if (s.flipVertical)    cv::flip(view, view, 0);
 
@@ -333,8 +335,14 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 {
 	//! [fixed_aspect]
 	cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
-	if (!s.useFisheye && s.flag & cv::CALIB_FIX_ASPECT_RATIO)
-		cameraMatrix.at<double>(0, 0) = s.aspectRatio;
+	cameraMatrix.at<double>(0, 0) = (double)22747; // Set f_x
+	cameraMatrix.at<double>(1, 1) = (double)22747; // Set f_y
+	cameraMatrix.at<double>(0, 2) = (double)4096.0; // Set c_x
+	cameraMatrix.at<double>(1, 2) = (double)2732.0; // Set c_y
+
+
+	//if (!s.useFisheye && s.flag & cv::CALIB_FIX_ASPECT_RATIO)
+	//	cameraMatrix.at<double>(0, 0) = s.aspectRatio;
 	//! [fixed_aspect]
 	if (s.useFisheye) {
 		distCoeffs = cv::Mat::zeros(4, 1, CV_64F);
@@ -374,9 +382,12 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 		int iFixedPoint = -1;
 		if (release_object)
 			iFixedPoint = s.boardSize.width - 1;
+		std::cout << cameraMatrix << std::endl;
 		rms = calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
 			cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
-			s.flag | cv::CALIB_USE_LU);
+			s.flag | cv::CALIB_USE_LU | cv::CALIB_FIX_FOCAL_LENGTH |
+				 cv::CALIB_FIX_PRINCIPAL_POINT | cv::CALIB_USE_INTRINSIC_GUESS);
+		std::cout << cameraMatrix << std::endl;
 	}
 
 	if (release_object) {
@@ -515,6 +526,7 @@ void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cam
 	if (s.writeGrid && !newObjPoints.empty())
 	{
 		fs << "grid_points" << newObjPoints;
+		gridPoints = newObjPoints;
 	}
 }
 

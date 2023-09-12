@@ -28,7 +28,7 @@ public:
 		const double translation_sigma,
 		const double point_sigma);
 
-	int camera_block_size() const { return 14; }
+	int camera_block_size() const { return 15; }
 
 	int point_block_size() const { return 3; }
 

@@ -43,10 +43,10 @@ Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 	camera_index_ = new int[num_observations_];
 	observations_ = new double[2 * num_observations_];
 	
-	// 11 : f, cx, cy, k1, k2, k3, p1, p2, 3(rot), 3(trans)
+	// 11 : fx, fy, cx, cy, k1, k2, k3, p1, p2, 3(rot), 3(trans)
 	// 3  £ºx, y, z
 	// num_parameters : need to be optimized
-	unsigned int perCameraParamNum = 14;
+	unsigned int perCameraParamNum = 15;
 	num_parameters_ = perCameraParamNum * num_cameras_ + 3 * num_points_;
 	parameters_ = new double[num_parameters_];
 
@@ -75,23 +75,24 @@ Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 	{ 
 		monoCamera& camera = multicamera.getCamera(i);
 
-		parameters_[perCameraParamNum * i]	    = camera.cameraMatrix.at<double>(0, 0); // focal length	
-		parameters_[perCameraParamNum * i + 1]  = camera.cameraMatrix.at<double>(0, 2); // cx
-		parameters_[perCameraParamNum * i + 2]  = camera.cameraMatrix.at<double>(1, 2); // cy		
+		parameters_[perCameraParamNum * i]	    = camera.cameraMatrix.at<double>(0, 0); // fx	
+		parameters_[perCameraParamNum * i + 1]	= camera.cameraMatrix.at<double>(1, 1); // fy
+		parameters_[perCameraParamNum * i + 2]  = camera.cameraMatrix.at<double>(0, 2); // cx
+		parameters_[perCameraParamNum * i + 3]  = camera.cameraMatrix.at<double>(1, 2); // cy		
 
-		parameters_[perCameraParamNum * i + 3]  = camera.distCoeffs.at<double>(0, 0); // k1
-		parameters_[perCameraParamNum * i + 4]  = camera.distCoeffs.at<double>(1, 0); // k2
-		parameters_[perCameraParamNum * i + 5]  = camera.distCoeffs.at<double>(2, 0); // p1
-		parameters_[perCameraParamNum * i + 6]  = camera.distCoeffs.at<double>(3, 0); // p2
-		parameters_[perCameraParamNum * i + 7]  = camera.distCoeffs.at<double>(4, 0); // k1
+		parameters_[perCameraParamNum * i + 4]  = camera.distCoeffs.at<double>(0, 0); // k1
+		parameters_[perCameraParamNum * i + 5]  = camera.distCoeffs.at<double>(1, 0); // k2
+		parameters_[perCameraParamNum * i + 6]  = camera.distCoeffs.at<double>(2, 0); // p1
+		parameters_[perCameraParamNum * i + 7]  = camera.distCoeffs.at<double>(3, 0); // p2
+		parameters_[perCameraParamNum * i + 8]  = camera.distCoeffs.at<double>(4, 0); // k1
 
-		parameters_[perCameraParamNum * i + 8]  = camera.R.at<double>(0, 0); // rvec 1
-		parameters_[perCameraParamNum * i + 9]  = camera.R.at<double>(1, 0); // rvec 2
-		parameters_[perCameraParamNum * i + 10] = camera.R.at<double>(2, 0); // rvec 3
+		parameters_[perCameraParamNum * i + 9]  = camera.R.at<double>(0, 0); // rvec 1
+		parameters_[perCameraParamNum * i + 10] = camera.R.at<double>(1, 0); // rvec 2
+		parameters_[perCameraParamNum * i + 11] = camera.R.at<double>(2, 0); // rvec 3
 
-		parameters_[perCameraParamNum * i + 11] = camera.T.at<double>(0, 0); // tvec 1
-		parameters_[perCameraParamNum * i + 12] = camera.T.at<double>(1, 0); // tvec 2
-		parameters_[perCameraParamNum * i + 13] = camera.T.at<double>(2, 0); // tvec 3
+		parameters_[perCameraParamNum * i + 12] = camera.T.at<double>(0, 0); // tvec 1
+		parameters_[perCameraParamNum * i + 13] = camera.T.at<double>(1, 0); // tvec 2
+		parameters_[perCameraParamNum * i + 14] = camera.T.at<double>(2, 0); // tvec 3
 	}
 
 	std::vector<cv::Point3f> worldpoints = multicamera.getWorldPointVec();
@@ -107,7 +108,6 @@ Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 		//std::cout << parameters_[addr] << std::endl; 
 		//std::cout << parameters_[addr+1] << std::endl;
 		//std::cout << parameters_[addr+2] << std::endl;
-
 	}
 
 	//if (use_quaternions_) {
@@ -153,16 +153,16 @@ void Problem::WriteToFile(const std::string& filename) const {
 	}
 
 	for (int i = 0; i < num_cameras(); ++i) {
-		double angleaxis[14];
+		double angleaxis[15];
 		if (use_quaternions_) {
 			//OutPut in angle-axis format.
 			QuaternionToAngleAxis(parameters_ + 10 * i, angleaxis);
 			memcpy(angleaxis + 3, parameters_ + 10 * i + 4, 6 * sizeof(double));
 		}
 		else {
-			memcpy(angleaxis, parameters_ + 14 * i, 14 * sizeof(double));
+			memcpy(angleaxis, parameters_ + 15 * i, 15 * sizeof(double));
 		}
-		for (int j = 0; j < 14; ++j) {
+		for (int j = 0; j < 15; ++j) {
 			fprintf(fptr, "%.16g\n", angleaxis[j]);
 		}
 	}
@@ -189,21 +189,21 @@ void Problem::WriteMultiCamera(multiCamera& multicamera) const
 		}
 		else 
 		{	
-			camera.cameraMatrix.at<double>(0, 0) = ((double*)parameters_)[14 * i];
-			camera.cameraMatrix.at<double>(1, 1) = ((double*)parameters_)[14 * i];
-			camera.cameraMatrix.at<double>(0, 2) = ((double*)parameters_)[14 * i + 1];
-			camera.cameraMatrix.at<double>(1, 2) = ((double*)parameters_)[14 * i + 2];
-			camera.distCoeffs.at<double>(0, 0) = ((double*)parameters_)[14 * i + 3];
-			camera.distCoeffs.at<double>(1, 0) = ((double*)parameters_)[14 * i + 4];
-			camera.distCoeffs.at<double>(2, 0) = ((double*)parameters_)[14 * i + 5];
-			camera.distCoeffs.at<double>(3, 0) = ((double*)parameters_)[14 * i + 6];
-			camera.distCoeffs.at<double>(4, 0) = ((double*)parameters_)[14 * i + 7];
-			camera.R.at<double>(0, 0) = ((double*)parameters_)[14 * i + 8];
-			camera.R.at<double>(1, 0) = ((double*)parameters_)[14 * i + 9];
-			camera.R.at<double>(2, 0) = ((double*)parameters_)[14 * i + 10];
-			camera.T.at<double>(0, 0) = ((double*)parameters_)[14 * i + 11];
-			camera.T.at<double>(1, 0) = ((double*)parameters_)[14 * i + 12];
-			camera.T.at<double>(2, 0) = ((double*)parameters_)[14 * i + 13];
+			camera.cameraMatrix.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i];
+			camera.cameraMatrix.at<double>(1, 1) = ((double*)parameters_)[camera_block_size() * i + 1];
+			camera.cameraMatrix.at<double>(0, 2) = ((double*)parameters_)[camera_block_size() * i + 2];
+			camera.cameraMatrix.at<double>(1, 2) = ((double*)parameters_)[camera_block_size() * i + 3];
+			camera.distCoeffs.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 4];
+			camera.distCoeffs.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 5];
+			camera.distCoeffs.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 6];
+			camera.distCoeffs.at<double>(3, 0) = ((double*)parameters_)[camera_block_size() * i + 7];
+			camera.distCoeffs.at<double>(4, 0) = ((double*)parameters_)[camera_block_size() * i + 8];
+			camera.R.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 9];
+			camera.R.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 10];
+			camera.R.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 11];
+			camera.T.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 12];
+			camera.T.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 13];
+			camera.T.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 14];
 		}
 	}
 }

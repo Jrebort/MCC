@@ -30,16 +30,17 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 		//if (multiCCproblem.camera_index()[i] != 5)
 		//	continue;
 		//using namespace cv;
-		double* f = camera;
-		double* cx = camera + 1;
-		double* cy = camera + 2;
-		double* k1 = camera + 3;
-		double* k2 = camera + 4;
-		double* p1 = camera + 5;
-		double* p2 = camera + 6;
-		double* k3 = camera + 7;
-		double* r = camera + 8;
-		double* t = camera + 11;
+		double* fx = camera;
+		double* fy = camera + 1;
+		double* cx = camera + 2;
+		double* cy = camera + 3;
+		double* k1 = camera + 4;
+		double* k2 = camera + 5;
+		double* p1 = camera + 6;
+		double* p2 = camera + 7;
+		double* k3 = camera + 8;
+		double* r = camera + 9;
+		double* t = camera + 12;
 
 		// __debug__Begin
 		//cv::Mat cameraMatrix = (cv::Mat_<double>(3, 3) << *f, 0, *cx, 0, *f, *cy, 0, 0, 1);
@@ -67,9 +68,10 @@ void BASolver::Solve(Problem& multiCCproblem, bool isFixedPoint3d, bool isFixCam
 		if (isFixedPoint3d)
 		{
 			cost_function = SnavelyReprojectionError::Create(observations[2 * i + 0], observations[2 * i + 1]);
-			problem.AddResidualBlock(cost_function, loss_function, f, cx, cy, k1, k2, p1, p2, k3, r, t, point);
+			problem.AddResidualBlock(cost_function, loss_function, fx, fy, cx, cy, k1, k2, p1, p2, k3, r, t, point);
 			problem.SetParameterBlockConstant(point);
-			problem.SetParameterBlockConstant(f);
+			problem.SetParameterBlockConstant(fx);
+			problem.SetParameterBlockConstant(fy);
 			problem.SetParameterBlockConstant(cx);
 			problem.SetParameterBlockConstant(cy);
 			//problem.SetParameterBlockConstant(p1);

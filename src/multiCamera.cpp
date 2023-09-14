@@ -3,10 +3,36 @@
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/sfm/projection.hpp>
+
+#include <boost/filesystem.hpp>
+
+#include "Core.h"
 #include "Dataset.h"
 #include "multiCamera.h"
 #include "reprojectionError.h"
 #include "typeConverter.h"
+
+bool multiCamera::iterateDataFolder(const std::string& foldername, std::vector<std::string>& viewFolders)
+{
+	using namespace boost::filesystem;
+	path p(foldername);
+	ASSERT(!(exists(p) && is_directory(p)), "Data folder is not exist! Please check ...")
+
+	std::cout << "Opening Data folder: " << p << std::endl;
+
+	std::cout << "Exist camera folder as follow: " << std::endl;
+	// Use boost::filesystem::recursive_directory_iterator for recursive search
+	for (directory_iterator it(p); it != directory_iterator(); ++it) {
+		if (boost::filesystem::is_directory(it->status())) {
+			if (it->path().filename().string().find("view") != std::string::npos) {
+				viewFolders.push_back(it->path().string()); 
+				std::cout << it->path() << std::endl;
+			}
+		}
+	}
+	return 0;
+}
+
 
 template<typename T>
 void FscanfOrDie(FILE* fptr, const char* format, T* value) {

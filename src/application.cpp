@@ -48,7 +48,7 @@ int main()
 	Step("Pnp Optimaliztion between two camera");
 	multicamera.pnpOptimization();
 	//multicamera.writeCameraParamter();
-	//multicamera.visCameraPose();
+	multicamera.visCameraPose();
 	//multicamera.evaluate();
 	Step("Bundle Adjustment Optimaliztion between all camera");
 	boost::filesystem::path p(optimalizationPath);

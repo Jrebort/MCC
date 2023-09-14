@@ -261,7 +261,7 @@ void multiCamera::readOptimalResult(const std::string& filename)
 	int* camera_index_ = new int[num_observations_];
 	double* observations_ = new double[2 * num_observations_];
 
-	int num_parameters_ = 9 * num_cameras_ + 3 * num_points_;
+	int num_parameters_ = 15 * num_cameras_ + 3 * num_points_;
 	double* parameters_ = new double[num_parameters_];
 
 	for (int i = 0; i < num_observations_; ++i) {
@@ -276,28 +276,28 @@ void multiCamera::readOptimalResult(const std::string& filename)
 		FscanfOrDie(fptr, "%lf", parameters_ + i);
 	}
 
-	int perCameraParamNum = 14;
+	int perCameraParamNum = 15;
 	for (int i = 0; i < getCameraNum(); ++i)
 	{
 		monoCamera& camera = cameraMatrix[i];
 		camera.cameraMatrix.at<double>(0, 0) = parameters_[perCameraParamNum * i];
-		camera.cameraMatrix.at<double>(1, 1) = parameters_[perCameraParamNum * i];
-		camera.cameraMatrix.at<double>(0, 2) = parameters_[perCameraParamNum * i + 1];
-		camera.cameraMatrix.at<double>(1, 2) = parameters_[perCameraParamNum * i + 2];
+		camera.cameraMatrix.at<double>(1, 1) = parameters_[perCameraParamNum * i + 1];
+		camera.cameraMatrix.at<double>(0, 2) = parameters_[perCameraParamNum * i + 2];
+		camera.cameraMatrix.at<double>(1, 2) = parameters_[perCameraParamNum * i + 3];
                                        
-		camera.distCoeffs.at<double>(0, 0)   = parameters_[perCameraParamNum * i + 3];
-		camera.distCoeffs.at<double>(1, 0)   = parameters_[perCameraParamNum * i + 4];
-		camera.distCoeffs.at<double>(2, 0)   = parameters_[perCameraParamNum * i + 5];
-		camera.distCoeffs.at<double>(3, 0)   = parameters_[perCameraParamNum * i + 6];
-		camera.distCoeffs.at<double>(4, 0)   = parameters_[perCameraParamNum * i + 7];
+		camera.distCoeffs.at<double>(0, 0)   = parameters_[perCameraParamNum * i + 4];
+		camera.distCoeffs.at<double>(1, 0)   = parameters_[perCameraParamNum * i + 5];
+		camera.distCoeffs.at<double>(2, 0)   = parameters_[perCameraParamNum * i + 6];
+		camera.distCoeffs.at<double>(3, 0)   = parameters_[perCameraParamNum * i + 7];
+		camera.distCoeffs.at<double>(4, 0)   = parameters_[perCameraParamNum * i + 8];
                                        
-		camera.R.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 8];
-		camera.R.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 9];
-		camera.R.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 10];
+		camera.R.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 9];
+		camera.R.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 10];
+		camera.R.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 11];
 
-		camera.T.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 11];
-		camera.T.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 12];
-		camera.T.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 13];
+		camera.T.at<double>(0, 0)			 = parameters_[perCameraParamNum * i + 12];
+		camera.T.at<double>(1, 0)			 = parameters_[perCameraParamNum * i + 13];
+		camera.T.at<double>(2, 0)			 = parameters_[perCameraParamNum * i + 14];
 		std::cout << camera.cameraMatrix << std::endl;
 	}
 	fclose(fptr);

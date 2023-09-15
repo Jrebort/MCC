@@ -24,332 +24,333 @@ double Median(std::vector<double>* data) {
 	std::nth_element(data->begin(), mid_point, data->end());
 	return *mid_point;
 }
-
-Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
-{
-	// num_points_ : worldPoint number
-	// num_observations_ : the number of imagepoint in all camera
-	unsigned int numPerCameraPoint = multicamera.getPerCameraNum();
-	num_cameras_ = multicamera.getCameraNum();
-	num_points_ = multicamera.getWorldPointVec().size(); 
-	num_observations_ = num_cameras_ * num_points_;
-
-	std::cout << "number of cameras: " << num_cameras_ << std::endl;
-	std::cout << "number of world point: " << num_points_ << std::endl;
-	std::cout << "number of observations point: " << num_observations_ << std::endl;
-
-	// point_index_ : world point index
-	point_index_ = new int[num_observations_];
-	camera_index_ = new int[num_observations_];
-	observations_ = new double[2 * num_observations_];
-	
-	// 11 : fx, fy, cx, cy, k1, k2, k3, p1, p2, 3(rot), 3(trans)
-	// 3  £ºx, y, z
-	// num_parameters : need to be optimized
-	unsigned int perCameraParamNum = 15;
-	num_parameters_ = perCameraParamNum * num_cameras_ + 3 * num_points_;
-	parameters_ = new double[num_parameters_];
-
-	unsigned int cami = 0; // camera index 1,2,3,4,5,6
-	unsigned int pointi = 0; // point index 1 - 88
-	monoCamera& camera = multicamera.getCamera(cami);
-	std::vector<cv::Point2f> imagepoints = camera.getImagePoint();
-	for (int i = 0; i < num_observations_; ++i) {
-		if (!((pointi+1) % (numPerCameraPoint+1)))
-		{
-			cami += 1;
-			pointi = 0;
-			monoCamera& camera = multicamera.getCamera(cami);
-			imagepoints = camera.getImagePoint();
-		}
-		camera_index_[i] = cami;
-		point_index_[i] = pointi;
-
-		observations_[2 * i] = imagepoints[pointi].x;
-		observations_[2 * i + 1] = imagepoints[pointi].y;
-		pointi += 1;
-	}
-
-	// camera parameter f, cx, cy, k1, k2, p1, p2, k3, rot_3, t_3
-	for (int i = 0; i < num_cameras_; i++) 
-	{ 
-		monoCamera& camera = multicamera.getCamera(i);
-
-		parameters_[perCameraParamNum * i]	    = camera.cameraMatrix.at<double>(0, 0); // fx	
-		parameters_[perCameraParamNum * i + 1]	= camera.cameraMatrix.at<double>(1, 1); // fy
-		parameters_[perCameraParamNum * i + 2]  = camera.cameraMatrix.at<double>(0, 2); // cx
-		parameters_[perCameraParamNum * i + 3]  = camera.cameraMatrix.at<double>(1, 2); // cy		
-
-		parameters_[perCameraParamNum * i + 4]  = camera.distCoeffs.at<double>(0, 0); // k1
-		parameters_[perCameraParamNum * i + 5]  = camera.distCoeffs.at<double>(1, 0); // k2
-		parameters_[perCameraParamNum * i + 6]  = camera.distCoeffs.at<double>(2, 0); // p1
-		parameters_[perCameraParamNum * i + 7]  = camera.distCoeffs.at<double>(3, 0); // p2
-		parameters_[perCameraParamNum * i + 8]  = camera.distCoeffs.at<double>(4, 0); // k1
-
-		parameters_[perCameraParamNum * i + 9]  = camera.R.at<double>(0, 0); // rvec 1
-		parameters_[perCameraParamNum * i + 10] = camera.R.at<double>(1, 0); // rvec 2
-		parameters_[perCameraParamNum * i + 11] = camera.R.at<double>(2, 0); // rvec 3
-
-		parameters_[perCameraParamNum * i + 12] = camera.T.at<double>(0, 0); // tvec 1
-		parameters_[perCameraParamNum * i + 13] = camera.T.at<double>(1, 0); // tvec 2
-		parameters_[perCameraParamNum * i + 14] = camera.T.at<double>(2, 0); // tvec 3
-	}
-
-	std::vector<cv::Point3f> worldpoints = multicamera.getWorldPointVec();
-	unsigned int worldpointsNum = worldpoints.size();
-	unsigned int parameterPtr = perCameraParamNum * 6;
-	for (int i = 0; i < worldpointsNum; i++)
+namespace MCC {
+	Problem::Problem(multiCamera& multicamera, bool use_quaternions_)
 	{
-		unsigned int addr = parameterPtr + 3 * i;
-		parameters_[addr] = worldpoints[i].x;
-		parameters_[addr + 1] = worldpoints[i].y;
-		parameters_[addr + 2] = worldpoints[i].z;
+		// num_points_ : worldPoint number
+		// num_observations_ : the number of imagepoint in all camera
+		unsigned int numPerCameraPoint = multicamera.getPerCameraNum();
+		num_cameras_ = multicamera.getCameraNum();
+		num_points_ = multicamera.getWorldPointVec().size();
+		num_observations_ = num_cameras_ * num_points_;
 
-		//std::cout << parameters_[addr] << std::endl; 
-		//std::cout << parameters_[addr+1] << std::endl;
-		//std::cout << parameters_[addr+2] << std::endl;
-	}
+		std::cout << "number of cameras: " << num_cameras_ << std::endl;
+		std::cout << "number of world point: " << num_points_ << std::endl;
+		std::cout << "number of observations point: " << num_observations_ << std::endl;
 
-	//if (use_quaternions_) {
-	//	// Switch the angle-axis rotations to quaternions.
-	//	num_parameters_ = 10 * num_cameras_ + 3 * num_points_;
-	//	double* quaternion_parameters = new double[num_parameters_];
-	//	double* original_cursor = parameters_;
-	//	double* quaternion_cursor = quaternion_parameters;
-	//	for (int i = 0; i < num_cameras_; ++i) {
-	//		AngleAxisToQuaternion(original_cursor, quaternion_cursor);
-	//		quaternion_cursor += 4;
-	//		original_cursor += 3;
-	//		for (int j = 4; j < 10; ++j) {
-	//			*quaternion_cursor++ = *original_cursor++;
-	//		}
-	//	}
-	//	// Copy the rest of the points.
-	//	for (int i = 0; i < 3 * num_points_; ++i) {
-	//		*quaternion_cursor++ = *original_cursor++;
-	//	}
-	//	// Swap in the quaternion parameters.
-	//	delete[]parameters_;
-	//	parameters_ = quaternion_parameters;
-	//}
-}
+		// point_index_ : world point index
+		point_index_ = new int[num_observations_];
+		camera_index_ = new int[num_observations_];
+		observations_ = new double[2 * num_observations_];
 
-void Problem::WriteToFile(const std::string& filename) const {
-	FILE* fptr = fopen(filename.c_str(), "w");
+		// 11 : fx, fy, cx, cy, k1, k2, k3, p1, p2, 3(rot), 3(trans)
+		// 3  £ºx, y, z
+		// num_parameters : need to be optimized
+		unsigned int perCameraParamNum = 15;
+		num_parameters_ = perCameraParamNum * num_cameras_ + 3 * num_points_;
+		parameters_ = new double[num_parameters_];
 
-	if (fptr == NULL) {
-		std::cerr << "Error: unable to open file " << filename;
-		return;
-	}
+		unsigned int cami = 0; // camera index 1,2,3,4,5,6
+		unsigned int pointi = 0; // point index 1 - 88
+		monoCamera& camera = multicamera.getCamera(cami);
+		std::vector<cv::Point2f> imagepoints = camera.getImagePoint();
+		for (int i = 0; i < num_observations_; ++i) {
+			if (!((pointi + 1) % (numPerCameraPoint + 1)))
+			{
+				cami += 1;
+				pointi = 0;
+				monoCamera& camera = multicamera.getCamera(cami);
+				imagepoints = camera.getImagePoint();
+			}
+			camera_index_[i] = cami;
+			point_index_[i] = pointi;
 
-	fprintf(fptr, "%d %d %d\n", num_cameras_, num_points_, num_observations_);
-
-	for (int i = 0; i < num_observations_; ++i) {
-		fprintf(fptr, "%d %d", camera_index_[i], point_index_[i]);
-		for (int j = 0; j < 2; ++j) {
-			fprintf(fptr, " %g", observations_[2 * i + j]);
+			observations_[2 * i] = imagepoints[pointi].x;
+			observations_[2 * i + 1] = imagepoints[pointi].y;
+			pointi += 1;
 		}
-		fprintf(fptr, "\n");
-	}
 
-	for (int i = 0; i < num_cameras(); ++i) {
-		double angleaxis[15];
-		if (use_quaternions_) {
-			//OutPut in angle-axis format.
-			QuaternionToAngleAxis(parameters_ + 10 * i, angleaxis);
-			memcpy(angleaxis + 3, parameters_ + 10 * i + 4, 6 * sizeof(double));
-		}
-		else {
-			memcpy(angleaxis, parameters_ + 15 * i, 15 * sizeof(double));
-		}
-		for (int j = 0; j < 15; ++j) {
-			fprintf(fptr, "%.16g\n", angleaxis[j]);
-		}
-	}
-
-	const double* points = parameters_ + camera_block_size() * num_cameras_;
-	for (int i = 0; i < num_points(); ++i) {
-		const double* point = points + i * point_block_size();
-		for (int j = 0; j < point_block_size(); ++j) {
-			fprintf(fptr, "%.16g\n", point[j]);
-		}
-	}
-
-	fclose(fptr);
-}
-
-void Problem::WriteMultiCamera(multiCamera& multicamera) const
-{	
-	for (int i = 0; i < num_cameras(); ++i) 
-	{
-		monoCamera& camera = multicamera.getCamera(i);
-		if (use_quaternions_) 
+		// camera parameter f, cx, cy, k1, k2, p1, p2, k3, rot_3, t_3
+		for (int i = 0; i < num_cameras_; i++)
 		{
-			//OutPut in angle-axis format.
+			monoCamera& camera = multicamera.getCamera(i);
+
+			parameters_[perCameraParamNum * i] = camera.cameraMatrix.at<double>(0, 0); // fx	
+			parameters_[perCameraParamNum * i + 1] = camera.cameraMatrix.at<double>(1, 1); // fy
+			parameters_[perCameraParamNum * i + 2] = camera.cameraMatrix.at<double>(0, 2); // cx
+			parameters_[perCameraParamNum * i + 3] = camera.cameraMatrix.at<double>(1, 2); // cy		
+
+			parameters_[perCameraParamNum * i + 4] = camera.distCoeffs.at<double>(0, 0); // k1
+			parameters_[perCameraParamNum * i + 5] = camera.distCoeffs.at<double>(1, 0); // k2
+			parameters_[perCameraParamNum * i + 6] = camera.distCoeffs.at<double>(2, 0); // p1
+			parameters_[perCameraParamNum * i + 7] = camera.distCoeffs.at<double>(3, 0); // p2
+			parameters_[perCameraParamNum * i + 8] = camera.distCoeffs.at<double>(4, 0); // k1
+
+			parameters_[perCameraParamNum * i + 9] = camera.R.at<double>(0, 0); // rvec 1
+			parameters_[perCameraParamNum * i + 10] = camera.R.at<double>(1, 0); // rvec 2
+			parameters_[perCameraParamNum * i + 11] = camera.R.at<double>(2, 0); // rvec 3
+
+			parameters_[perCameraParamNum * i + 12] = camera.T.at<double>(0, 0); // tvec 1
+			parameters_[perCameraParamNum * i + 13] = camera.T.at<double>(1, 0); // tvec 2
+			parameters_[perCameraParamNum * i + 14] = camera.T.at<double>(2, 0); // tvec 3
 		}
-		else 
-		{	
-			camera.cameraMatrix.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i];
-			camera.cameraMatrix.at<double>(1, 1) = ((double*)parameters_)[camera_block_size() * i + 1];
-			camera.cameraMatrix.at<double>(0, 2) = ((double*)parameters_)[camera_block_size() * i + 2];
-			camera.cameraMatrix.at<double>(1, 2) = ((double*)parameters_)[camera_block_size() * i + 3];
-			camera.distCoeffs.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 4];
-			camera.distCoeffs.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 5];
-			camera.distCoeffs.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 6];
-			camera.distCoeffs.at<double>(3, 0) = ((double*)parameters_)[camera_block_size() * i + 7];
-			camera.distCoeffs.at<double>(4, 0) = ((double*)parameters_)[camera_block_size() * i + 8];
-			camera.R.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 9];
-			camera.R.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 10];
-			camera.R.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 11];
-			camera.T.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 12];
-			camera.T.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 13];
-			camera.T.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 14];
+
+		std::vector<cv::Point3f> worldpoints = multicamera.getWorldPointVec();
+		unsigned int worldpointsNum = worldpoints.size();
+		unsigned int parameterPtr = perCameraParamNum * 6;
+		for (int i = 0; i < worldpointsNum; i++)
+		{
+			unsigned int addr = parameterPtr + 3 * i;
+			parameters_[addr] = worldpoints[i].x;
+			parameters_[addr + 1] = worldpoints[i].y;
+			parameters_[addr + 2] = worldpoints[i].z;
+
+			//std::cout << parameters_[addr] << std::endl; 
+			//std::cout << parameters_[addr+1] << std::endl;
+			//std::cout << parameters_[addr+2] << std::endl;
 		}
-	}
-}
 
-// Write the problem to a PLY file for inspection in Meshlab or CloudCompare
-void Problem::WriteToPLYFile(const std::string& filename) const {
-	std::ofstream of(filename.c_str());
-
-	of << "ply"
-		<< '\n' << "format ascii 1.0"
-		<< '\n' << "element vertex " << num_cameras_ + num_points_
-		<< '\n' << "property float x"
-		<< '\n' << "property float y"
-		<< '\n' << "property float z"
-		<< '\n' << "property uchar red"
-		<< '\n' << "property uchar green"
-		<< '\n' << "property uchar blue"
-		<< '\n' << "end_header" << std::endl;
-
-	// Export extrinsic data (i.e. camera centers) as green points.
-	double angle_axis[3];
-	double center[3];
-	for (int i = 0; i < num_cameras(); ++i) {
-		const double* camera = cameras() + camera_block_size() * i;
-		CameraToAngelAxisAndCenter(camera, angle_axis, center);
-		of << center[0] << ' ' << center[1] << ' ' << center[2]
-			<< " 0 255 0" << '\n';
+		//if (use_quaternions_) {
+		//	// Switch the angle-axis rotations to quaternions.
+		//	num_parameters_ = 10 * num_cameras_ + 3 * num_points_;
+		//	double* quaternion_parameters = new double[num_parameters_];
+		//	double* original_cursor = parameters_;
+		//	double* quaternion_cursor = quaternion_parameters;
+		//	for (int i = 0; i < num_cameras_; ++i) {
+		//		AngleAxisToQuaternion(original_cursor, quaternion_cursor);
+		//		quaternion_cursor += 4;
+		//		original_cursor += 3;
+		//		for (int j = 4; j < 10; ++j) {
+		//			*quaternion_cursor++ = *original_cursor++;
+		//		}
+		//	}
+		//	// Copy the rest of the points.
+		//	for (int i = 0; i < 3 * num_points_; ++i) {
+		//		*quaternion_cursor++ = *original_cursor++;
+		//	}
+		//	// Swap in the quaternion parameters.
+		//	delete[]parameters_;
+		//	parameters_ = quaternion_parameters;
+		//}
 	}
 
-	// Export the structure (i.e. 3D Points) as white points.
-	const double* points = parameters_ + camera_block_size() * num_cameras_;
-	for (int i = 0; i < num_points(); ++i) {
-		const double* point = points + i * point_block_size();
-		for (int j = 0; j < point_block_size(); ++j) {
-			of << point[j] << ' ';
+	void Problem::WriteToFile(const std::string& filename) const {
+		FILE* fptr = fopen(filename.c_str(), "w");
+
+		if (fptr == NULL) {
+			std::cerr << "Error: unable to open file " << filename;
+			return;
 		}
-		of << " 255 255 255\n";
-	}
-	of.close();
-}
 
-void Problem::CameraToAngelAxisAndCenter(const double* camera,
-	double* angle_axis,
-	double* center) const {
-	VectorRef angle_axis_ref(angle_axis, 3);
-	if (use_quaternions_) {
-		QuaternionToAngleAxis(camera, angle_axis);
-	}
-	else {
-		angle_axis_ref = ConstVectorRef(camera, 3);
-	}
+		fprintf(fptr, "%d %d %d\n", num_cameras_, num_points_, num_observations_);
 
-	// c = -R't
-	Eigen::VectorXd inverse_rotation = -angle_axis_ref;
-	AngleAxisRotatePoint(inverse_rotation.data(),
-		camera + camera_block_size() - 6,
-		center);
-	VectorRef(center, 3) *= -1.0;
-}
-
-void Problem::AngleAxisAndCenterToCamera(const double* angle_axis,
-	const double* center,
-	double* camera) const {
-	ConstVectorRef angle_axis_ref(angle_axis, 3);
-	if (use_quaternions_) {
-		AngleAxisToQuaternion(angle_axis, camera);
-	}
-	else {
-		VectorRef(camera, 3) = angle_axis_ref;
-	}
-
-	// t = -R * c
-	AngleAxisRotatePoint(angle_axis, center, camera + camera_block_size() - 6);
-	VectorRef(camera + camera_block_size() - 6, 3) *= -1.0;
-}
-
-void Problem::Normalize() {
-	// Compute the marginal median of the geometry
-	std::vector<double> tmp(num_points_);
-	Eigen::Vector3d median;
-	double* points = mutable_points();
-	for (int i = 0; i < 3; ++i) {
-		for (int j = 0; j < num_points_; ++j) {
-			tmp[j] = points[3 * j + i];
+		for (int i = 0; i < num_observations_; ++i) {
+			fprintf(fptr, "%d %d", camera_index_[i], point_index_[i]);
+			for (int j = 0; j < 2; ++j) {
+				fprintf(fptr, " %g", observations_[2 * i + j]);
+			}
+			fprintf(fptr, "\n");
 		}
-		median(i) = Median(&tmp);
+
+		for (int i = 0; i < num_cameras(); ++i) {
+			double angleaxis[15];
+			if (use_quaternions_) {
+				//OutPut in angle-axis format.
+				QuaternionToAngleAxis(parameters_ + 10 * i, angleaxis);
+				memcpy(angleaxis + 3, parameters_ + 10 * i + 4, 6 * sizeof(double));
+			}
+			else {
+				memcpy(angleaxis, parameters_ + 15 * i, 15 * sizeof(double));
+			}
+			for (int j = 0; j < 15; ++j) {
+				fprintf(fptr, "%.16g\n", angleaxis[j]);
+			}
+		}
+
+		const double* points = parameters_ + camera_block_size() * num_cameras_;
+		for (int i = 0; i < num_points(); ++i) {
+			const double* point = points + i * point_block_size();
+			for (int j = 0; j < point_block_size(); ++j) {
+				fprintf(fptr, "%.16g\n", point[j]);
+			}
+		}
+
+		fclose(fptr);
 	}
 
-	for (int i = 0; i < num_points_; ++i) {
-		VectorRef point(points + 3 * i, 3);
-		tmp[i] = (point - median).lpNorm<1>();
-	}
-
-	const double median_absolute_deviation = Median(&tmp);
-
-	// Scale so that the median absolute deviation of the resulting
-	// reconstruction is 100
-
-	const double scale = 100.0 / median_absolute_deviation;
-
-	// X = scale * (X - median)
-	for (int i = 0; i < num_points_; ++i) {
-		VectorRef point(points + 3 * i, 3);
-		point = scale * (point - median);
-	}
-
-	double* cameras = mutable_cameras();
-	double angle_axis[3];
-	double center[3];
-	for (int i = 0; i < num_cameras_; ++i) {
-		double* camera = cameras + camera_block_size() * i;
-		CameraToAngelAxisAndCenter(camera, angle_axis, center);
-		// center = scale * (center - median)
-		VectorRef(center, 3) = scale * (VectorRef(center, 3) - median);
-		AngleAxisAndCenterToCamera(angle_axis, center, camera);
-	}
-}
-
-void Problem::Perturb(const double rotation_sigma,
-	const double translation_sigma,
-	const double point_sigma) {
-	assert(point_sigma >= 0.0);
-	assert(rotation_sigma >= 0.0);
-	assert(translation_sigma >= 0.0);
-
-	double* points = mutable_points();
-	if (point_sigma > 0) {
-		for (int i = 0; i < num_points_; ++i) {
-			PerturbPoint3(point_sigma, points + 3 * i);
+	void Problem::WriteMultiCamera(multiCamera& multicamera) const
+	{
+		for (int i = 0; i < num_cameras(); ++i)
+		{
+			monoCamera& camera = multicamera.getCamera(i);
+			if (use_quaternions_)
+			{
+				//OutPut in angle-axis format.
+			}
+			else
+			{
+				camera.cameraMatrix.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i];
+				camera.cameraMatrix.at<double>(1, 1) = ((double*)parameters_)[camera_block_size() * i + 1];
+				camera.cameraMatrix.at<double>(0, 2) = ((double*)parameters_)[camera_block_size() * i + 2];
+				camera.cameraMatrix.at<double>(1, 2) = ((double*)parameters_)[camera_block_size() * i + 3];
+				camera.distCoeffs.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 4];
+				camera.distCoeffs.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 5];
+				camera.distCoeffs.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 6];
+				camera.distCoeffs.at<double>(3, 0) = ((double*)parameters_)[camera_block_size() * i + 7];
+				camera.distCoeffs.at<double>(4, 0) = ((double*)parameters_)[camera_block_size() * i + 8];
+				camera.R.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 9];
+				camera.R.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 10];
+				camera.R.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 11];
+				camera.T.at<double>(0, 0) = ((double*)parameters_)[camera_block_size() * i + 12];
+				camera.T.at<double>(1, 0) = ((double*)parameters_)[camera_block_size() * i + 13];
+				camera.T.at<double>(2, 0) = ((double*)parameters_)[camera_block_size() * i + 14];
+			}
 		}
 	}
 
-	for (int i = 0; i < num_cameras_; ++i) {
-		double* camera = mutable_cameras() + camera_block_size() * i;
+	// Write the problem to a PLY file for inspection in Meshlab or CloudCompare
+	void Problem::WriteToPLYFile(const std::string& filename) const {
+		std::ofstream of(filename.c_str());
 
+		of << "ply"
+			<< '\n' << "format ascii 1.0"
+			<< '\n' << "element vertex " << num_cameras_ + num_points_
+			<< '\n' << "property float x"
+			<< '\n' << "property float y"
+			<< '\n' << "property float z"
+			<< '\n' << "property uchar red"
+			<< '\n' << "property uchar green"
+			<< '\n' << "property uchar blue"
+			<< '\n' << "end_header" << std::endl;
+
+		// Export extrinsic data (i.e. camera centers) as green points.
 		double angle_axis[3];
 		double center[3];
-		// Perturb in the rotation of the camera in the angle-axis
-		// representation
-		CameraToAngelAxisAndCenter(camera, angle_axis, center);
-		if (rotation_sigma > 0.0) {
-			PerturbPoint3(rotation_sigma, angle_axis);
+		for (int i = 0; i < num_cameras(); ++i) {
+			const double* camera = cameras() + camera_block_size() * i;
+			CameraToAngelAxisAndCenter(camera, angle_axis, center);
+			of << center[0] << ' ' << center[1] << ' ' << center[2]
+				<< " 0 255 0" << '\n';
 		}
-		AngleAxisAndCenterToCamera(angle_axis, center, camera);
 
-		if (translation_sigma > 0.0)
-			PerturbPoint3(translation_sigma, camera + camera_block_size() - 6);
+		// Export the structure (i.e. 3D Points) as white points.
+		const double* points = parameters_ + camera_block_size() * num_cameras_;
+		for (int i = 0; i < num_points(); ++i) {
+			const double* point = points + i * point_block_size();
+			for (int j = 0; j < point_block_size(); ++j) {
+				of << point[j] << ' ';
+			}
+			of << " 255 255 255\n";
+		}
+		of.close();
+	}
+
+	void Problem::CameraToAngelAxisAndCenter(const double* camera,
+		double* angle_axis,
+		double* center) const {
+		VectorRef angle_axis_ref(angle_axis, 3);
+		if (use_quaternions_) {
+			QuaternionToAngleAxis(camera, angle_axis);
+		}
+		else {
+			angle_axis_ref = ConstVectorRef(camera, 3);
+		}
+
+		// c = -R't
+		Eigen::VectorXd inverse_rotation = -angle_axis_ref;
+		AngleAxisRotatePoint(inverse_rotation.data(),
+			camera + camera_block_size() - 6,
+			center);
+		VectorRef(center, 3) *= -1.0;
+	}
+
+	void Problem::AngleAxisAndCenterToCamera(const double* angle_axis,
+		const double* center,
+		double* camera) const {
+		ConstVectorRef angle_axis_ref(angle_axis, 3);
+		if (use_quaternions_) {
+			AngleAxisToQuaternion(angle_axis, camera);
+		}
+		else {
+			VectorRef(camera, 3) = angle_axis_ref;
+		}
+
+		// t = -R * c
+		AngleAxisRotatePoint(angle_axis, center, camera + camera_block_size() - 6);
+		VectorRef(camera + camera_block_size() - 6, 3) *= -1.0;
+	}
+
+	void Problem::Normalize() {
+		// Compute the marginal median of the geometry
+		std::vector<double> tmp(num_points_);
+		Eigen::Vector3d median;
+		double* points = mutable_points();
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < num_points_; ++j) {
+				tmp[j] = points[3 * j + i];
+			}
+			median(i) = Median(&tmp);
+		}
+
+		for (int i = 0; i < num_points_; ++i) {
+			VectorRef point(points + 3 * i, 3);
+			tmp[i] = (point - median).lpNorm<1>();
+		}
+
+		const double median_absolute_deviation = Median(&tmp);
+
+		// Scale so that the median absolute deviation of the resulting
+		// reconstruction is 100
+
+		const double scale = 100.0 / median_absolute_deviation;
+
+		// X = scale * (X - median)
+		for (int i = 0; i < num_points_; ++i) {
+			VectorRef point(points + 3 * i, 3);
+			point = scale * (point - median);
+		}
+
+		double* cameras = mutable_cameras();
+		double angle_axis[3];
+		double center[3];
+		for (int i = 0; i < num_cameras_; ++i) {
+			double* camera = cameras + camera_block_size() * i;
+			CameraToAngelAxisAndCenter(camera, angle_axis, center);
+			// center = scale * (center - median)
+			VectorRef(center, 3) = scale * (VectorRef(center, 3) - median);
+			AngleAxisAndCenterToCamera(angle_axis, center, camera);
+		}
+	}
+
+	void Problem::Perturb(const double rotation_sigma,
+		const double translation_sigma,
+		const double point_sigma) {
+		assert(point_sigma >= 0.0);
+		assert(rotation_sigma >= 0.0);
+		assert(translation_sigma >= 0.0);
+
+		double* points = mutable_points();
+		if (point_sigma > 0) {
+			for (int i = 0; i < num_points_; ++i) {
+				PerturbPoint3(point_sigma, points + 3 * i);
+			}
+		}
+
+		for (int i = 0; i < num_cameras_; ++i) {
+			double* camera = mutable_cameras() + camera_block_size() * i;
+
+			double angle_axis[3];
+			double center[3];
+			// Perturb in the rotation of the camera in the angle-axis
+			// representation
+			CameraToAngelAxisAndCenter(camera, angle_axis, center);
+			if (rotation_sigma > 0.0) {
+				PerturbPoint3(rotation_sigma, angle_axis);
+			}
+			AngleAxisAndCenterToCamera(angle_axis, center, camera);
+
+			if (translation_sigma > 0.0)
+				PerturbPoint3(translation_sigma, camera + camera_block_size() - 6);
+		}
 	}
 }

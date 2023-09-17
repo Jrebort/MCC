@@ -203,6 +203,7 @@ bool monoCamera::calibrate()
 		}
 		else
 		{
+			//TODO: register all image
 			__debugbreak;
 		}
 

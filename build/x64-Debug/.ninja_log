@@ -1,0 +1,13 @@
+# ninja log v5
+34	1462	7169309067065535	MCC/CMakeFiles/mcc.dir/typeConverter.cpp.obj	7039854cfb3612ee
+30	1466	7169309067055541	MCC/CMakeFiles/mcc.dir/reprojectionError.cpp.obj	f0ff6e57bd6465cf
+12	1475	7169309067225530	MCC/CMakeFiles/mcc.dir/Settings.cpp.obj	8d67e0559016e26c
+20	1602	7169309068485807	MCC/CMakeFiles/mcc.dir/monoCamera.cpp.obj	187481c276bd3a6c
+9	1819	7169309070616065	MCC/CMakeFiles/mcc.dir/Dataset.cpp.obj	791468aadf01a62e
+23	1987	7169309072326330	MCC/CMakeFiles/mcc.dir/multiCamera.cpp.obj	8352f596efdaab26
+27	2264	7169309075117360	MCC/CMakeFiles/mcc.dir/problem.cpp.obj	67fe901241d5fcab
+16	2628	7169309078758416	MCC/CMakeFiles/mcc.dir/bundleAdjustment.cpp.obj	3d4df29337662b56
+2629	2685	7169309079313553	MCC/mcc.lib	fbf4e088d9140b88
+38	2823	7169309080678643	example/CMakeFiles/demo.dir/app.cpp.obj	f077106412bb3700
+2823	7526	7169309084559714	example/demo.exe	db31978eb36755d6
+7526	7651	0	CMakeFiles/install.util	497d8cd063c3f86e

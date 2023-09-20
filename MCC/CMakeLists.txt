@@ -20,7 +20,8 @@ find_package(Boost COMPONENTS filesystem REQUIRED)
 find_package(Sophus REQUIRED)
 
 # Generate Lib
-add_library(${MODULE_MCC} ${MCC_SOURCE})
+add_library(${MODULE_MCC} ${MCC_SOURCE} ${MCC_INCLUDE})
+SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
 
 target_link_libraries(${MODULE_MCC} PRIVATE Ceres::ceres)
 target_link_libraries(${MODULE_MCC} PRIVATE Sophus::Sophus)
@@ -50,5 +51,5 @@ install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
 install(EXPORT MccConfig 
     FILE MccConfig.cmake
     NAMESPACE MCC::
-    DESTINATION lib/cmake/MyProject
+    DESTINATION lib/cmake/MCC
 )

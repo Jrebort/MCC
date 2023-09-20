@@ -1,0 +1,17 @@
+H:/Engine/cameraCalibration/install/x64-Debug/lib/mcc.lib
+H:/Engine/cameraCalibration/install/x64-Debug/include/bundleAdjustment.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/Core.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/Dataset.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/monoCamera.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/multiCamera.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/problem.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/random.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/reprojectionCost.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/reprojectionError.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/rotation.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/Settings.h
+H:/Engine/cameraCalibration/install/x64-Debug/include/typeConverter.h
+H:/Engine/cameraCalibration/install/x64-Debug/lib/cmake/MCC/MccConfig.cmake
+H:/Engine/cameraCalibration/install/x64-Debug/lib/cmake/MCC/MccConfig-debug.cmake
+H:/Engine/cameraCalibration/install/x64-Debug/share/mcc/cmake/MccConfig.cmake
+H:/Engine/cameraCalibration/install/x64-Debug/share/mcc/cmake/MccConfig-debug.cmake

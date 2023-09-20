@@ -1,10 +1,5 @@
-# Binaries
-**/bin/
-**/out/
-
-**.png
-**.dll
-**.lib
+# build
+build/*
 
 # Visual Studio files and folder
 .vs/

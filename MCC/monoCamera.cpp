@@ -114,6 +114,7 @@ bool monoCamera::calibrate()
 {
 	while ( imagePoints.size() < (size_t)s.nrFrames )
 	{
+		std::cout << imagePoints.size() << std::endl;
 		cv::Mat view; // calibration image
 		view = s.nextImage();
 

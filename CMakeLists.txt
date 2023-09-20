@@ -11,4 +11,4 @@ set(MCC_VERSION_MINOR 0.0)
 add_subdirectory(MCC)
 add_subdirectory(example)
 
-install(EXPORT MccConfig DESTINATION share/mcc/cmake)
+#install(EXPORT MccConfig DESTINATION share/mcc/cmake)

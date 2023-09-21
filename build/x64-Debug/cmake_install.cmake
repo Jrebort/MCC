@@ -1,8 +1,8 @@
-# Install script for directory: H:/Engine/CameraCalibration
+# Install script for directory: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "H:/Engine/cameraCalibration/install/x64-Debug")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/install/x64-Debug")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,24 +34,24 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("H:/Engine/CameraCalibration/build/x64-Debug/MCC/cmake_install.cmake")
+  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("H:/Engine/CameraCalibration/build/x64-Debug/example/cmake_install.cmake")
+  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/mcc/cmake/MccConfig.cmake")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
-         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/mcc/cmake/MccConfig.cmake"
-         "H:/Engine/CameraCalibration/build/x64-Debug/CMakeFiles/Export/dab4013f20034dacf82ea9ecc071d5e9/MccConfig.cmake")
+         "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig.cmake"
+         "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
     if(_cmake_export_file_changed)
-      file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/mcc/cmake/MccConfig-*.cmake")
+      file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig-*.cmake")
       if(_cmake_old_config_files)
         string(REPLACE ";" ", " _cmake_old_config_files_text "${_cmake_old_config_files}")
-        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/mcc/cmake/MccConfig.cmake\" will be replaced.  Removing files [${_cmake_old_config_files_text}].")
+        message(STATUS "Old export file \"$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig.cmake\" will be replaced.  Removing files [${_cmake_old_config_files_text}].")
         unset(_cmake_old_config_files_text)
         file(REMOVE ${_cmake_old_config_files})
       endif()
@@ -59,9 +59,9 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mcc/cmake" TYPE FILE FILES "H:/Engine/CameraCalibration/build/x64-Debug/CMakeFiles/Export/dab4013f20034dacf82ea9ecc071d5e9/MccConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mcc/cmake" TYPE FILE FILES "H:/Engine/CameraCalibration/build/x64-Debug/CMakeFiles/Export/dab4013f20034dacf82ea9ecc071d5e9/MccConfig-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig-debug.cmake")
   endif()
 endif()
 
@@ -73,5 +73,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "H:/Engine/CameraCalibration/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -5,28 +5,19 @@ set(MODULE_MCC mcc)
 file(GLOB MCC_SOURCE *.cpp)
 file(GLOB MCC_INCLUDE *.h)
 
-# OpenCV
+# import package
 find_package(OpenCV CONFIG REQUIRED)
-
-# Ceres
 find_package(Ceres CONFIG REQUIRED)
-
-# Boost
 find_package(Boost COMPONENTS filesystem REQUIRED)
-
-# Sophus
 find_package(Sophus REQUIRED)
 
 # Generate Lib
 add_library(${MODULE_MCC} ${MCC_SOURCE} ${MCC_INCLUDE})
-SET(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install)
 
 target_link_libraries(${MODULE_MCC} PRIVATE Ceres::ceres)
 target_link_libraries(${MODULE_MCC} PRIVATE Sophus::Sophus)
 target_link_libraries(${MODULE_MCC} PRIVATE ${OpenCV_LIBS})
 target_link_libraries(${MODULE_MCC} PRIVATE ${Boost_LIBRARIES})
-
-target_include_directories(${MODULE_MCC} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 # install
 target_include_directories(${MODULE_MCC} PUBLIC 
@@ -34,7 +25,7 @@ target_include_directories(${MODULE_MCC} PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
 )
 
-install(TARGETS ${MODULE_MCC} EXPORT MccConfig
+install(TARGETS ${MODULE_MCC} EXPORT mccConfig
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
@@ -42,12 +33,32 @@ install(TARGETS ${MODULE_MCC} EXPORT MccConfig
 )
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/
-        DESTINATION include
+        DESTINATION include/MCC/
         FILES_MATCHING PATTERN "*.h" 
 )
 
-install(EXPORT MccConfig 
-    FILE MccConfig.cmake
+install(EXPORT mccConfig 
+    FILE mccTarget.cmake
     NAMESPACE MCC::
-    DESTINATION lib/cmake/MCC
+    DESTINATION share/cmake/MCC
 )
+
+include(CMakePackageConfigHelpers)
+
+configure_package_config_file(
+    "${CMAKE_SOURCE_DIR}/cmake/mccConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/mccConfig.cmake"
+    INSTALL_DESTINATION lib/cmake/MCC
+)
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/mccConfigVersion.cmake"
+    VERSION ${PROJECT_VERSION}
+    COMPATIBILITY AnyNewerVersion
+)
+
+install(
+    FILES "${CMAKE_CURRENT_BINARY_DIR}/mccConfig.cmake"
+          "${CMAKE_CURRENT_BINARY_DIR}/mccConfigVersion.cmake"
+    DESTINATION share/cmake/MCC
+)
+

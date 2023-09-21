@@ -13,9 +13,6 @@
       "intelliSenseMode": "windows-msvc-x64",
       "variables": [
         {
-          "name": "CMAKE_INSTALL_PREFIX",
-          "value": "H:/Engine/cameraCalibration/install/x64-Debug",
-          "type": "PATH"
         }
       ]
     },

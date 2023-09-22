@@ -15,6 +15,7 @@
 namespace MCC {
 	bool multiCamera::iterateDataFolder(const std::string& foldername, std::vector<std::string>& viewFolders)
 	{
+		dataPath = foldername;
 		using namespace boost::filesystem;
 		path p(foldername);
 		ASSERT(!(exists(p) && is_directory(p)), "Data folder is not exist! Please check ...");
@@ -100,6 +101,23 @@ namespace MCC {
 
 	void multiCamera::writeCameraParamter()
 	{
+		namespace fs = boost::filesystem;
+		for (unsigned int i = 0; i < cameraMatrix.size(); i++) {
+			monoCamera& currentCamera = cameraMatrix[i];
+
+			fs::path filename("Camera_" + std::to_string(i+1) + ".xml");
+			fs::path dir(dataPath);
+
+			std::string filepath = (dataPath/filename).string();
+
+			cv::Size& imageSize = currentCamera.imageSize;
+			cv::Mat& cameraMat = currentCamera.cameraMatrix;
+			cv::Mat& distCoeff = currentCamera.distCoeffs;
+			cv::Mat& r = currentCamera.R;
+			cv::Mat& t = currentCamera.T;
+
+			currentCamera.saveCameraParams(filepath, imageSize, cameraMat, distCoeff, r, t);
+		}
 
 	}
 
@@ -323,7 +341,6 @@ namespace MCC {
 			camera.T.at<double>(0, 0) = parameters_[perCameraParamNum * i + 12];
 			camera.T.at<double>(1, 0) = parameters_[perCameraParamNum * i + 13];
 			camera.T.at<double>(2, 0) = parameters_[perCameraParamNum * i + 14];
-			std::cout << camera.cameraMatrix << std::endl;
 		}
 		fclose(fptr);
 
@@ -384,7 +401,7 @@ namespace MCC {
 				camera.distCoeffs,
 				false);
 
-			std::cout << "camera" << i << " reprojection error: " << error << " pixel" << std::endl;
+			std::cout << "camera" << i+1 << " reprojection error: " << error << " pixel" << std::endl;
 		}
 	}
 }

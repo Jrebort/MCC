@@ -10,6 +10,7 @@ namespace MCC {
 	class multiCamera
 	{
 	private:
+		std::string dataPath;
 		std::vector<monoCamera> cameraMatrix;
 		std::vector<std::vector<cv::Point3f>> worldPoint;
 		unsigned int cameraNum;

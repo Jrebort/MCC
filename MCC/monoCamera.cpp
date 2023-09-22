@@ -647,3 +647,25 @@ std::vector<cv::Point2f> monoCamera::getImagePoint()
 	}
 	return result;
 }
+
+
+bool monoCamera::saveCameraParams(std::string& filename,
+	cv::Size& imageSize,
+	cv::Mat& cameraMat,
+	cv::Mat& distCoeff,
+	cv::Mat& r,
+	cv::Mat& t)
+{
+	cv::FileStorage fs(filename, cv::FileStorage::WRITE);
+	if (!fs.isOpened())
+		return 1;
+
+	fs << "imageSize" << imageSize;
+	fs << "cameraMatrix" << cameraMatrix;
+	fs << "distCoeffs" << distCoeffs;
+	fs << "rvec" << r;
+	fs << "tvec" << t;
+	fs.release();
+	return 0;
+}
+

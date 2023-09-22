@@ -14,7 +14,7 @@ int main()
 {
 	unsigned int STEPNUM = 1;
 	MCC::multiCamera multicamera;
-	const std::string dataPath = "E:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/database/yangshuang/right";
+	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/data_test/calibration";
 	const std::string optimalizationPath = dataPath + "/optimalResult";
  
 	Step("Check camera need to be calibration");
@@ -44,6 +44,7 @@ int main()
 
 	multicamera.evaluate();
 
-	multicamera.visCameraPose();
+	//multicamera.visCameraPose();
+	multicamera.writeCameraParamter();
 	return 0;
 }

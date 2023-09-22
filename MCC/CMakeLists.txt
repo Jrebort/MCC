@@ -14,10 +14,10 @@ find_package(Sophus REQUIRED)
 # Generate Lib
 add_library(${MODULE_MCC} ${MCC_SOURCE} ${MCC_INCLUDE})
 
-target_link_libraries(${MODULE_MCC} PRIVATE Ceres::ceres)
-target_link_libraries(${MODULE_MCC} PRIVATE Sophus::Sophus)
-target_link_libraries(${MODULE_MCC} PRIVATE ${OpenCV_LIBS})
-target_link_libraries(${MODULE_MCC} PRIVATE ${Boost_LIBRARIES})
+target_link_libraries(${MODULE_MCC} PUBLIC Ceres::ceres)
+target_link_libraries(${MODULE_MCC} PUBLIC Sophus::Sophus)
+target_link_libraries(${MODULE_MCC} PUBLIC ${OpenCV_LIBS})
+target_link_libraries(${MODULE_MCC} PUBLIC ${Boost_LIBRARIES})
 
 # install
 target_include_directories(${MODULE_MCC} PUBLIC 

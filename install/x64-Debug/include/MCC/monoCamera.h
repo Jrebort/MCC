@@ -67,5 +67,11 @@ public:
 	inline unsigned int getImagePointNum() { return imagePoints[1].size() * getPatternNum(); }
 	bool calibrate();
 	bool showCalibrationResults(DISPLAY displayMode);
+	bool saveCameraParams(std::string& filename,
+							cv::Size& imageSize,
+							cv::Mat& cameraMat,
+							cv::Mat& distCoeff,
+							cv::Mat& r,
+							cv::Mat& t);
 };
 

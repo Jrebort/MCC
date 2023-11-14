@@ -73,5 +73,6 @@ public:
 							cv::Mat& distCoeff,
 							cv::Mat& r,
 							cv::Mat& t);
+	cv::Mat getProjectMatrix();
 };
 

@@ -3,6 +3,7 @@ message(STATUS "BUILD MCC library")
 set(MODULE_MCC mcc)
 
 file(GLOB MCC_SOURCE *.cpp)
+#list(REMOVE_ITEM MCC_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/multiCameraBA.cpp)
 file(GLOB MCC_INCLUDE *.h)
 
 # import package
@@ -50,6 +51,7 @@ configure_package_config_file(
     "${CMAKE_CURRENT_BINARY_DIR}/mccConfig.cmake"
     INSTALL_DESTINATION lib/cmake/MCC
 )
+
 write_basic_package_version_file(
     "${CMAKE_CURRENT_BINARY_DIR}/mccConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}

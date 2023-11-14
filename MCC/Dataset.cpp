@@ -73,9 +73,9 @@ void Dataset::generateSettingXml()
 	fs << "Write_gridPoints" << 1;
 	fs << "Show_UndistortedImage" << 1;
 	fs << "Calibrate_UseFisheyeModel" << 0;
-	fs << "Fix_K1" << 0;
-	fs << "Fix_K2" << 0;
-	fs << "Fix_K3" << 0;
+	fs << "Fix_K1" << 1;
+	fs << "Fix_K2" << 1;
+	fs << "Fix_K3" << 1;
 	fs << "Fix_K4" << 1;
 	fs << "Fix_K5" << 1;
 

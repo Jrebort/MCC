@@ -12,7 +12,7 @@ namespace MCC {
 	private:
 		std::string dataPath;
 		std::vector<monoCamera> cameraMatrix;
-		std::vector<std::vector<cv::Point3f>> worldPoint;
+		std::vector<std::vector<cv::Point3d>> worldPoint;
 		unsigned int cameraNum;
 
 	public:

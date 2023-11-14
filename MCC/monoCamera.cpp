@@ -8,7 +8,10 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
-#include "opencv2/objdetect/charuco_detector.hpp"
+#include <opencv2/objdetect/charuco_detector.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 
 static inline void read(const cv::FileNode& node, Settings& x, const Settings& default_value = Settings())
 {
@@ -663,9 +666,64 @@ bool monoCamera::saveCameraParams(std::string& filename,
 	fs << "imageSize" << imageSize;
 	fs << "cameraMatrix" << cameraMatrix;
 	fs << "distCoeffs" << distCoeffs;
-	fs << "rvec" << r;
-	fs << "tvec" << t;
+	fs << "R" << r;
+	fs << "T" << t;
 	fs.release();
 	return 0;
 }
 
+bool monoCamera::readCameraParams(std::string& filename)
+{
+	using namespace boost::property_tree;
+	ptree pt;
+
+	read_xml(filename, pt);
+
+	// Reading cameraMatrix
+	std::string cameraDataStr = pt.get<std::string>("opencv_storage.cameraMatrix.data");
+	std::stringstream camDataSS(cameraDataStr);
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			camDataSS >> cameraMatrix.at<double>(i, j);
+		}
+	}
+
+	// Reading distCoeffs
+	std::string distCoeffsDataStr = pt.get<std::string>("opencv_storage.distCoeffs.data");
+	std::stringstream distCoeffsSS(distCoeffsDataStr);
+	for (int i = 0; i < 5; ++i) {
+		distCoeffsSS >> distCoeffs.at<double>(i);
+	}
+
+	// Reading rvec
+	R = cv::Mat(3, 3, CV_64F);
+	std::string rvecDataStr = pt.get<std::string>("opencv_storage.R.data");
+	std::stringstream rvecSS(rvecDataStr);
+	for (int i = 0; i < 3; ++i) {
+		for (int j = 0; j < 3; ++j) {
+			rvecSS >> R.at<double>(i, j);
+		}
+	}
+
+	// Reading tvec
+	T = cv::Mat(3, 1, CV_64F);
+	std::string tvecDataStr = pt.get<std::string>("opencv_storage.T.data");
+	std::stringstream tvecSS(tvecDataStr);
+	for (int i = 0; i < 3; ++i) {
+		tvecSS >> T.at<double>(i);
+	}
+
+	//std::cout << cameraMatrix << std::endl;
+	return 0;
+}
+
+
+cv::Mat monoCamera::getProjectMatrix()
+{
+	cv::Mat P;
+	cv::Mat RT;
+	cv::hconcat(R, T, RT);
+	P = cameraMatrix * RT;
+
+	return P;
+}

@@ -73,5 +73,9 @@ public:
 							cv::Mat& distCoeff,
 							cv::Mat& r,
 							cv::Mat& t);
+
+	bool readCameraParams(std::string& filename);
+
+	cv::Mat getProjectMatrix();
 };
 

@@ -97,6 +97,9 @@ namespace MCC {
 		options.linear_solver_type = ceres::LinearSolverType::SPARSE_SCHUR;
 		options.minimizer_progress_to_stdout = true;
 		options.max_num_iterations = 150;
+		options.function_tolerance = 1e-9;
+		options.gradient_tolerance = 1e-10;
+		options.parameter_tolerance = 1e-8;
 		ceres::Solver::Summary summary;
 		ceres::Solve(options, &problem, &summary);
 		std::cout << summary.FullReport() << "\n";

@@ -107,3 +107,32 @@ double computeReprojectionErrors(const std::vector<cv::Point3f>& objectPoints,
 }
 
 
+double computeReprojectionErrors(const std::vector<cv::Point3d>& objectPoints,
+	const std::vector<cv::Point2d>& imagePoints,
+	const cv::Mat& rvecs,
+	const cv::Mat& tvecs,
+	const cv::Mat& cameraMatrix,
+	const cv::Mat& distCoeffs,
+	bool fisheye)
+{
+	std::vector<cv::Point2d> imagePoints2;
+	double err = 0;
+
+	if (fisheye)
+	{
+		cv::fisheye::projectPoints(objectPoints, imagePoints2, rvecs, tvecs, cameraMatrix,
+			distCoeffs);
+	}
+	else
+	{
+		projectPoints(objectPoints, rvecs, tvecs, cameraMatrix, distCoeffs, imagePoints2);
+	}
+	//std::cout << rvecs << std::endl;
+	//std::cout << tvecs << std::endl;
+	//std::cout << cameraMatrix << std::endl;
+	//std::cout << distCoeffs << std::endl;
+	err = norm(imagePoints, imagePoints2, cv::NORM_L2);
+	size_t n = objectPoints.size();
+	err = (double)std::sqrt(err * err / n);
+	return err;
+}

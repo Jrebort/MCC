@@ -201,7 +201,7 @@ namespace MCC {
 
 	}
 
-	void vtoA(std::vector<cv::Point2f> in, cv::Mat& out);
+	void vtoA(std::vector<cv::Point2d> in, cv::Mat& out);
 	bool findCorrectCameraPose(
 		const Mat& K,
 		const Mat& E,
@@ -509,9 +509,9 @@ namespace MCC {
 
 			Rodrigues(cameraBase.rvecs[i], r, noArray());
 
-			vector<Point3f> worldpoint;
+			vector<Point3d> worldpoint;
 			point3d = r * gridpoint3d + repeat(t, 1, 88);
-			mat3dTovector3f(point3d, worldpoint);
+			mat3dTovector3d(point3d, worldpoint);
 
 			worldPoint.push_back(worldpoint);
 		}
@@ -535,12 +535,12 @@ namespace MCC {
 		assert(error < 1.0); // error exceeds threshold
 
 		// solve PnP between worldPoint and camera ImagePoint
-		vector<Point3f> worldPointVec = getWorldPointVec();
+		vector<Point3d> worldPointVec = getWorldPointVec();
 		std::cout << cameraBase.distCoeffs << std::endl;
 		for (int i = 0; i < cameraMatrix.size(); i++)
 		{
 			auto& camera = cameraMatrix[i];
-			vector<Point2f> imagePointVec;
+			vector<Point2d> imagePointVec;
 			Mat imagePointHomo;
 			Mat cameraPoint;
 			Mat inlier;
@@ -575,11 +575,11 @@ namespace MCC {
 		};
 	}
 
-	std::vector<cv::Point3f> multiCamera::getWorldPointVec() const
+	std::vector<cv::Point3d> multiCamera::getWorldPointVec() const
 	{
 		using namespace std;
 		unsigned int N = worldPoint.size();
-		vector<cv::Point3f> result;
+		vector<cv::Point3d> result;
 
 		for (auto& vec : worldPoint)
 		{
@@ -809,13 +809,13 @@ namespace MCC {
 
 	void computeReprojectionError(monoCamera & camera1, monoCamera & camera2)
 	{
-		vector<Point2f> imagePointVec1;
-		vector<Point2f> imagePointVec2;
+		vector<Point2d> imagePointVec1;
+		vector<Point2d> imagePointVec2;
 		vv2fToV2f(camera1.imagePoints, imagePointVec1);
 		vv2fToV2f(camera2.imagePoints, imagePointVec2);
 		
-		vector<Point2f> undistortImagePointVec1;
-		vector<Point2f> undistortImagePointVec2;
+		vector<Point2d> undistortImagePointVec1;
+		vector<Point2d> undistortImagePointVec2;
 
 		// undistort Image Point
 		cv::undistortImagePoints(imagePointVec1,
@@ -847,7 +847,7 @@ namespace MCC {
 			R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), T.at<double>(2));
 	}
 
-	void vtoA(std::vector<cv::Point2f> in, cv::Mat& out)
+	void vtoA(std::vector<cv::Point2d> in, cv::Mat& out)
 	{
 		// 检查输入向量是否为空
 		if (in.empty()) {

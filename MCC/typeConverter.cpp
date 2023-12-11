@@ -13,8 +13,17 @@ void mat3dTovector3f(Mat& mat, vector<Point3f>& stdvector)
 	}
 }
 
+void mat3dTovector3d(Mat& mat, vector<Point3d>& stdvector)
+{
+	for (int i = 0; i < mat.cols; i++)
+	{
+		stdvector.push_back(Point3d(mat.at<double>(0, i), 
+									mat.at<double>(1, i), 
+									mat.at<double>(2, i)));
+	}
+}
 
-void vv3fToV3f(const vector<vector<Point2f>>& input, vector<Point2f>& output)
+void vv3fToV3f(const vector<vector<Point2d>>& input, vector<Point2d>& output)
 {
 	for (auto& vec : input)
 	{
@@ -23,7 +32,7 @@ void vv3fToV3f(const vector<vector<Point2f>>& input, vector<Point2f>& output)
 	}
 }
 
-void vv2fToV2f(const vector<vector<Point2f>>& input, vector<Point2f>& output)
+void vv2fToV2f(const vector<vector<Point2d>>& input, vector<Point2d>& output)
 {
 	for (auto& vec : input)
 	{
@@ -44,7 +53,7 @@ void MatTov3d(const Mat& input, std::vector<cv::Point3d>& point3d)
 	}
 }
 
-void vv2fToV2d(const std::vector<std::vector<cv::Point2f>>& input, std::vector<cv::Point2d>& output) {
+void vv2fToV2d(const std::vector<std::vector<cv::Point2d>>& input, std::vector<cv::Point2d>& output) {
 	// 清空输出向量
 	output.clear();
 
@@ -52,7 +61,7 @@ void vv2fToV2d(const std::vector<std::vector<cv::Point2f>>& input, std::vector<c
 	for (const auto& subVec : input) {
 		// 遍历子向量中的所有点
 		for (const auto& point : subVec) {
-			// 将每个 Point2f 转换为 Point2d 并添加到输出向量
+			// 将每个 Point2d 转换为 Point2d 并添加到输出向量
 			output.emplace_back(static_cast<double>(point.x), static_cast<double>(point.y));
 		}
 	}
@@ -74,7 +83,7 @@ Mat v2dToMat(const vector<Point2d>& input)
 	return result;
 }
 
-Mat v2fToMat(const vector<Point2f>& input)
+Mat v2fToMat(const vector<Point2d>& input)
 {
 	unsigned int N = input.size();
 	Mat result(2, N, CV_64F);

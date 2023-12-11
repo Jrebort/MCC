@@ -19,34 +19,34 @@ private:
 	bool release_object = false;
 
 private:	
-	double computeReprojectionErrors(const std::vector<std::vector<cv::Point3f> >& objectPoints,
-		const std::vector<std::vector<cv::Point2f> >& imagePoints,
+	double computeReprojectionErrors(const std::vector<std::vector<cv::Point3d> >& objectPoints,
+		const std::vector<std::vector<cv::Point2d> >& imagePoints,
 		const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
 		const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
 		std::vector<float>& perViewErrors, bool fisheye);
 
-	void calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
+	void calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3d>& corners,
 		Settings::Pattern patternType /*= Settings::CHESSBOARD*/);
 	
 	bool runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
-		std::vector<std::vector<cv::Point2f> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
-		std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3f>& newObjPoints,
+		std::vector<std::vector<cv::Point2d> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
+		std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3d>& newObjPoints,
 		float grid_width, bool release_object);
 
 	void saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 		const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
-		const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2f> >& imagePoints,
-		double totalAvgErr, const std::vector<cv::Point3f>& newObjPoints);
+		const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2d> >& imagePoints,
+		double totalAvgErr, const std::vector<cv::Point3d>& newObjPoints);
 	
 	bool runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
-		std::vector<std::vector<cv::Point2f>> imagePoints, float grid_width, bool release_object);
+		std::vector<std::vector<cv::Point2d>> imagePoints, float grid_width, bool release_object);
 
 
 public:
 	const int winSize;
 	float grid_width = 0;
-	std::vector<cv::Point3f> gridPoints;
-    std::vector<std::vector<cv::Point2f> > imagePoints;
+	std::vector<cv::Point3d> gridPoints;
+    std::vector<std::vector<cv::Point2d> > imagePoints;
 	std::vector<cv::Mat> rvecs, tvecs;
 	cv::Mat R;
 	cv::Mat T;
@@ -60,7 +60,7 @@ public:
 	void addSettingFilePath(const std::string& settingFilePath);
 	~monoCamera();
 	float getScaleFactor() { return scaleFactor; }
-	std::vector<cv::Point2f> getImagePoint();
+	std::vector<cv::Point2d> getImagePoint();
 	void readResultXml(const std::string& xmlFilename);
 	void setScaleFactor(float scale) { scaleFactor = scale; }
 	unsigned int getPatternNum() { return imagePoints.size(); }

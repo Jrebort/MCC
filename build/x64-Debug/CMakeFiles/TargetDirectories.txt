@@ -10,6 +10,7 @@ C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFil
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFiles/install.dir
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFiles/install/local.dir
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/CMakeFiles/demo.dir
+C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/CMakeFiles/testMat.dir
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/CMakeFiles/edit_cache.dir
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/CMakeFiles/rebuild_cache.dir
 C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/CMakeFiles/list_install_components.dir

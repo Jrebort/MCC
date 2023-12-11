@@ -128,7 +128,7 @@ bool monoCamera::calibrate()
 		if (s.flipVertical)    cv::flip(view, view, 0);
 
 		//! [find_pattern]
-		std::vector<cv::Point2f> pointBuf;
+		std::vector<cv::Point2d> pointBuf;
 
 		bool found; // true if corner found by detector
 
@@ -169,8 +169,23 @@ bool monoCamera::calibrate()
 			{
 				cv::Mat viewGray;
 				cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
-				cornerSubPix(viewGray, pointBuf, cv::Size(winSize, winSize),
+				
+				//cv::Mat pointMat(pointBuf.size(), 2, CV_64FC1);
+				//cv::Mat_<double> pointMat(2,88);
+				//for (size_t i = 0; i < pointBuf.size(); ++i) {
+				//pointMat.at<double>(i, 0) = pointBuf[i].x; // 行0, 列i
+				//pointMat.at<double>(i, 1) = pointBuf[i].y; // 行1, 列i
+				//}
+				
+				std::vector<cv::Point2f> cornerpts(pointBuf.size());
+				for (int i = 0; i < pointBuf.size(); i++) {
+					cornerpts[i] = cv::Point2f(pointBuf[i].x, pointBuf[i].y);
+				}
+				cornerSubPix(viewGray, cornerpts, cv::Size(winSize, winSize),
 					cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.0001));
+				for (int i = 0; i < pointBuf.size(); i++) {
+					pointBuf[i] = cv::Point2d(cornerpts[i].x, cornerpts[i].y);
+				}
 			}
 
 			// scale 
@@ -263,13 +278,13 @@ bool monoCamera::calibrate()
 }
 
 //! [compute_errors]
-double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::Point3f> >& objectPoints,
-	const std::vector<std::vector<cv::Point2f> >& imagePoints,
+double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::Point3d> >& objectPoints,
+	const std::vector<std::vector<cv::Point2d> >& imagePoints,
 	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
 	const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
 	std::vector<float>& perViewErrors, bool fisheye)
 {
-	std::vector<cv::Point2f> imagePoints2;
+	std::vector<cv::Point2d> imagePoints2;
 	size_t totalPoints = 0;
 	double totalErr = 0, err;
 	perViewErrors.resize(objectPoints.size());
@@ -298,7 +313,7 @@ double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::P
 //! [compute_errors]
 
 //! [board_corners]
-void monoCamera::calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3f>& corners,
+void monoCamera::calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3d>& corners,
 	Settings::Pattern patternType /*= Settings::CHESSBOARD*/)
 {
 	corners.clear();
@@ -334,8 +349,8 @@ void monoCamera::calcBoardCornerPositions(cv::Size boardSize, float squareSize, 
 //! [board_corners]
 
 bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
-	std::vector<std::vector<cv::Point2f> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
-	std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3f>& newObjPoints,
+	std::vector<std::vector<cv::Point2d> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
+	std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3d>& newObjPoints,
 	float grid_width, bool release_object)
 {
 	//! [fixed_aspect]
@@ -356,7 +371,7 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 		distCoeffs = cv::Mat::zeros(8, 1, CV_64F);
 	}
 
-	std::vector<std::vector<cv::Point3f> > objectPoints(1);
+	std::vector<std::vector<cv::Point3d> > objectPoints(1);
 	calcBoardCornerPositions(s.boardSize, s.squareSize, objectPoints[0], s.calibrationPattern);
 	if (s.calibrationPattern == Settings::Pattern::CHARUCOBOARD) {
 		objectPoints[0][s.boardSize.width - 2].x = objectPoints[0][0].x + grid_width;
@@ -387,12 +402,29 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 		int iFixedPoint = -1;
 		if (release_object)
 			iFixedPoint = s.boardSize.width - 1;
-		std::cout << cameraMatrix << std::endl;
-		rms = calibrateCameraRO(objectPoints, imagePoints, imageSize, iFixedPoint,
+		
+		std::vector<std::vector<cv::Point3f>> inputobject3d(objectPoints.size());
+		for (int i = 0; i < imagePoints.size(); i++)
+		{
+			inputobject3d[i].reserve(objectPoints[i].size());
+			for (int j = 0; j < objectPoints[i].size(); j++) {
+				inputobject3d[i].push_back(cv::Point3f(objectPoints[i][j].x, objectPoints[i][j].y, objectPoints[i][j].z));
+			}
+		}
+
+		std::vector<std::vector<cv::Point2f>> inputimage2d(imagePoints.size());
+		for (int i = 0; i < imagePoints.size(); i++)
+		{
+			inputimage2d[i].reserve(imagePoints[i].size());
+			for (int j = 0; j < imagePoints[i].size(); j++) {
+				inputimage2d[i].push_back(cv::Point2f(imagePoints[i][j].x, imagePoints[i][j].y));
+			}
+		}
+		rms = calibrateCameraRO(inputobject3d, inputimage2d, imageSize, iFixedPoint,
 			cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
 			s.flag | cv::CALIB_USE_LU | cv::CALIB_FIX_FOCAL_LENGTH |
 				 cv::CALIB_FIX_PRINCIPAL_POINT | cv::CALIB_USE_INTRINSIC_GUESS);
-		std::cout << cameraMatrix << std::endl;
+
 	}
 
 	if (release_object) {
@@ -418,8 +450,8 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 // Print camera parameters to the output file
 void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
-	const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2f> >& imagePoints,
-	double totalAvgErr, const std::vector<cv::Point3f>& newObjPoints)
+	const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2d> >& imagePoints,
+	double totalAvgErr, const std::vector<cv::Point3d>& newObjPoints)
 {
 	cv::FileStorage fs(s.outputFileName, cv::FileStorage::WRITE);
 
@@ -537,11 +569,11 @@ void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cam
 
 //! [run_and_save]
 bool monoCamera::runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
-	std::vector<std::vector<cv::Point2f>> imagePoints, float grid_width, bool release_object)
+	std::vector<std::vector<cv::Point2d>> imagePoints, float grid_width, bool release_object)
 {
 	std::vector<float> reprojErrs;
 	double totalAvgErr = 0;
-	std::vector<cv::Point3f> newObjPoints;
+	std::vector<cv::Point3d> newObjPoints;
 
 	bool ok = runCalibration(s, imageSize, cameraMatrix, distCoeffs, imagePoints, rvecs, tvecs, reprojErrs,
 		totalAvgErr, newObjPoints, grid_width, release_object);
@@ -610,7 +642,7 @@ void monoCamera::readResultXml(const std::string& xmlFilename)
 	fs["extrinsic_parameters"] >> bigmat; 
     fs["image_points"] >> imagePtMat;  
 
-	// Convert imagePtMat to std::vector<std::vector<cv::Point2f>>
+	// Convert imagePtMat to std::vector<std::vector<cv::Point2d>>
 	imagePoints.resize(imagePtMat.rows);
 	for (int i = 0; i < imagePtMat.rows; i++) {
 		imagePoints[i] = imagePtMat.row(i);
@@ -637,11 +669,11 @@ void monoCamera::readResultXml(const std::string& xmlFilename)
 	//std::cout << "Distortion Coefficients:\n" << distCoeffs << std::endl;
 }
 
-std::vector<cv::Point2f> monoCamera::getImagePoint()
+std::vector<cv::Point2d> monoCamera::getImagePoint()
 {
 	using namespace std;
 	using namespace cv;
-	vector<Point2f> result;
+	vector<Point2d> result;
 	
 	for (auto& patternPoint : imagePoints)
 	{

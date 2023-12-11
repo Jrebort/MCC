@@ -12,7 +12,7 @@ namespace MCC {
 	public:
 		std::string dataPath;
 		std::vector<monoCamera> cameraMatrix;
-		std::vector<std::vector<cv::Point3f>> worldPoint;
+		std::vector<std::vector<cv::Point3d>> worldPoint;
 		std::vector<cv::Point3d> worldPointDouble;
 		unsigned int cameraNum;
 
@@ -35,7 +35,7 @@ namespace MCC {
 		unsigned int getCameraNum() { return cameraMatrix.size(); }
 		unsigned int getPerCameraNum() { return cameraMatrix[1].getImagePointNum(); }
 		inline monoCamera& getCamera(unsigned int i) { return cameraMatrix[i]; }
-		std::vector<cv::Point3f> getWorldPointVec() const;
+		std::vector<cv::Point3d> getWorldPointVec() const;
 		cv::Mat getWorldPointMat() const;
 		void evaluate();
 		void visCameraPose();

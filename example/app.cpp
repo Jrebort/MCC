@@ -5,8 +5,6 @@
 
 #include "Core.h"
 #include "Dataset.h"
-#include "problem.h"
-#include "bundleAdjustment.h"
 #include "monoCamera.h"
 #include "multiCamera.h"
 #include "lab.h"
@@ -15,7 +13,7 @@ int main()
 {
 	unsigned int STEPNUM = 1;
 	MCC::multiCamera multicamera;
-	const std::string dataPath = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/calibration";
+	const std::string dataPath = R"(Z:\wangxiukia_23_12_05\right\)";
  
 	Step("Check camera need to be calibration");
 	std::vector<std::string> viewFolders;

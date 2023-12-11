@@ -9,10 +9,11 @@ namespace MCC {
 
 	class multiCamera
 	{
-	private:
+	public:
 		std::string dataPath;
 		std::vector<monoCamera> cameraMatrix;
-		std::vector<std::vector<cv::Point3d>> worldPoint;
+		std::vector<std::vector<cv::Point3f>> worldPoint;
+		std::vector<cv::Point3d> worldPointDouble;
 		unsigned int cameraNum;
 
 	public:
@@ -20,10 +21,17 @@ namespace MCC {
 		~multiCamera();
 		void addCamera(monoCamera& camera);
 		void readOptimalResult(const std::string& filename);
-		bool multiCamera::iterateDataFolder(const std::string& DataPath, std::vector<std::string>& viewFolders);
-		bool multiCamera::addCameraFromData(std::vector<std::string>& viewFolders);
+		bool iterateDataFolder(const std::string& DataPath, std::vector<std::string>& viewFolders);
+		bool addCameraFromData(std::vector<std::string>& viewFolders);
 		void writeCameraParamter();
+		bool writePoint3D();
+		bool readPoint3D();
+		void MVSTriangluationEval();
+		void readCameraParamter();
+		void evaluateReprojection();
+		void GlobalBA();
 		void pnpOptimization();
+		void sfmCalibration(int firstindex, int secondindex);
 		unsigned int getCameraNum() { return cameraMatrix.size(); }
 		unsigned int getPerCameraNum() { return cameraMatrix[1].getImagePointNum(); }
 		inline monoCamera& getCamera(unsigned int i) { return cameraMatrix[i]; }
@@ -32,5 +40,8 @@ namespace MCC {
 		void evaluate();
 		void visCameraPose();
 	};
+
+	void computeReprojectionError(monoCamera& camera1, monoCamera& camera2);
+	void computeProjectionMatrix(monoCamera& camera2, cv::Mat P2);
 
 } // MCC namespace 

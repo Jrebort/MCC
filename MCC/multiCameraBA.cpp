@@ -4,9 +4,9 @@
 
 // 用于Ceres的重投影误差计算，包括畸变处理
 struct ReprojectionErrorWithDistortion {
-	cv::Point2f observed;
+	cv::Point2d observed;
 
-	ReprojectionErrorWithDistortion(cv::Point2f observed)
+	ReprojectionErrorWithDistortion(cv::Point2d observed)
 		: observed(observed) {}
 
 	template <typename T>

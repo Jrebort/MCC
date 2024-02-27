@@ -53,7 +53,8 @@ void MatTov3d(const Mat& input, std::vector<cv::Point3d>& point3d)
 	}
 }
 
-void vv2fToV2d(const std::vector<std::vector<cv::Point2d>>& input, std::vector<cv::Point2d>& output) {
+
+void vv2dToV2d(const std::vector<std::vector<cv::Point2d>>& input, std::vector<cv::Point2d>& output) {
 	// 清空输出向量
 	output.clear();
 

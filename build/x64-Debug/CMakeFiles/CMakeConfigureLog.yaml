@@ -5,7 +5,7 @@ events:
     kind: "message-v1"
     backtrace:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     message: |
       The system is: Windows - 10.0.19045 - AMD64
   -
@@ -14,7 +14,7 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
       Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe 
@@ -39,7 +39,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
       
       The C compiler identification is MSVC, found in:
-        C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdC/CMakeCCompilerId.exe
+        C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/3.26.4-msvc4/CompilerIdC/CMakeCCompilerId.exe
       
   -
     kind: "message-v1"
@@ -47,11 +47,11 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:1153 (message)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     message: |
       Detecting C compiler /showIncludes prefix:
         main.c
-        注意: 包含文件:  C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        注意: 包含文件:  C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "注意: 包含文件:  "
   -
@@ -60,7 +60,7 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
       Compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.37.32822/bin/Hostx64/x64/cl.exe 
@@ -85,7 +85,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
       
       The CXX compiler identification is MSVC, found in:
-        C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/3.26.4-msvc4/CompilerIdCXX/CMakeCXXCompilerId.exe
+        C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/3.26.4-msvc4/CompilerIdCXX/CMakeCXXCompilerId.exe
       
   -
     kind: "message-v1"
@@ -93,11 +93,11 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:1153 (message)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:221 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     message: |
       Detecting CXX compiler /showIncludes prefix:
         main.c
-        注意: 包含文件:  C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\ShowIncludes\\foo.h
+        注意: 包含文件:  C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\ShowIncludes\\foo.h
         
       Found prefix "注意: 包含文件:  "
   -
@@ -105,16 +105,17 @@ events:
     backtrace:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-edl5tx"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-edl5tx"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-9nu7l7"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-9nu7l7"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -122,10 +123,10 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-edl5tx
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-9nu7l7
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_7915a && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_7915a.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_7915a.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_7915a.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_7915a.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_7915a.exe /implib:cmTC_7915a.lib /pdb:cmTC_7915a.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-edl5tx && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-edl5tx/cmTC_7915a.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_18f1d && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_18f1d.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_18f1d.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_18f1d.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_18f1d.dir\\CMakeCCompilerABI.c.obj  /out:cmTC_18f1d.exe /implib:cmTC_18f1d.lib /pdb:cmTC_18f1d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-9nu7l7 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-9nu7l7/cmTC_18f1d.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -133,16 +134,17 @@ events:
     backtrace:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
+      - "CMakeLists.txt:9 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ryl4xa"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ryl4xa"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-nvwff6"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-nvwff6"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
-      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -150,10 +152,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ryl4xa
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-nvwff6
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_dad81 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_dad81.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_dad81.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_dad81.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_dad81.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_dad81.exe /implib:cmTC_dad81.lib /pdb:cmTC_dad81.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ryl4xa && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ryl4xa/cmTC_dad81.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_44403 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo /TP   /DWIN32 /D_WINDOWS /GR /EHsc  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_44403.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_44403.dir\\ /FS -c "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_44403.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_44403.dir\\CMakeCXXCompilerABI.cpp.obj  /out:cmTC_44403.exe /implib:cmTC_44403.lib /pdb:cmTC_44403.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-nvwff6 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-nvwff6/cmTC_44403.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -172,12 +174,13 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pe20lt"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pe20lt"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-xqay1e"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-xqay1e"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -185,12 +188,12 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pe20lt
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-xqay1e
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_14b98 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_14b98.dir\\src.c.obj /FdCMakeFiles\\cmTC_14b98.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pe20lt\\src.c
-        FAILED: CMakeFiles/cmTC_14b98.dir/src.c.obj 
-        C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_14b98.dir\\src.c.obj /FdCMakeFiles\\cmTC_14b98.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pe20lt\\src.c
-        C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pe20lt\\src.c(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_c5644 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_c5644.dir\\src.c.obj /FdCMakeFiles\\cmTC_c5644.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-xqay1e\\src.c
+        FAILED: CMakeFiles/cmTC_c5644.dir/src.c.obj 
+        C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo -DCMAKE_HAVE_LIBC_PTHREAD  /DWIN32 /D_WINDOWS  /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_c5644.dir\\src.c.obj /FdCMakeFiles\\cmTC_c5644.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-xqay1e\\src.c
+        C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-xqay1e\\src.c(1): fatal error C1083: 无法打开包括文件: “pthread.h”: No such file or directory
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -209,12 +212,13 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-alvf0m"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-alvf0m"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-j45if8"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-j45if8"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -222,13 +226,13 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-alvf0m
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-j45if8
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_f4702 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_f4702.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f4702.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-alvf0m\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f4702.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4702.dir\\CheckFunctionExists.c.obj  /out:cmTC_f4702.exe /implib:cmTC_f4702.lib /pdb:cmTC_f4702.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-alvf0m && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-alvf0m/cmTC_f4702.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_f4702.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f4702.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4702.dir\\CheckFunctionExists.c.obj  /out:cmTC_f4702.exe /implib:cmTC_f4702.lib /pdb:cmTC_f4702.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-alvf0m && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-alvf0m/cmTC_f4702.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f4702.dir\\CheckFunctionExists.c.obj /out:cmTC_f4702.exe /implib:cmTC_f4702.lib /pdb:cmTC_f4702.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_f4702.dir/intermediate.manifest CMakeFiles\\cmTC_f4702.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_fc948 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_fc948.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_fc948.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-j45if8\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_fc948.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_fc948.dir\\CheckFunctionExists.c.obj  /out:cmTC_fc948.exe /implib:cmTC_fc948.lib /pdb:cmTC_fc948.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-j45if8 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-j45if8/cmTC_fc948.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_fc948.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_fc948.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_fc948.dir\\CheckFunctionExists.c.obj  /out:cmTC_fc948.exe /implib:cmTC_fc948.lib /pdb:cmTC_fc948.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthreads.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-j45if8 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-j45if8/cmTC_fc948.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_fc948.dir\\CheckFunctionExists.c.obj /out:cmTC_fc948.exe /implib:cmTC_fc948.lib /pdb:cmTC_fc948.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_fc948.dir/intermediate.manifest CMakeFiles\\cmTC_fc948.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthreads.lib”\x0d
         ninja: build stopped: subcommand failed.
         
@@ -248,12 +252,13 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-02w1m6"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-02w1m6"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-0tvkfu"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-0tvkfu"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -261,13 +266,13 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-02w1m6
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-0tvkfu
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_a7876 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_a7876.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_a7876.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-02w1m6\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a7876.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a7876.dir\\CheckFunctionExists.c.obj  /out:cmTC_a7876.exe /implib:cmTC_a7876.lib /pdb:cmTC_a7876.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-02w1m6 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-02w1m6/cmTC_a7876.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_a7876.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a7876.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a7876.dir\\CheckFunctionExists.c.obj  /out:cmTC_a7876.exe /implib:cmTC_a7876.lib /pdb:cmTC_a7876.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-02w1m6 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-02w1m6/cmTC_a7876.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a7876.dir\\CheckFunctionExists.c.obj /out:cmTC_a7876.exe /implib:cmTC_a7876.lib /pdb:cmTC_a7876.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_a7876.dir/intermediate.manifest CMakeFiles\\cmTC_a7876.dir/manifest.res" failed (exit code 1104) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_6120c && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=pthread_create /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_6120c.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_6120c.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-0tvkfu\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_6120c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_6120c.dir\\CheckFunctionExists.c.obj  /out:cmTC_6120c.exe /implib:cmTC_6120c.lib /pdb:cmTC_6120c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-0tvkfu && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-0tvkfu/cmTC_6120c.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_6120c.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_6120c.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_6120c.dir\\CheckFunctionExists.c.obj  /out:cmTC_6120c.exe /implib:cmTC_6120c.lib /pdb:cmTC_6120c.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  pthread.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-0tvkfu && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-0tvkfu/cmTC_6120c.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_6120c.dir\\CheckFunctionExists.c.obj /out:cmTC_6120c.exe /implib:cmTC_6120c.lib /pdb:cmTC_6120c.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_6120c.dir/intermediate.manifest CMakeFiles\\cmTC_6120c.dir/manifest.res" failed (exit code 1104) with the following output:
         LINK : fatal error LNK1104: 无法打开文件“pthread.lib”\x0d
         ninja: build stopped: subcommand failed.
         
@@ -294,13 +299,14 @@ events:
     checks:
       - "Looking for sgemm_"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ika5jd"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ika5jd"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-yx1957"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-yx1957"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/Users/DELL/vcpkg/installed/x64-windows/share/ceres"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -308,15 +314,15 @@ events:
       variable: "BLAS_WORKS"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ika5jd
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-yx1957
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_060c2 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_060c2.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_060c2.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ika5jd\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_060c2.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_060c2.dir\\CheckFunctionExists.c.obj  /out:cmTC_060c2.exe /implib:cmTC_060c2.lib /pdb:cmTC_060c2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ika5jd && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ika5jd/cmTC_060c2.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_060c2.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_060c2.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_060c2.dir\\CheckFunctionExists.c.obj  /out:cmTC_060c2.exe /implib:cmTC_060c2.lib /pdb:cmTC_060c2.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ika5jd && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ika5jd/cmTC_060c2.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_060c2.dir\\CheckFunctionExists.c.obj /out:cmTC_060c2.exe /implib:cmTC_060c2.lib /pdb:cmTC_060c2.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_060c2.dir/intermediate.manifest CMakeFiles\\cmTC_060c2.dir/manifest.res" failed (exit code 1120) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_f6885 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_f6885.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_f6885.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-yx1957\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f6885.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f6885.dir\\CheckFunctionExists.c.obj  /out:cmTC_f6885.exe /implib:cmTC_f6885.lib /pdb:cmTC_f6885.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-yx1957 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-yx1957/cmTC_f6885.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_f6885.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_f6885.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f6885.dir\\CheckFunctionExists.c.obj  /out:cmTC_f6885.exe /implib:cmTC_f6885.lib /pdb:cmTC_f6885.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-yx1957 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-yx1957/cmTC_f6885.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_f6885.dir\\CheckFunctionExists.c.obj /out:cmTC_f6885.exe /implib:cmTC_f6885.lib /pdb:cmTC_f6885.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_f6885.dir/intermediate.manifest CMakeFiles\\cmTC_f6885.dir/manifest.res" failed (exit code 1120) with the following output:
         CheckFunctionExists.c.obj : error LNK2019: 无法解析的外部符号 sgemm_，函数 main 中引用了该符号
-        cmTC_060c2.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
+        cmTC_f6885.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -342,13 +348,14 @@ events:
     checks:
       - "Looking for sgemm_"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-r6i0x8"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-r6i0x8"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-r73t81"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-r73t81"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/Users/DELL/vcpkg/installed/x64-windows/share/ceres"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -356,10 +363,10 @@ events:
       variable: "BLAS_openblas_WORKS"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-r6i0x8
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-r73t81
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_3715a && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_3715a.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_3715a.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-r6i0x8\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_3715a.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_3715a.dir\\CheckFunctionExists.c.obj  /out:cmTC_3715a.exe /implib:cmTC_3715a.lib /pdb:cmTC_3715a.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-r6i0x8 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-r6i0x8/cmTC_3715a.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_6356a && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=sgemm_ /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_6356a.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_6356a.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-r73t81\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_6356a.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_6356a.dir\\CheckFunctionExists.c.obj  /out:cmTC_6356a.exe /implib:cmTC_6356a.lib /pdb:cmTC_6356a.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-r73t81 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-r73t81/cmTC_6356a.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
   -
@@ -384,13 +391,14 @@ events:
     checks:
       - "Looking for cheev_"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lmhbr4"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lmhbr4"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-iodk2s"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-iodk2s"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/Users/DELL/vcpkg/installed/x64-windows/share/ceres;C:/Users/DELL/vcpkg/installed/x64-windows/share/lapack"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -398,15 +406,15 @@ events:
       variable: "LAPACK_WORKS"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lmhbr4
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-iodk2s
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_0b07d && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_0b07d.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_0b07d.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-lmhbr4\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0b07d.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0b07d.dir\\CheckFunctionExists.c.obj  /out:cmTC_0b07d.exe /implib:cmTC_0b07d.lib /pdb:cmTC_0b07d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-lmhbr4 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lmhbr4/cmTC_0b07d.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_0b07d.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_0b07d.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0b07d.dir\\CheckFunctionExists.c.obj  /out:cmTC_0b07d.exe /implib:cmTC_0b07d.lib /pdb:cmTC_0b07d.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-lmhbr4 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-lmhbr4/cmTC_0b07d.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_0b07d.dir\\CheckFunctionExists.c.obj /out:cmTC_0b07d.exe /implib:cmTC_0b07d.lib /pdb:cmTC_0b07d.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_0b07d.dir/intermediate.manifest CMakeFiles\\cmTC_0b07d.dir/manifest.res" failed (exit code 1120) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_331e6 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_331e6.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_331e6.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-iodk2s\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_331e6.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_331e6.dir\\CheckFunctionExists.c.obj  /out:cmTC_331e6.exe /implib:cmTC_331e6.lib /pdb:cmTC_331e6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-iodk2s && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-iodk2s/cmTC_331e6.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_331e6.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_331e6.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_331e6.dir\\CheckFunctionExists.c.obj  /out:cmTC_331e6.exe /implib:cmTC_331e6.lib /pdb:cmTC_331e6.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-iodk2s && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-iodk2s/cmTC_331e6.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_331e6.dir\\CheckFunctionExists.c.obj /out:cmTC_331e6.exe /implib:cmTC_331e6.lib /pdb:cmTC_331e6.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_331e6.dir/intermediate.manifest CMakeFiles\\cmTC_331e6.dir/manifest.res" failed (exit code 1120) with the following output:
         CheckFunctionExists.c.obj : error LNK2019: 无法解析的外部符号 cheev_，函数 main 中引用了该符号\x0d
-        cmTC_0b07d.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
+        cmTC_331e6.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -432,13 +440,14 @@ events:
     checks:
       - "Looking for cheev_"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvviyq"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvviyq"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-rbqs51"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-rbqs51"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/Users/DELL/vcpkg/installed/x64-windows/share/ceres;C:/Users/DELL/vcpkg/installed/x64-windows/share/lapack"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -446,15 +455,15 @@ events:
       variable: "LAPACK_openblas_WORKS"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvviyq
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-rbqs51
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_4a615 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_4a615.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_4a615.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bvviyq\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_4a615.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4a615.dir\\CheckFunctionExists.c.obj  /out:cmTC_4a615.exe /implib:cmTC_4a615.lib /pdb:cmTC_4a615.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bvviyq && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvviyq/cmTC_4a615.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        FAILED: cmTC_4a615.exe 
-        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_4a615.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4a615.dir\\CheckFunctionExists.c.obj  /out:cmTC_4a615.exe /implib:cmTC_4a615.lib /pdb:cmTC_4a615.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bvviyq && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bvviyq/cmTC_4a615.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
-        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_4a615.dir\\CheckFunctionExists.c.obj /out:cmTC_4a615.exe /implib:cmTC_4a615.lib /pdb:cmTC_4a615.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_4a615.dir/intermediate.manifest CMakeFiles\\cmTC_4a615.dir/manifest.res" failed (exit code 1120) with the following output:
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_68351 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_68351.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_68351.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-rbqs51\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_68351.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_68351.dir\\CheckFunctionExists.c.obj  /out:cmTC_68351.exe /implib:cmTC_68351.lib /pdb:cmTC_68351.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-rbqs51 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-rbqs51/cmTC_68351.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        FAILED: cmTC_68351.exe 
+        cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_68351.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_68351.dir\\CheckFunctionExists.c.obj  /out:cmTC_68351.exe /implib:cmTC_68351.lib /pdb:cmTC_68351.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-rbqs51 && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-rbqs51/cmTC_68351.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        LINK Pass 1: command "C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_68351.dir\\CheckFunctionExists.c.obj /out:cmTC_68351.exe /implib:cmTC_68351.lib /pdb:cmTC_68351.pdb /version:0.0 /machine:x64 /debug /INCREMENTAL /subsystem:console C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_68351.dir/intermediate.manifest CMakeFiles\\cmTC_68351.dir/manifest.res" failed (exit code 1120) with the following output:
         CheckFunctionExists.c.obj : error LNK2019: 无法解析的外部符号 cheev_，函数 main 中引用了该符号\x0d
-        cmTC_4a615.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
+        cmTC_68351.exe : fatal error LNK1120: 1 个无法解析的外部命令\x0d
         ninja: build stopped: subcommand failed.
         
       exitCode: 1
@@ -480,13 +489,14 @@ events:
     checks:
       - "Looking for cheev_"
     directories:
-      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-9dg4fz"
-      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-9dg4fz"
+      source: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-76oi6h"
+      binary: "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-76oi6h"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_C_FLAGS_DEBUG: "/Ob0 /Od /RTC1"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/Users/DELL/vcpkg/installed/x64-windows/share/ceres;C:/Users/DELL/vcpkg/installed/x64-windows/share/lapack"
+      CMAKE_MSVC_DEBUG_INFORMATION_FORMAT: "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>"
       VCPKG_APPLOCAL_DEPS: "ON"
       VCPKG_TARGET_TRIPLET: "x64-windows"
       Z_VCPKG_ROOT_DIR: "C:/Users/DELL/vcpkg"
@@ -494,10 +504,10 @@ events:
       variable: "LAPACK_lapack_WORKS"
       cached: true
       stdout: |
-        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-9dg4fz
+        Change Dir: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-76oi6h
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_83468 && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Zi /Ob0 /Od /RTC1 -MDd /showIncludes /FoCMakeFiles\\cmTC_83468.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_83468.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-9dg4fz\\CheckFunctionExists.c
-        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_83468.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_83468.dir\\CheckFunctionExists.c.obj  /out:cmTC_83468.exe /implib:cmTC_83468.lib /pdb:cmTC_83468.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\lapack.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-9dg4fz && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-9dg4fz/cmTC_83468.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe -v cmTC_a43cc && [1/2] C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\cl.exe  /nologo   /DWIN32 /D_WINDOWS -DCHECK_FUNCTION_EXISTS=cheev_ /Ob0 /Od /RTC1 -MDd -Zi /showIncludes /FoCMakeFiles\\cmTC_a43cc.dir\\CheckFunctionExists.c.obj /FdCMakeFiles\\cmTC_a43cc.dir\\ /FS -c C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-76oi6h\\CheckFunctionExists.c
+        [2/2] cmd.exe /C "cd . && "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\bin\\cmake.exe" -E vs_link_exe --intdir=CMakeFiles\\cmTC_a43cc.dir --rc=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\rc.exe --mt=C:\\PROGRA~2\\WI3CF2~1\\10\\bin\\10.0.22621.0\\x64\\mt.exe --manifests  -- C:\\PROGRA~1\\MIB055~1\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx64\\x64\\link.exe /nologo CMakeFiles\\cmTC_a43cc.dir\\CheckFunctionExists.c.obj  /out:cmTC_a43cc.exe /implib:cmTC_a43cc.lib /pdb:cmTC_a43cc.pdb /version:0.0 /machine:x64  /debug /INCREMENTAL /subsystem:console  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\lapack.lib  C:\\Users\\DELL\\vcpkg\\installed\\x64-windows\\debug\\lib\\openblas.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib && cmd.exe /C "cd /D C:\\Users\\DELL\\source\\repos\\Jrebort\\Eye3D\\vendor\\mcc\\build\\x64-debug\\CMakeFiles\\CMakeScratch\\TryCompile-76oi6h && "C:\\Program Files\\PowerShell\\7\\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/CMakeScratch/TryCompile-76oi6h/cmTC_a43cc.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out""
         
       exitCode: 0
 ...

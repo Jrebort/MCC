@@ -12,35 +12,12 @@
 
 #include "multiCameraBA.h"
 #include "Core.h"
-#include "Dataset.h"
+#include "Loader.h"
 #include "multiCamera.h"
 #include "reprojectionError.h"
 #include "typeConverter.h"
 
 namespace MCC {
-	bool multiCamera::iterateDataFolder(const std::string& foldername, std::vector<std::string>& viewFolders)
-	{
-		dataPath = foldername;
-		using namespace boost::filesystem;
-		path p(foldername);
-		ASSERT(!(exists(p) && is_directory(p)), "Data folder is not exist! Please check ...");
-
-		std::cout << "Opening Data folder: " << p << std::endl;
-
-		std::cout << "Exist camera folder as follow: " << std::endl;
-		// Use boost::filesystem::recursive_directory_iterator for recursive search
-		for (directory_iterator it(p); it != directory_iterator(); ++it) {
-			if (boost::filesystem::is_directory(it->status())) {
-				if (it->path().filename().string().find("view") != std::string::npos) {
-					viewFolders.push_back(it->path().string());
-					std::cout << it->path() << std::endl;
-				}
-			}
-		}
-		return 0;
-	}
-
-
 	template<typename T>
 	void FscanfOrDie(FILE* fptr, const char* format, T* value) {
 		int num_scanned = fscanf(fptr, format, value);
@@ -87,118 +64,6 @@ namespace MCC {
 		cv::Rodrigues(averageRotMat, averageRVec);
 
 		return averageRVec;
-	}
-
-	multiCamera::multiCamera()
-	{
-
-	}
-
-	multiCamera::~multiCamera()
-	{
-
-	}
-
-	void multiCamera::addCamera(monoCamera& camera)
-	{
-		cameraMatrix.push_back(camera);
-	}
-
-	void multiCamera::writeCameraParamter()
-	{
-		namespace fs = boost::filesystem;
-		for (unsigned int i = 0; i < cameraMatrix.size(); i++) {
-			monoCamera& currentCamera = cameraMatrix[i];
-
-			fs::path filename("Camera_" + std::to_string(i + 1) + ".xml");
-			fs::path dir(dataPath);
-
-			std::string filepath = (dataPath / filename).string();
-
-			cv::Size& imageSize = currentCamera.imageSize;
-			cv::Mat& cameraMat = currentCamera.cameraMatrix;
-			cv::Mat& distCoeff = currentCamera.distCoeffs;
-			cv::Mat& r = currentCamera.R;
-			cv::Mat& t = currentCamera.T;
-
-			currentCamera.saveCameraParams(filepath, imageSize, cameraMat, distCoeff, r, t);
-		}
-
-	}
-	bool multiCamera::writePoint3D()
-	{
-		namespace bfs = boost::filesystem;
-		bfs::path filename("CaliPts3D.xml");
-		bfs::path dir(dataPath);
-
-		std::string filepath = (dataPath / filename).string();
-
-
-		cv::FileStorage fs(filepath, cv::FileStorage::WRITE);
-		if (!fs.isOpened())
-			return 1;
-
-		fs << "Pts" << worldPointDouble;
-		fs.release();
-
-		return 0;	
-	}
-
-	bool multiCamera::readPoint3D()
-	{
-		namespace bfs = boost::filesystem;
-		bfs::path filename("CaliPts3D.xml");
-		bfs::path dir(dataPath);
-
-		std::string filepath = (dataPath / filename).string();
-
-
-		cv::FileStorage fs(filepath, cv::FileStorage::READ);
-		if (!fs.isOpened())
-			return 1;
-
-		fs["Pts"] >> worldPointDouble;
-
-		//using namespace boost::property_tree;
-		//ptree pt;
-
-		//read_xml(filepath, pt);
-
-		//// Reading cameraMatrix
-		//std::string PtsStr = pt.get<std::string>("opencv_storage.Pts.data");
-		//std::stringstream PtsSS(PtsStr);
-
-		//int PointNum = cameraMatrix[1].imagePoints.size() * cameraMatrix[1].imagePoints[0].size();
-		//for (int i = 0; i < PointNum; i++)
-		//{
-		//	int x, y, z;
-		//	for(int j = 0; j < 3; j++)
-		//	{
-		//		PtsSS >> x;
-		//		PtsSS >> y;
-		//		PtsSS >> z;	
-		//		Point3d a(x, y ,z);
-		//		worldPointDouble.push_back(a);
-		//	}
-		//}
-
-		return 0;	
-	}
-
-	void multiCamera::readCameraParamter()
-	{
-		namespace fs = boost::filesystem;
-		for (unsigned int i = 0; i < cameraMatrix.size(); i++) {
-			monoCamera& currentCamera = cameraMatrix[i];
-
-			fs::path filename("Camera_" + std::to_string(i + 1) + ".xml");
-			fs::path dir(dataPath);
-
-			std::string filepath = (dataPath / filename).string();
-
-			currentCamera.readCameraParams(filepath);
-		}
-
 	}
 
 	void vtoA(std::vector<cv::Point2d> in, cv::Mat& out);
@@ -325,6 +190,126 @@ namespace MCC {
 		return points;
 	}
 
+	void computeProjectionMatrix(monoCamera& camera, cv::Mat P)
+	{
+		cv::Mat R;
+		cv::Rodrigues(camera.R, R);
+		cv::Mat T = camera.T;
+		P = camera.cameraMatrix * (cv::Mat_<double>(3, 4) <<
+			R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), T.at<double>(0),
+			R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), T.at<double>(1),
+			R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), T.at<double>(2));
+	}
+
+	void vtoA(std::vector<cv::Point2d> in, cv::Mat& out)
+	{
+		// 检查输入向量是否为空
+		if (in.empty()) {
+			out = cv::Mat(); // 如果为空，返回一个空的cv::Mat
+			return;
+		}
+
+		// 创建一个2行N列的矩阵，N是输入向量的大小
+		out = cv::Mat(2, in.size(), CV_32F);
+
+		for (size_t i = 0; i < in.size(); ++i) {
+			// 将点的x坐标放入第一行
+			out.at<float>(0, i) = in[i].x;
+			// 将点的y坐标放入第二行
+			out.at<float>(1, i) = in[i].y;
+		}
+	}
+
+
+
+	multiCamera::multiCamera()
+	{
+
+	}
+
+	multiCamera::~multiCamera()
+	{
+
+	}
+
+	void multiCamera::addCamera(monoCamera& camera)
+	{
+		cameraMatrix.push_back(camera);
+	}
+
+	void multiCamera::writeCameraParamter()
+	{
+		namespace fs = boost::filesystem;
+		for (unsigned int i = 0; i < cameraMatrix.size(); i++) {
+			monoCamera& currentCamera = cameraMatrix[i];
+
+			fs::path filename("Camera_" + std::to_string(i + 1) + ".xml");
+			fs::path dir(dataPath);
+
+			std::string filepath = (dataPath / filename).string();
+
+			cv::Size& imageSize = currentCamera.imageSize;
+			cv::Mat& cameraMat = currentCamera.cameraMatrix;
+			cv::Mat& distCoeff = currentCamera.distCoeffs;
+			cv::Mat& r = currentCamera.R;
+			cv::Mat& t = currentCamera.T;
+
+			currentCamera.saveCameraParams(filepath, imageSize, cameraMat, distCoeff, r, t);
+		}
+
+	}
+	bool multiCamera::writeWorldPoint3D()
+	{
+		namespace bfs = boost::filesystem;
+		bfs::path filename("CaliPts3D.xml");
+		bfs::path dir(dataPath);
+
+		std::string filepath = (dataPath / filename).string();
+
+
+		cv::FileStorage fs(filepath, cv::FileStorage::WRITE);
+		if (!fs.isOpened())
+			return 1;
+
+		fs << "Pts" << worldPointDouble;
+		fs.release();
+
+		return 0;
+	}
+
+	bool multiCamera::readWorldPoint3D()
+	{
+		namespace bfs = boost::filesystem;
+		bfs::path filename("CaliPts3D.xml");
+		bfs::path dir(dataPath);
+
+		std::string filepath = (dataPath / filename).string();
+
+
+		cv::FileStorage fs(filepath, cv::FileStorage::READ);
+		if (!fs.isOpened())
+			return 1;
+
+		fs["Pts"] >> worldPointDouble;
+		return 0;
+	}
+
+	void multiCamera::readCameraParamter()
+	{
+		namespace fs = boost::filesystem;
+		for (unsigned int i = 0; i < cameraMatrix.size(); i++) {
+			monoCamera& currentCamera = cameraMatrix[i];
+
+			fs::path filename("Camera_" + std::to_string(i + 1) + ".xml");
+			fs::path dir(dataPath);
+
+			std::string filepath = (dataPath / filename).string();
+
+			currentCamera.readCameraParams(filepath);
+		}
+
+	}
+
 	void multiCamera::sfmCalibration(int firstindex, int secondindex)
 	{
 		using namespace cv;
@@ -345,10 +330,10 @@ namespace MCC {
 
 		// generate data format
 		cv::Mat inputPtsArray1;
-		vv2fToV2d(camera1.imagePoints, imagePointVec1);
+		vv2dToV2d(camera1.imagePoints, imagePointVec1);
 
 		cv::Mat inputPtsArray2;
-		vv2fToV2d(camera2.imagePoints, imagePointVec2);
+		vv2dToV2d(camera2.imagePoints, imagePointVec2);
 
 		vector<vector<Point2d>> triangulateInputImagePoints;
 		triangulateInputImagePoints.push_back(imagePointVec1);
@@ -377,15 +362,16 @@ namespace MCC {
 
 		Mat points3D;
 		convertPointsFromHomogeneous(points4D.t(), points3D);
-		
+
 		double reprojectionError = computeReprojectionError(imagePointVec1, imagePointVec2, R, T, K, points3D);
 		vector<Point3d> worldPoints = convertMatToPoint3d(points3D);
 
-		for (int i = 2; i < cameraMatrix.size(); i++)
+		for (int i = 0; i < cameraMatrix.size(); i++)
 		{
+			if (i == firstindex && i == secondindex) continue;
 			monoCamera& camera = cameraMatrix[i];
 			vector<Point2d>	imagePointVec;
-			vv2fToV2d(camera.imagePoints, imagePointVec);
+			vv2dToV2d(camera.imagePoints, imagePointVec);
 
 			Mat inlier;
 			Mat rvec, tvec;
@@ -397,7 +383,7 @@ namespace MCC {
 				tvec,
 				false,
 				10,
-				20.0,
+				1.0,
 				0.99,
 				inlier,
 				SOLVEPNP_EPNP
@@ -416,25 +402,25 @@ namespace MCC {
 
 			// BA
 			std::vector<monoCamera*> cameras;
-			for (int j = 0; j < i+1; j++)
+			for (int j = 0; j < i + 1; j++)
 			{
 				monoCamera& camerainstance = cameraMatrix[j];
 				cameras.push_back(&camerainstance);
 			}
 
 			std::vector<std::vector<cv::Point2d>> imagePoints;
-			for (int j = 0; j < i+1; j++)
-			{	
+			for (int j = 0; j < i + 1; j++)
+			{
 				monoCamera& camerainstance = cameraMatrix[j];
 				vector<Point2d> imagePointsVec;
-				vv2fToV2d(camerainstance.imagePoints, imagePointsVec);
+				vv2dToV2d(camerainstance.imagePoints, imagePointsVec);
 				imagePoints.push_back(imagePointsVec);
 			}
 
 			OptimizeCameraAndPoints(cameras, worldPoints, imagePoints);
 			//visCameraPose();
 		}
-					
+
 		worldPointDouble = worldPoints;
 	}
 
@@ -448,8 +434,10 @@ namespace MCC {
 		{
 			monoCamera& currentCam = cameraMatrix[i];
 			vector<Point2d> imagePointsVec;
-			vv2fToV2d(currentCam.imagePoints, imagePointsVec);
-			Mat imgPtsMat = v2dToMat(imagePointsVec);
+			vector<Point2d> undistortImgVec;
+			vv2dToV2d(currentCam.imagePoints, imagePointsVec);
+			cv::undistortImagePoints(imagePointsVec, undistortImgVec, currentCam.cameraMatrix, currentCam.distCoeffs);
+			Mat imgPtsMat = v2dToMat(undistortImgVec);
 			inputImgPtsVec.push_back(imgPtsMat);
 
 			cv::Mat pose = cv::Mat::zeros(3, 4, CV_64F);
@@ -462,10 +450,10 @@ namespace MCC {
 		Mat point3d;
 		sfm::triangulatePoints(inputImgPtsVec, ProjVec, point3d);
 		worldPointDouble.clear();
-		MatTov3d(point3d, worldPointDouble);	
+		MatTov3d(point3d, worldPointDouble);
 	}
 
-	
+
 	void multiCamera::GlobalBA()
 	{
 		std::vector<monoCamera*> cameras;
@@ -477,10 +465,10 @@ namespace MCC {
 
 		std::vector<std::vector<cv::Point2d>> imagePoints;
 		for (int i = 0; i < cameraMatrix.size(); i++)
-		{	
+		{
 			monoCamera& camerainstance = cameraMatrix[i];
 			vector<Point2d> imagePointsVec;
-			vv2fToV2d(camerainstance.imagePoints, imagePointsVec);
+			vv2dToV2d(camerainstance.imagePoints, imagePointsVec);
 			imagePoints.push_back(imagePointsVec);
 		}
 
@@ -621,6 +609,7 @@ namespace MCC {
 
 		unsigned int camNum = getCameraNum();
 		for (size_t i = 0; i < camNum; i++) {
+		//for (size_t i = 0; i < 2; i++) {
 			// 使用Rodrigues变换从旋转向量获得旋转矩阵
 			monoCamera& camera = cameraMatrix[i];
 			cv::Mat rotation;
@@ -629,24 +618,36 @@ namespace MCC {
 			// 构建4x4的仿射矩阵
 			cv::Mat affine = cv::Mat::zeros(4, 4, CV_64F);
 			rotation.copyTo(affine(cv::Rect(0, 0, 3, 3)));
-			camera.T.copyTo(affine(cv::Rect(3, 0, 1, 3)));
+			cv::Mat C = -camera.R.inv() * camera.T;
+			C.copyTo(affine(cv::Rect(3, 0, 1, 3)));
 			affine.at<double>(3, 3) = 1.0;
 			Affine3d pose(affine);
 
 			// 创建一个小立方体来表示相机的体积
 			Matx33d K(camera.cameraMatrix);
-			viz::WCameraPosition cameraModel(K, 1, viz::Color::white());
+			//viz::WCameraPosition cameraModel(K, 10, viz::Color::white());
+			viz::WCameraPosition cameraModel(40);
 			window.showWidget("Cube" + std::to_string(i), cameraModel, pose);
+
+			// 创建棋盘格角点方向射线
+			cv::Point2d pt = camera.imagePoints[0][0];
+			cv::Mat p_img_hom = (cv::Mat_<double>(3, 1) << pt.x, pt.y, 1);
+			cv::Mat p_norm = K.inv() * p_img_hom;
+			cv::Mat st = C;
+			cv::Mat et = camera.R.inv() * p_norm;
+			Point3d startPt(st);
+			Point3d endPt(et);
+			window.showWidget("Pt" + std::to_string(i), cv::viz::WLine(startPt, startPt + endPt * 450, cv::viz::Color::red()));
 
 			// 使用箭头表示相机的前向方向
 			//Point3d start(0, 0, 0);
-			//Point3d end(0, 0, 200);
-			//viz::WArrow arrowWidget(start, end, 0.01, viz::Color::red());
+			//Point3d end(0, 0, 400);
+			//viz::WArrow arrowWidget(start, end, 0.001, viz::Color::red());
 			//window.showWidget("Arrow" + std::to_string(i), arrowWidget, pose);
 
 			// 显示编号
 			std::string cameraNumber = "C " + std::to_string(i + 1);
-			viz::WText3D cameraLabel(cameraNumber, Point3d(0, -0.1, 0), 0.1, false, viz::Color::white());
+			viz::WText3D cameraLabel(cameraNumber, Point3d(0, -0.1, 0), 10, false, viz::Color::white());
 			window.showWidget("Label" + std::to_string(i), cameraLabel, pose);
 		}
 
@@ -657,119 +658,435 @@ namespace MCC {
 			center.x = worldPointDouble[i].x;
 			center.y = worldPointDouble[i].y;
 			center.z = worldPointDouble[i].z;
-			viz::WSphere point(center, 0.005, 10, viz::Color::red());
+			viz::WSphere point(center, 1, 10, viz::Color::red());
 			window.showWidget("point" + std::to_string(i), point);
 		}
 
-		for (int i = 88; i < 88+88; i++)
-		{
-			cv::Point3f center;
-			center.x = worldPointDouble[i].x;
-			center.y = worldPointDouble[i].y;
-			center.z = worldPointDouble[i].z;
-			viz::WSphere point(center, 0.005, 10, viz::Color::blue());
-			window.showWidget("point" + std::to_string(i), point);
-		}
+		//for (int i = 88; i < 88 + 88; i++)
+		//{
+		//	cv::Point3f center;
+		//	center.x = worldPointDouble[i].x;
+		//	center.y = worldPointDouble[i].y;
+		//	center.z = worldPointDouble[i].z;
+		//	viz::WSphere point(center, 1, 10, viz::Color::blue());
+		//	window.showWidget("point" + std::to_string(i), point);
+		//}
+		cv::Point3d pt1 = worldPointDouble[0];
+		cv::Point3d pt2 = worldPointDouble[7];
+		cv::Point3d pt3 = worldPointDouble[87];
+		cv::Point3d vector1 = pt2 - pt1;
+		cv::Point3d vector2 = pt3 - pt1;
+		cv::Point3d normal = -vector1.cross(vector2); 
+		window.showWidget("Normal", cv::viz::WLine(pt1, pt1 + normal * 3, cv::viz::Color::white()));
+
 
 		window.spin();
 	}
 
+	cv::Mat computeMedianRT(std::vector<cv::Mat>& Tvec) {
+		std::vector<double> tx, ty, tz;
+		for (const auto& T : Tvec) {
+			tx.push_back(T.at<double>(0, 0));
+			ty.push_back(T.at<double>(1, 0));
+			tz.push_back(T.at<double>(2, 0));
+		}
 
-	void multiCamera::readOptimalResult(const std::string& filename)
-	{
-		FILE* fptr = fopen(filename.c_str(), "r");
+		auto median = [](std::vector<double>& v) {
+			size_t n = v.size() / 2;
+			std::nth_element(v.begin(), v.begin() + n, v.end());
+			return v[n];
+			};
 
-		int num_cameras_;
-		int num_points_;
-		int num_observations_;
-		FscanfOrDie(fptr, "%d", &num_cameras_);
-		FscanfOrDie(fptr, "%d", &num_points_);
-		FscanfOrDie(fptr, "%d", &num_observations_);
+		return (cv::Mat_<double>(3, 1) << median(tx), median(ty), median(tz));
+	}
 
-
-		int* point_index_ = new int[num_observations_];
-		int* camera_index_ = new int[num_observations_];
-		double* observations_ = new double[2 * num_observations_];
-
-		int num_parameters_ = 15 * num_cameras_ + 3 * num_points_;
-		double* parameters_ = new double[num_parameters_];
-
-		for (int i = 0; i < num_observations_; ++i) {
-			FscanfOrDie(fptr, "%d", camera_index_ + i);
-			FscanfOrDie(fptr, "%d", point_index_ + i);
-			for (int j = 0; j < 2; ++j) {
-				FscanfOrDie(fptr, "%lf", observations_ + 2 * i + j);
+	bool stereoCalibration(monoCamera& firstCam, monoCamera& secondCam, cv::Mat& R, cv::Mat& T)
+	{	
+		cv::Mat E, F;
+		cv::Mat perViewError;
+		std::vector<std::vector<cv::Point3d> > objectPoints(1);
+		cv::Size boardSize = firstCam.s.boardSize;
+		float squareSize = firstCam.s.squareSize;
+		for (int i = 0; i < boardSize.height; ++i) {
+			for (int j = 0; j < boardSize.width; ++j) {
+				objectPoints[0].push_back(cv::Point3f(j * squareSize, i * squareSize, 0));
 			}
 		}
 
-		for (int i = 0; i < num_parameters_; ++i) {
-			FscanfOrDie(fptr, "%lf", parameters_ + i);
-		}
+		objectPoints[0][firstCam.s.boardSize.width - 1].x = objectPoints[0][0].x + firstCam.grid_width;
 
-		int perCameraParamNum = 15;
-		for (int i = 0; i < getCameraNum(); ++i)
+
+		objectPoints.resize(firstCam.imagePoints.size(), objectPoints[0]); // extent to all view
+
+		//Find intrinsic and extrinsic camera parameters
+		double rms;
+		int iFixedPoint = -1;
+
+		std::vector<std::vector<cv::Point3f>> inputobject3d(objectPoints.size());
+		for (int i = 0; i < firstCam.imagePoints.size(); i++)
 		{
-			monoCamera& camera = cameraMatrix[i];
-			camera.cameraMatrix.at<double>(0, 0) = parameters_[perCameraParamNum * i];
-			camera.cameraMatrix.at<double>(1, 1) = parameters_[perCameraParamNum * i + 1];
-			camera.cameraMatrix.at<double>(0, 2) = parameters_[perCameraParamNum * i + 2];
-			camera.cameraMatrix.at<double>(1, 2) = parameters_[perCameraParamNum * i + 3];
-
-			camera.distCoeffs.at<double>(0, 0) = parameters_[perCameraParamNum * i + 4];
-			camera.distCoeffs.at<double>(1, 0) = parameters_[perCameraParamNum * i + 5];
-			camera.distCoeffs.at<double>(2, 0) = parameters_[perCameraParamNum * i + 6];
-			camera.distCoeffs.at<double>(3, 0) = parameters_[perCameraParamNum * i + 7];
-			camera.distCoeffs.at<double>(4, 0) = parameters_[perCameraParamNum * i + 8];
-
-			camera.R.at<double>(0, 0) = parameters_[perCameraParamNum * i + 9];
-			camera.R.at<double>(1, 0) = parameters_[perCameraParamNum * i + 10];
-			camera.R.at<double>(2, 0) = parameters_[perCameraParamNum * i + 11];
-
-			camera.T.at<double>(0, 0) = parameters_[perCameraParamNum * i + 12];
-			camera.T.at<double>(1, 0) = parameters_[perCameraParamNum * i + 13];
-			camera.T.at<double>(2, 0) = parameters_[perCameraParamNum * i + 14];
+			inputobject3d[i].reserve(objectPoints[i].size());
+			for (int j = 0; j < objectPoints[i].size(); j++) {
+				inputobject3d[i].push_back(cv::Point3f(objectPoints[i][j].x, objectPoints[i][j].y, objectPoints[i][j].z));
+			}
 		}
-		fclose(fptr);
 
-		delete[] point_index_;
-		delete[] camera_index_;
-		delete[] observations_;
-		delete[] parameters_;
+		std::vector<std::vector<cv::Point2f>> firstInputimage2d(firstCam.imagePoints.size());
+		for (int i = 0; i < firstCam.imagePoints.size(); i++)
+		{
+			firstInputimage2d[i].reserve(firstCam.imagePoints[i].size());
+			for (int j = 0; j < firstCam.imagePoints[i].size(); j++) {
+				firstInputimage2d[i].push_back(cv::Point2f(firstCam.imagePoints[i][j].x, firstCam.imagePoints[i][j].y));
+			}
+		}
+
+		std::vector<std::vector<cv::Point2f>> secondInputimage2d(secondCam.imagePoints.size());
+		for (int i = 0; i < secondCam.imagePoints.size(); i++)
+		{
+			secondInputimage2d[i].reserve(secondCam.imagePoints[i].size());
+			for (int j = 0; j < secondCam.imagePoints[i].size(); j++) {
+				secondInputimage2d[i].push_back(cv::Point2f(secondCam.imagePoints[i][j].x, secondCam.imagePoints[i][j].y));
+			}
+		}
+
+		cv::stereoCalibrate(inputobject3d,
+			firstInputimage2d,
+			secondInputimage2d,
+			firstCam.cameraMatrix,
+			firstCam.distCoeffs,
+			secondCam.cameraMatrix,
+			secondCam.distCoeffs,
+			firstCam.imageSize,
+			R,
+			T,
+			E,
+			F,
+			perViewError);
+		return 0;
 	}
 
-	bool multiCamera::addCameraFromData(std::vector<std::string>& viewFolders)
+// 	bool multiCamera::zhangCalibration(int firstindex, int secondindex)
+// 	{
+// 		firstindex -= 1;
+// 		secondindex -= 1;
+// 
+// 		monoCamera& firstCam = cameraMatrix[firstindex];
+// 		monoCamera& secondCam = cameraMatrix[secondindex];	
+// 		unsigned int patternNum = firstCam.getPatternNum();
+// 		cv::Mat R, T;
+// 		cv::Mat K;
+// 		K = firstCam.cameraMatrix;
+// 
+// 		double totalAvgErr;
+// 		std::vector<float> perViewErr;
+// 		for (int i = 0; i < cameraMatrix.size(); i++)
+// 		{
+// 			monoCamera& camera = cameraMatrix[i];
+// 			camera.runCalibration(perViewErr, totalAvgErr);
+// 		}
+// 			
+// 		std::vector<cv::Mat> relativeR, relativeT;
+// 		for (int i = 0; i < patternNum; i++)
+// 		{
+// 			cv::Mat rl, RL, R1, R2, tl, T1, T2, TL;
+// 			Rodrigues(firstCam.rvecs[i], R1);
+// 			Rodrigues(secondCam.rvecs[i], R2);
+// 			T1 = firstCam.tvecs[i];
+// 			T2 = secondCam.tvecs[i];
+// 			RL = R2 * R1.t();
+// 			TL = T2 - R2 * R1.t()* T1;
+// 			Rodrigues(RL, rl);
+// 			Rodrigues(TL, tl);
+// 			relativeR.push_back(rl);
+// 			relativeT.push_back(tl);
+// 		}
+// 		Rodrigues(computeMedianRT(relativeR), secondCam.R);
+// 		secondCam.T = computeMedianRT(relativeT);
+// 		firstCam.R = cv::Mat::eye(3, 3, CV_64F);
+// 		firstCam.T = cv::Mat::zeros(3, 1, CV_64F);
+// 
+// 		vector<Point2d>	imagePointVec1;
+// 		vector<Point2d>	imagePointVec2;
+// 
+// 		// generate data format
+// 		cv::Mat inputPtsArray1;
+// 		vv2dToV2d(firstCam.imagePoints, imagePointVec1);
+// 
+// 		cv::Mat inputPtsArray2;
+// 		vv2dToV2d(secondCam.imagePoints, imagePointVec2);
+// 
+// 		vector<vector<Point2d>> triangulateInputImagePoints;
+// 		triangulateInputImagePoints.push_back(imagePointVec1);
+// 		triangulateInputImagePoints.push_back(imagePointVec2);
+// 
+// 		Mat points4D;
+// 		triangulatePoints(firstCam.getProjectMatrix(), secondCam.getProjectMatrix(),
+// 			imagePointVec1, imagePointVec2, points4D);
+// 
+// 		Mat points3D;
+// 		convertPointsFromHomogeneous(points4D.t(), points3D);
+// 
+// 		//double reprojectionError = computeReprojectionError(imagePointVec1, imagePointVec2, R, T, K, points3D);
+// 		vector<Point3d> worldPoints = convertMatToPoint3d(points3D);
+// 
+// 		std::vector<monoCamera*> cameras;
+// 		cameras.push_back(&firstCam);
+// 		cameras.push_back(&secondCam);
+// 
+// 		std::vector<std::vector<cv::Point2d>> imagePoints;
+// 		imagePoints.push_back(imagePointVec1);
+// 		imagePoints.push_back(imagePointVec2);
+// 
+// 		OptimizeCameraAndPoints(cameras, worldPoints, imagePoints);
+// 		worldPointDouble = worldPoints;
+// 		visCameraPose();
+// 
+// 		for (int i = 0; i < cameraMatrix.size(); i++)
+// 		{
+// 			//if (i == firstindex || i == secondindex) continue;
+// 			monoCamera& camera = cameraMatrix[i];
+// 			vector<Point2d>	imagePointVec;
+// 			vv2dToV2d(camera.imagePoints, imagePointVec);
+// 
+// 			Mat inlier;
+// 			Mat rvec, tvec;
+// 			solvePnPRansac(worldPoints,
+// 				imagePointVec,
+// 				camera.cameraMatrix,
+// 				camera.distCoeffs,
+// 				rvec,
+// 				tvec,
+// 				false,
+// 				100,
+// 				0.5,
+// 				0.99,
+// 				inlier,
+// 				SOLVEPNP_EPNP
+// 			);
+// 
+// 			double error = computeReprojectionErrors(worldPoints,
+// 				imagePointVec,
+// 				rvec,
+// 				tvec,
+// 				camera.cameraMatrix,
+// 				camera.distCoeffs,
+// 				false);
+// 
+// 			Rodrigues(rvec, camera.R);
+// 			camera.T = tvec;
+// 
+// 			// BA
+// 			cameras.push_back(&camera);
+// 			imagePoints.push_back(imagePointVec);
+// 
+// 			OptimizeCameraAndPoints(cameras, worldPoints, imagePoints);
+// 			std::cout << i << std::endl;
+// 			worldPointDouble = worldPoints;
+// 			visCameraPose();
+// 		}
+// 
+// 		return 0;
+// 	}
+// 
+ 	bool multiCamera::zhangCalibration(int firstindex, int secondindex)
+  	{
+ 		firstindex -= 1;
+ 		secondindex -= 1;
+  		unsigned int patternNum;
+  
+  		monoCamera& firstCam = cameraMatrix[firstindex];
+  		monoCamera& secondCam = cameraMatrix[secondindex];
+  		cv::Mat R, T;
+  		cv::Mat K;
+  		K = firstCam.cameraMatrix;
+  
+  		// stereo calibration input parameter
+		stereoCalibration(firstCam, secondCam, R, T);
+   		
+ 		firstCam.R = cv::Mat::eye(3, 3, CV_64F);
+ 		firstCam.T = cv::Mat::zeros(3, 1, CV_64F);
+ 		secondCam.R = R;
+  		secondCam.T = T;
+  
+  		vector<Point2d>	imagePointVec1;
+  		vector<Point2d>	imagePointVec2;
+  
+  		// generate data format
+  		cv::Mat inputPtsArray1;
+  		vv2dToV2d(firstCam.imagePoints, imagePointVec1);
+  
+  		cv::Mat inputPtsArray2;
+  		vv2dToV2d(secondCam.imagePoints, imagePointVec2);
+  
+  		vector<vector<Point2d>> triangulateInputImagePoints;
+  		triangulateInputImagePoints.push_back(imagePointVec1);
+  		triangulateInputImagePoints.push_back(imagePointVec2);
+  
+  		Mat points4D;
+  		triangulatePoints(K * Mat::eye(3, 4, R.type()), K * (Mat_<double>(3, 4) << R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), T.at<double>(0),
+  			R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), T.at<double>(1),
+  			R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), T.at<double>(2)),
+  			imagePointVec1, imagePointVec2, points4D);
+  
+  		Mat points3D;
+  		convertPointsFromHomogeneous(points4D.t(), points3D);
+  
+  		double reprojectionError = computeReprojectionError(imagePointVec1, imagePointVec2, R, T, K, points3D);
+  		vector<Point3d> worldPoints = convertMatToPoint3d(points3D);
+  
+  		std::vector<monoCamera*> cameras;
+  		cameras.push_back(&firstCam);
+  		cameras.push_back(&secondCam);
+ 
+  		std::vector<std::vector<cv::Point2d>> imagePoints;
+ 		imagePoints.push_back(imagePointVec1);
+ 		imagePoints.push_back(imagePointVec2);
+ 		
+  		OptimizeCameraAndPoints(cameras, worldPoints, imagePoints);
+  		worldPointDouble = worldPoints;
+  		//visCameraPose();
+   
+  		for (int i = 0; i < cameraMatrix.size(); i++)
+  		{
+  			if (i == firstindex || i == secondindex) continue;
+  			monoCamera& camera = cameraMatrix[i];
+  			vector<Point2d>	imagePointVec;
+  			vv2dToV2d(camera.imagePoints, imagePointVec);
+  
+  			Mat inlier;
+  			Mat rvec, tvec;
+  			solvePnPRansac(worldPoints,
+  				imagePointVec,
+  				camera.cameraMatrix,
+  				camera.distCoeffs,
+  				rvec,
+  				tvec,
+  				false,
+  				100,
+  				0.5,
+  				0.99,
+  				inlier,
+  				SOLVEPNP_EPNP
+  			);
+  
+  			double error = computeReprojectionErrors(worldPoints,
+  				imagePointVec,
+  				rvec,
+  				tvec,
+  				camera.cameraMatrix,
+  				camera.distCoeffs,
+  				false);
+  
+  			Rodrigues(rvec, camera.R);
+  			camera.T = tvec;
+  
+  			// BA
+  			cameras.push_back(&camera); 
+  			imagePoints.push_back(imagePointVec);
+  
+  			OptimizeCameraAndPoints(cameras, worldPoints, imagePoints);
+  			worldPointDouble = worldPoints;
+  			//visCameraPose();
+  		}
+  		visCameraPose();
+		
+  		return 0;
+  	}
+
+  
+	int multiCamera::checkResult()
 	{
+		cv::Point3f pt1, pt2;
+		monoCamera& camera = cameraMatrix[0];
+		pt1 = worldPointDouble[0];
+		pt2 = worldPointDouble[1];
+		double dis = cv::norm(pt1-pt2);
+		std::cout << "calibration chessboard square error: " << fabs(dis - camera.s.squareSize) << " mm" << std::endl;
+		if (fabs(dis - camera.s.squareSize) < 1) return 0;
+		else return 1;
+	}
+
+	bool multiCamera::initCameraFromData(std::vector<std::string>& viewFolders, double scale)
+	{
+		unsigned int patternNum = 0;
 		for (size_t i = 0; i < viewFolders.size(); i++)
 		{
 			std::string datasetFolder = viewFolders[i] + "/filter";
 			monoCamera camera;
-			Dataset dataset(datasetFolder);
-			if (!dataset.isCalibrated())
-			//if (true)
+			Loader loader(datasetFolder);
+			cv::Mat initCameraMatrix = cv::Mat::zeros(3, 3, CV_64F);
+			initCameraMatrix.at<double>(0, 0) = 22758.306779999999;
+			initCameraMatrix.at<double>(1, 1) = 22768.670300000002;
+			initCameraMatrix.at<double>(0, 2) = 4096;
+			initCameraMatrix.at<double>(1, 2) = 2732;
+			initCameraMatrix.at<double>(2, 2) = 1;
+
+			cv::Mat initdistMatrix = cv::Mat::zeros(5, 1, CV_64F);
+
+			bool isCalibrated = false;
+			if (!loader.isCalibrated())
 			{
-				std::cout << "Camera " << i + 1 << " is calibrating!" << std::endl;
-				dataset.traverseFloder();
-				dataset.writeXml();
-				dataset.generateSettingXml();
-				const std::string filePath = dataset.getSettingPath();
-				const int winSize = 11;
+				std::cout << "Camera " << i + 1 << " is detecting corner point!" << std::endl;
+				loader.traverseFloder();
+				loader.writeXml();
+				loader.generateSettingXml();
+				const std::string filePath = loader.getSettingPath();
 				camera.addSettingFilePath(filePath);
 				camera.init();
-				camera.setScaleFactor(0.25);
-				camera.calibrate();
-				std::cout << "Camera " << i + 1 << " has finished calibration!" << std::endl;
+				camera.setScaleFactor(scale);
+				camera.cornerDetect();
+				camera.setCameraMatrix(initCameraMatrix);
+				camera.setdistMatrix(initdistMatrix);
+				std::cout << "Camera " << i + 1 << " has finished corner detect!" << std::endl;
 			}
 			else
 			{
-				std::cout << "Camera " << i + 1 << " is calibrated!" << std::endl;
-				const std::string filePath = dataset.getSettingPath();
-				const int winSize = 11;
+				std::cout << "Camera " << i + 1 << " is detected corner point!" << std::endl;
+				isCalibrated = true;
+				const std::string filePath = loader.getSettingPath();
 				camera.addSettingFilePath(filePath);
 				camera.init();
-				camera.readResultXml(dataset.getCameraParamPath());
+				camera.readCornerDetectResultXml(loader.getCameraParamPath());
+
 			}
+			patternNum = camera.getPatternNum();
 			addCamera(camera);
+
+			if ((i == viewFolders.size() - 1) && isCalibrated) return 0;
 		}
+
+		// post_processing
+
+		boost::dynamic_bitset<uint8_t> allCamPattern(patternNum);
+		allCamPattern.set(); // set 1 to all pos
+		for (int i = 0; i < getCameraNum(); i++)
+		{
+			monoCamera& camera = getCamera(i);
+			allCamPattern &= camera.used;
+		}
+		
+		std::cout << allCamPattern << std::endl;
+
+		int sort_dis = 0; // due to erase, affect element index
+		for (int i = 0; i < patternNum; i++)
+		{
+			if (!allCamPattern.test(i))
+			{
+				for (auto& camera : cameraMatrix)
+					camera.imagePoints.erase(camera.imagePoints.begin()+(i-sort_dis));
+				sort_dis += 1;
+			}
+		}
+
+		for (size_t i = 0; i < viewFolders.size(); i++)
+		{
+			std::string datasetFolder = viewFolders[i] + "/filter";
+			monoCamera& camera = getCamera(i);
+			Loader loader(datasetFolder);
+			camera.writeCornerDetectResultXml(loader.getCameraParamPath());
+			//camera.
+		}
+		
 		return 0;
 	}
 
@@ -779,7 +1096,7 @@ namespace MCC {
 		{
 			monoCamera& camera = cameraMatrix[i];
 			vector<Point2d> imagePointVec;
-			vv2fToV2d(camera.imagePoints, imagePointVec);
+			vv2dToV2d(camera.imagePoints, imagePointVec);
 			double error = computeReprojectionErrors(worldPointDouble,
 				imagePointVec,
 				camera.R,
@@ -788,82 +1105,7 @@ namespace MCC {
 				camera.distCoeffs,
 				false);
 
-			std::cout << "camera" << i+1 << " reprojection error: " << error << " pixel" << std::endl;
-		}
-	}
-
-	void multiCamera::evaluate()
-	{
-		for (int i = 0; i < getCameraNum(); ++i)
-		{
-			monoCamera& camera1 = cameraMatrix[i];	
-			for (int j = i; j < getCameraNum(); ++j)
-			{
-				if (j == i)
-					continue;
-				monoCamera& camera2 = cameraMatrix[i];	
-				computeReprojectionError(camera1, camera2);
-			}
-		}
-	}
-
-	void computeReprojectionError(monoCamera & camera1, monoCamera & camera2)
-	{
-		vector<Point2d> imagePointVec1;
-		vector<Point2d> imagePointVec2;
-		vv2fToV2f(camera1.imagePoints, imagePointVec1);
-		vv2fToV2f(camera2.imagePoints, imagePointVec2);
-		
-		vector<Point2d> undistortImagePointVec1;
-		vector<Point2d> undistortImagePointVec2;
-
-		// undistort Image Point
-		cv::undistortImagePoints(imagePointVec1,
-			undistortImagePointVec1,
-			camera1.cameraMatrix,
-			camera1.distCoeffs);
-
-		cv::undistortImagePoints(imagePointVec2,
-			undistortImagePointVec2,
-			camera2.cameraMatrix,
-			camera2.distCoeffs);
-
-		cv::Mat	P1;
-		cv::Mat	P2;
-		computeProjectionMatrix(camera1, P1);
-		computeProjectionMatrix(camera2, P2);
-
-			
-	}
-
-	void computeProjectionMatrix(monoCamera& camera, cv::Mat P)
-	{
-		cv::Mat R;
-		cv::Rodrigues(camera.R, R);
-		cv::Mat T = camera.T;
-		P = camera.cameraMatrix * (cv::Mat_<double>(3, 4) <<
-			R.at<double>(0, 0), R.at<double>(0, 1), R.at<double>(0, 2), T.at<double>(0),
-			R.at<double>(1, 0), R.at<double>(1, 1), R.at<double>(1, 2), T.at<double>(1),
-			R.at<double>(2, 0), R.at<double>(2, 1), R.at<double>(2, 2), T.at<double>(2));
-	}
-
-	void vtoA(std::vector<cv::Point2d> in, cv::Mat& out)
-	{
-		// 检查输入向量是否为空
-		if (in.empty()) {
-			out = cv::Mat(); // 如果为空，返回一个空的cv::Mat
-			return;
-		}
-
-		// 创建一个2行N列的矩阵，N是输入向量的大小
-		out = cv::Mat(2, in.size(), CV_32F);
-
-		for (size_t i = 0; i < in.size(); ++i) {
-			// 将点的x坐标放入第一行
-			out.at<float>(0, i) = in[i].x;
-			// 将点的y坐标放入第二行
-			out.at<float>(1, i) = in[i].y;
+			std::cout << "camera" << i + 1 << " reprojection error: " << error << " pixel" << std::endl;
 		}
 	}
 }
-

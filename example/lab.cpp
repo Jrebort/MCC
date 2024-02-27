@@ -1,18 +1,19 @@
-#include "lab.h"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <boost/filesystem.hpp>
 
+#include "Loader.h"
 #include "monoCamera.h"
 #include "multiCamera.h"
-
 
 void genMultiCamObject(std::string dataPath, MCC::multiCamera& multicamera, int firstindex, int secondindex)
 {
 	std::vector<std::string> viewFolders;
-	multicamera.iterateDataFolder(dataPath, viewFolders); 
-	multicamera.addCameraFromData(viewFolders);
+	MCC::Loader::iterateDataFolder(dataPath, viewFolders);
+	multicamera.dataPath = dataPath;
+	double scale = 0.25;
+	multicamera.initCameraFromData(viewFolders, scale);
 	boost::filesystem::path p(dataPath + "/Camera_1.xml");
 	if (!boost::filesystem::is_regular_file(p))
 	{
@@ -21,16 +22,15 @@ void genMultiCamObject(std::string dataPath, MCC::multiCamera& multicamera, int 
 	else
 	{
 		multicamera.readCameraParamter();
-		multicamera.readPoint3D();
+		multicamera.readWorldPoint3D();
 	}
-	//multicamera.MVSTriangluationEval();
-	//multicamera.evaluateReprojection();
+	multicamera.MVSTriangluationEval();
+	multicamera.evaluateReprojection();
 	//multicamera.visCameraPose();
-	multicamera.GlobalBA();
+	//multicamera.GlobalBA();
 
-	//multicamera.visCameraPose();
-	multicamera.writeCameraParamter();
-	multicamera.writePoint3D();
+	//multicamera.writeCameraParamter();
+	//multicamera.writeWorldPoint3D();
 }
 
 void vizAddmultiCamera(MCC::multiCamera& multicamera, cv::viz::Viz3d window, int id)
@@ -106,7 +106,7 @@ void viz(MCC::multiCamera& multicamera1, MCC::multiCamera& multicamera2)
 auto computeRelativePose(cv::Mat R1, cv::Mat T1, cv::Mat R2, cv::Mat T2)
 {
 	cv::Mat R = R1 * R2.t();
-	cv::Mat T = T1 - (R * T2);
+	cv::Mat T = R1 * (-R2.t() * T2) + T1;
 
 	return std::make_pair(R, T);
 }
@@ -134,10 +134,10 @@ void convertMultiCamWorldCoord(MCC::multiCamera& multicamera, std::pair<cv::Mat,
 	// convert Camera
 	for (int i = 0; i < multicamera.getCameraNum(); i++)
 	{
-		monoCamera& camera = multicamera.getCamera(i);	
+		monoCamera& camera = multicamera.getCamera(i);
 		camera.R = relativeR * camera.R;
 		camera.T = relativeR * camera.T + relativeT;
-	}	
+	}
 }
 
 void testRelativePose(MCC::multiCamera& multicamera)
@@ -156,30 +156,27 @@ void testRelativePose(MCC::multiCamera& multicamera)
 	std::cout << relativePose.second << std::endl;
 }
 
-void lab1()
+int main()
 {
 	MCC::multiCamera multicamera1;
 	MCC::multiCamera multicamera2;
-	const std::string dataPath1 = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/calibration"; 
-	const std::string dataPath2 = "H:/OneDrive - mails.ucas.edu.cn/Study/Academy/Project/reconstruction/data/calibration2"; 
-	genMultiCamObject(dataPath1, multicamera1, 1, 0);
-	genMultiCamObject(dataPath2, multicamera2, 0, 1);
+	const std::string dataPath1 = R"(Z:\wangxiukia_23_12_06\calibration\)";
+	const std::string dataPath2 = R"(Z:\wangxiukia_23_12_06\calibration2\)";
+	genMultiCamObject(dataPath1, multicamera1, 2, 1);
+	genMultiCamObject(dataPath2, multicamera2, 0, 3);
 	std::cout << "************Profile: multicamera1 base view 1 and 0 *************" << std::endl;
 	multicamera1.evaluateReprojection();
 	std::cout << "************Profile: multicamera2 base view 0 and 1 *************" << std::endl;
 	multicamera2.evaluateReprojection();
-	
+
 	//auto pose = camMatrixRelativePose(multicamera2, multicamera1);
-	
-	testRelativePose(multicamera1);
-	testRelativePose(multicamera2);
 	//convertMultiCamWorldCoord(multicamera1, pose);
 
 	//multicamera1.MVSTriangluationEval();
 	//multicamera1.GlobalBA();
 	//std::cout << "************Profile: multicamera1 base view 1 and 0 *************" << std::endl;
-	//multicamera1.evaluateReprojection();
-	
-	viz(multicamera1, multicamera2);
-}
+	multicamera1.evaluateReprojection();
 
+	viz(multicamera1, multicamera2);
+	return 0;
+}

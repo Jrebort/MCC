@@ -34,19 +34,19 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/cmake_install.cmake")
+  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/cmake_install.cmake")
+  include("C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/example/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig.cmake"
-         "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
+         "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccConfig-*.cmake")
       if(_cmake_old_config_files)
@@ -59,9 +59,9 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccConfig-debug.cmake")
   endif()
 endif()
 
@@ -73,5 +73,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

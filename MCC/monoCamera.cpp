@@ -13,6 +13,9 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
+#include "reprojectionError.h"
+#include "progressbar.hpp"
+
 static inline void read(const cv::FileNode& node, Settings& x, const Settings& default_value = Settings())
 {
 	if (node.empty())
@@ -59,53 +62,7 @@ void monoCamera::init()
 		grid_width = s.squareSize * (s.boardSize.width - 2);
 	}
 
-	bool release_object = false;
-	
-	//create CharucoBoard
-	if (s.calibrationPattern == Settings::CHARUCOBOARD) 
-	{
-		if (s.arucoDictFileName == "") {
-			cv::aruco::PredefinedDictionaryType arucoDict;
-			if (s.arucoDictName == "DICT_4X4_50") { arucoDict = cv::aruco::DICT_4X4_50; }
-			else if (s.arucoDictName == "DICT_4X4_100") { arucoDict = cv::aruco::DICT_4X4_100; }
-			else if (s.arucoDictName == "DICT_4X4_250") { arucoDict = cv::aruco::DICT_4X4_250; }
-			else if (s.arucoDictName == "DICT_4X4_1000") { arucoDict = cv::aruco::DICT_4X4_1000; }
-			else if (s.arucoDictName == "DICT_5X5_50") { arucoDict = cv::aruco::DICT_5X5_50; }
-			else if (s.arucoDictName == "DICT_5X5_100") { arucoDict = cv::aruco::DICT_5X5_100; }
-			else if (s.arucoDictName == "DICT_5X5_250") { arucoDict = cv::aruco::DICT_5X5_250; }
-			else if (s.arucoDictName == "DICT_5X5_1000") { arucoDict = cv::aruco::DICT_5X5_1000; }
-			else if (s.arucoDictName == "DICT_6X6_50") { arucoDict = cv::aruco::DICT_6X6_50; }
-			else if (s.arucoDictName == "DICT_6X6_100") { arucoDict = cv::aruco::DICT_6X6_100; }
-			else if (s.arucoDictName == "DICT_6X6_250") { arucoDict = cv::aruco::DICT_6X6_250; }
-			else if (s.arucoDictName == "DICT_6X6_1000") { arucoDict = cv::aruco::DICT_6X6_1000; }
-			else if (s.arucoDictName == "DICT_7X7_50") { arucoDict = cv::aruco::DICT_7X7_50; }
-			else if (s.arucoDictName == "DICT_7X7_100") { arucoDict = cv::aruco::DICT_7X7_100; }
-			else if (s.arucoDictName == "DICT_7X7_250") { arucoDict = cv::aruco::DICT_7X7_250; }
-			else if (s.arucoDictName == "DICT_7X7_1000") { arucoDict = cv::aruco::DICT_7X7_1000; }
-			else if (s.arucoDictName == "DICT_ARUCO_ORIGINAL") { arucoDict = cv::aruco::DICT_ARUCO_ORIGINAL; }
-			else if (s.arucoDictName == "DICT_APRILTAG_16h5") { arucoDict = cv::aruco::DICT_APRILTAG_16h5; }
-			else if (s.arucoDictName == "DICT_APRILTAG_25h9") { arucoDict = cv::aruco::DICT_APRILTAG_25h9; }
-			else if (s.arucoDictName == "DICT_APRILTAG_36h10") { arucoDict = cv::aruco::DICT_APRILTAG_36h10; }
-			else if (s.arucoDictName == "DICT_APRILTAG_36h11") { arucoDict = cv::aruco::DICT_APRILTAG_36h11; }
-			else {
-				std::cout << "incorrect name of aruco dictionary \n";
-			}
-
-			dictionary = cv::aruco::getPredefinedDictionary(arucoDict);
-		}
-		else {
-			cv::FileStorage dict_file(s.arucoDictFileName, cv::FileStorage::Mode::READ);
-			cv::FileNode fn(dict_file.root());
-			dictionary.readDictionary(fn);
-
-			cv::aruco::CharucoBoard ch_board({s.boardSize.width, s.boardSize.height}, s.squareSize, s.markerSize, dictionary);
-			cv::aruco::CharucoDetector ch_detector(ch_board);
-		}
-	}
-	else {
-		// default dictionary
-		dictionary = cv::aruco::getPredefinedDictionary(0);
-	}
+	bool release_object = false;	
 }
 
 monoCamera::~monoCamera()
@@ -113,11 +70,21 @@ monoCamera::~monoCamera()
 
 }
 
-bool monoCamera::calibrate()
+bool monoCamera::cornerDetect()
 {
-	while ( imagePoints.size() < (size_t)s.nrFrames )
+	unsigned short int imgcout = 0;
+	used = boost::dynamic_bitset<uint8_t>(s.nrFrames, 0);
+	
+	progressbar bar(s.nrFrames);
+	bar.set_niter(s.nrFrames);
+	bar.reset();
+	bar.set_todo_char(" ");
+	bar.set_done_char("█");
+	bar.set_opening_bracket_char("{");
+	bar.set_closing_bracket_char("}");
+	while ( imgcout < (size_t)s.nrFrames )
 	{
-		std::cout << imagePoints.size() << std::endl;
+		bar.update();
 		cv::Mat view; // calibration image
 		view = s.nextImage();
 
@@ -133,59 +100,27 @@ bool monoCamera::calibrate()
 		bool found; // true if corner found by detector
 
 		int chessBoardFlags = cv::CALIB_CB_ADAPTIVE_THRESH | cv::CALIB_CB_NORMALIZE_IMAGE;
-
-		if (!s.useFisheye) {
-			// fast check erroneously fails with high distortions like fisheye
-			chessBoardFlags |= cv::CALIB_CB_FAST_CHECK;
-		}
-
-		switch (s.calibrationPattern) // Find feature points on the input format
-		{
-			case Settings::CHESSBOARD:
-				found = findChessboardCorners(view, s.boardSize, pointBuf, chessBoardFlags);
-				break;
-				//[TODO]
-				//case Settings::CHARUCOBOARD:
-				//    ch_detector.detectBoard( view, pointBuf, markerIds);
-				//    found = pointBuf.size() == (size_t)((s.boardSize.height - 1)*(s.boardSize.width - 1));
-				//    break;
-			case Settings::CIRCLES_GRID:
-				found = findCirclesGrid(view, s.boardSize, pointBuf);
-				break;
-			case Settings::ASYMMETRIC_CIRCLES_GRID:
-				found = findCirclesGrid(view, s.boardSize, pointBuf, cv::CALIB_CB_ASYMMETRIC_GRID);
-				break;
-			default:
-				found = false;
-				break;
-		}
+		//int chessBoardFlags = cv::CALIB_CB_FAST_CHECK;
+		found = findChessboardCorners(view, s.boardSize, pointBuf, chessBoardFlags);
 		//! [find_pattern]
 
 		//! [pattern_found]
 		if (found)                // If done with success,
 		{
 			// improve the found corners' coordinate accuracy for chessboard
-			if (s.calibrationPattern == Settings::CHESSBOARD)
-			{
-				cv::Mat viewGray;
-				cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
-				
-				//cv::Mat pointMat(pointBuf.size(), 2, CV_64FC1);
-				//cv::Mat_<double> pointMat(2,88);
-				//for (size_t i = 0; i < pointBuf.size(); ++i) {
-				//pointMat.at<double>(i, 0) = pointBuf[i].x; // 行0, 列i
-				//pointMat.at<double>(i, 1) = pointBuf[i].y; // 行1, 列i
-				//}
-				
-				std::vector<cv::Point2f> cornerpts(pointBuf.size());
-				for (int i = 0; i < pointBuf.size(); i++) {
-					cornerpts[i] = cv::Point2f(pointBuf[i].x, pointBuf[i].y);
-				}
-				cornerSubPix(viewGray, cornerpts, cv::Size(winSize, winSize),
-					cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.0001));
-				for (int i = 0; i < pointBuf.size(); i++) {
-					pointBuf[i] = cv::Point2d(cornerpts[i].x, cornerpts[i].y);
-				}
+			used.set(imgcout);
+			cv::Mat viewGray;
+			cvtColor(view, viewGray, cv::COLOR_BGR2GRAY);
+			
+			
+			std::vector<cv::Point2f> cornerpts(pointBuf.size());
+			for (int i = 0; i < pointBuf.size(); i++) {
+				cornerpts[i] = cv::Point2f(pointBuf[i].x, pointBuf[i].y);
+			}
+			cornerSubPix(viewGray, cornerpts, cv::Size(winSize, winSize),
+				cv::Size(-1, -1), cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 30, 0.0001));
+			for (int i = 0; i < pointBuf.size(); i++) {
+				pointBuf[i] = cv::Point2d(cornerpts[i].x, cornerpts[i].y);
 			}
 
 			// scale 
@@ -194,253 +129,70 @@ bool monoCamera::calibrate()
 				point.x *= 1 / scaleFactor;
 				point.y *= 1 / scaleFactor;
 			}
-
-
-			if (mode == DETECTING)
-			{
-				imagePoints.push_back(pointBuf);
-			}
-
-			//------------------------- Video capture  output  undistorted ------------------------------
-			//! [output_undistorted]
-			if (mode == CALIBRATED && s.showUndistorted)
-			{
-				cv::Mat temp = view.clone();
-				if (s.useFisheye)
-				{
-					cv::Mat newCamMat;
-					cv::fisheye::estimateNewCameraMatrixForUndistortRectify(cameraMatrix, distCoeffs, imageSize,
-						cv::Matx33d::eye(), newCamMat, 1);
-					cv::fisheye::undistortImage(temp, view, cameraMatrix, distCoeffs, newCamMat);
-				}
-				else
-					undistort(temp, view, cameraMatrix, distCoeffs);
-			}
-			//! [output_undistorted]
-			//------------------------------ Show image and check for input commands -------------------
-			//! [await_input]
-		}
-		else
-		{
-			//TODO: register all image
-			__debugbreak;
 		}
 
-		// -----------------------Show the undistorted image for the image list ------------------------
-		//! [show_results]
-		if (s.showUndistorted && !cameraMatrix.empty())
+		imgcout++;
+		if (mode == DETECTING)
 		{
-			cv::Mat view, rview, map1, map2;
-
-			if (s.useFisheye)
-			{
-				cv::Mat newCamMat;
-				cv::fisheye::estimateNewCameraMatrixForUndistortRectify(cameraMatrix, distCoeffs, imageSize,
-					cv::Matx33d::eye(), newCamMat, 1);
-				cv::fisheye::initUndistortRectifyMap(cameraMatrix, distCoeffs, cv::Matx33d::eye(), newCamMat, imageSize,
-					CV_16SC2, map1, map2);
-			}
-			else
-			{
-				initUndistortRectifyMap(
-					cameraMatrix, distCoeffs, cv::Mat(),
-					getOptimalNewCameraMatrix(cameraMatrix, distCoeffs, imageSize, 1, imageSize, 0), imageSize,
-					CV_16SC2, map1, map2);
-			}
-
-			for (size_t i = 0; i < s.imageList.size(); i++)
-			{
-				view = cv::imread(s.imageList[i], cv::IMREAD_COLOR);
-				if (view.empty())
-					continue;
-				remap(view, rview, map1, map2, cv::INTER_LINEAR);
-				imshow("Image View", rview);
-				while (char c = (char)cv::waitKey())
-				{
-					if (c == ESC_KEY || c == 'q' || c == 'Q')
-						break;
-				}
-			}
-		}
-		//! [show_results]
-	}
-
-	if (mode == DETECTING && imagePoints.size() >= (size_t)s.nrFrames)
-	{
-		if (runCalibrationAndSave(s, imageSize, cameraMatrix, distCoeffs, imagePoints, grid_width,
-			release_object))
-		{
-			mode = CALIBRATED;
-			return 0;
+			imagePoints.push_back(pointBuf);
 		}
 	}
 	return 1;
 }
 
-//! [compute_errors]
-double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::Point3d> >& objectPoints,
-	const std::vector<std::vector<cv::Point2d> >& imagePoints,
-	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
-	const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
-	std::vector<float>& perViewErrors, bool fisheye)
+bool monoCamera::runCalibration(std::vector<float>& reprojErrs, double& totalAvgErr)
 {
-	std::vector<cv::Point2d> imagePoints2;
-	size_t totalPoints = 0;
-	double totalErr = 0, err;
-	perViewErrors.resize(objectPoints.size());
-
-	for (size_t i = 0; i < objectPoints.size(); ++i)
-	{
-		if (fisheye)
-		{
-			cv::fisheye::projectPoints(objectPoints[i], imagePoints2, rvecs[i], tvecs[i], cameraMatrix,
-				distCoeffs);
-		}
-		else
-		{
-			projectPoints(objectPoints[i], rvecs[i], tvecs[i], cameraMatrix, distCoeffs, imagePoints2);
-		}
-		err = norm(imagePoints[i], imagePoints2, cv::NORM_L2);
-
-		size_t n = objectPoints[i].size();
-		perViewErrors[i] = (float)std::sqrt(err * err / n);
-		totalErr += err * err;
-		totalPoints += n;
-	}
-
-	return std::sqrt(totalErr / totalPoints);
-}
-//! [compute_errors]
-
-//! [board_corners]
-void monoCamera::calcBoardCornerPositions(cv::Size boardSize, float squareSize, std::vector<cv::Point3d>& corners,
-	Settings::Pattern patternType /*= Settings::CHESSBOARD*/)
-{
-	corners.clear();
-
-	switch (patternType)
-	{
-	case Settings::CHESSBOARD:
-	case Settings::CIRCLES_GRID:
-		for (int i = 0; i < boardSize.height; ++i) {
-			for (int j = 0; j < boardSize.width; ++j) {
-				corners.push_back(cv::Point3f(j * squareSize, i * squareSize, 0));
-			}
-		}
-		break;
-	case Settings::CHARUCOBOARD:
-		for (int i = 0; i < boardSize.height - 1; ++i) {
-			for (int j = 0; j < boardSize.width - 1; ++j) {
-				corners.push_back(cv::Point3f(j * squareSize, i * squareSize, 0));
-			}
-		}
-		break;
-	case Settings::ASYMMETRIC_CIRCLES_GRID:
-		for (int i = 0; i < boardSize.height; i++) {
-			for (int j = 0; j < boardSize.width; j++) {
-				corners.push_back(cv::Point3f((2 * j + i % 2) * squareSize, i * squareSize, 0));
-			}
-		}
-		break;
-	default:
-		break;
-	}
-}
-//! [board_corners]
-
-bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
-	std::vector<std::vector<cv::Point2d> > imagePoints, std::vector<cv::Mat>& rvecs, std::vector<cv::Mat>& tvecs,
-	std::vector<float>& reprojErrs, double& totalAvgErr, std::vector<cv::Point3d>& newObjPoints,
-	float grid_width, bool release_object)
-{
-	//! [fixed_aspect]
-	cameraMatrix = cv::Mat::eye(3, 3, CV_64F);
-	cameraMatrix.at<double>(0, 0) = (double)22758.30678; // Set f_x
-	cameraMatrix.at<double>(1, 1) = (double)22768.67030; // Set f_y
-	cameraMatrix.at<double>(0, 2) = (double)4096.0; // Set c_x
-	cameraMatrix.at<double>(1, 2) = (double)2732.0; // Set c_y
-
-
-	//if (!s.useFisheye && s.flag & cv::CALIB_FIX_ASPECT_RATIO)
-	//	cameraMatrix.at<double>(0, 0) = s.aspectRatio;
-	//! [fixed_aspect]
-	if (s.useFisheye) {
-		distCoeffs = cv::Mat::zeros(4, 1, CV_64F);
-	}
-	else {
-		distCoeffs = cv::Mat::zeros(8, 1, CV_64F);
-	}
-
 	std::vector<std::vector<cv::Point3d> > objectPoints(1);
-	calcBoardCornerPositions(s.boardSize, s.squareSize, objectPoints[0], s.calibrationPattern);
-	if (s.calibrationPattern == Settings::Pattern::CHARUCOBOARD) {
-		objectPoints[0][s.boardSize.width - 2].x = objectPoints[0][0].x + grid_width;
-	}
-	else {
-		objectPoints[0][s.boardSize.width - 1].x = objectPoints[0][0].x + grid_width;
-	}
-	newObjPoints = objectPoints[0];
 
-	objectPoints.resize(imagePoints.size(), objectPoints[0]);
+	cv::Size boardSize = s.boardSize;
+	float squareSize = s.squareSize;
+	for (int i = 0; i < boardSize.height; ++i) {
+		for (int j = 0; j < boardSize.width; ++j) {
+			objectPoints[0].push_back(cv::Point3f(j * squareSize, i * squareSize, 0));
+		}
+	}
+
+	objectPoints[0][s.boardSize.width - 1].x = objectPoints[0][0].x + grid_width;
+
+	gridPoints = objectPoints[0];
+
+	objectPoints.resize(imagePoints.size(), objectPoints[0]); // extent to all view
 
 	//Find intrinsic and extrinsic camera parameters
 	double rms;
 
-	if (s.useFisheye) {
-		cv::Mat _rvecs, _tvecs;
-		rms = cv::fisheye::calibrate(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs, _rvecs,
-			_tvecs, s.flag);
-
-		rvecs.reserve(_rvecs.rows);
-		tvecs.reserve(_tvecs.rows);
-		for (int i = 0; i < int(objectPoints.size()); i++) {
-			rvecs.push_back(_rvecs.row(i));
-			tvecs.push_back(_tvecs.row(i));
+	int iFixedPoint = -1;
+	if (release_object)
+		iFixedPoint = s.boardSize.width - 1;
+	
+	std::vector<std::vector<cv::Point3f>> inputobject3d(objectPoints.size());
+	for (int i = 0; i < imagePoints.size(); i++)
+	{
+		inputobject3d[i].reserve(objectPoints[i].size());
+		for (int j = 0; j < objectPoints[i].size(); j++) {
+			inputobject3d[i].push_back(cv::Point3f(objectPoints[i][j].x, objectPoints[i][j].y, objectPoints[i][j].z));
 		}
 	}
-	else {
-		int iFixedPoint = -1;
-		if (release_object)
-			iFixedPoint = s.boardSize.width - 1;
-		
-		std::vector<std::vector<cv::Point3f>> inputobject3d(objectPoints.size());
-		for (int i = 0; i < imagePoints.size(); i++)
-		{
-			inputobject3d[i].reserve(objectPoints[i].size());
-			for (int j = 0; j < objectPoints[i].size(); j++) {
-				inputobject3d[i].push_back(cv::Point3f(objectPoints[i][j].x, objectPoints[i][j].y, objectPoints[i][j].z));
-			}
+
+	std::vector<std::vector<cv::Point2f>> inputimage2d(imagePoints.size());
+	for (int i = 0; i < imagePoints.size(); i++)
+	{
+		inputimage2d[i].reserve(imagePoints[i].size());
+		for (int j = 0; j < imagePoints[i].size(); j++) {
+			inputimage2d[i].push_back(cv::Point2f(imagePoints[i][j].x, imagePoints[i][j].y));
 		}
-
-		std::vector<std::vector<cv::Point2f>> inputimage2d(imagePoints.size());
-		for (int i = 0; i < imagePoints.size(); i++)
-		{
-			inputimage2d[i].reserve(imagePoints[i].size());
-			for (int j = 0; j < imagePoints[i].size(); j++) {
-				inputimage2d[i].push_back(cv::Point2f(imagePoints[i][j].x, imagePoints[i][j].y));
-			}
-		}
-		rms = calibrateCameraRO(inputobject3d, inputimage2d, imageSize, iFixedPoint,
-			cameraMatrix, distCoeffs, rvecs, tvecs, newObjPoints,
-			s.flag | cv::CALIB_USE_LU | cv::CALIB_FIX_FOCAL_LENGTH |
-				 cv::CALIB_FIX_PRINCIPAL_POINT | cv::CALIB_USE_INTRINSIC_GUESS);
-
 	}
-
-	if (release_object) {
-		std::cout << "New board corners: " << std::endl;
-		std::cout << newObjPoints[0] << std::endl;
-		std::cout << newObjPoints[s.boardSize.width - 1] << std::endl;
-		std::cout << newObjPoints[s.boardSize.width * (s.boardSize.height - 1)] << std::endl;
-		std::cout << newObjPoints.back() << std::endl;
-	}
+	rms = calibrateCameraRO(inputobject3d, inputimage2d, imageSize, iFixedPoint,
+		cameraMatrix, distCoeffs, rvecs, tvecs, gridPoints,
+		s.flag | cv::CALIB_USE_LU | cv::CALIB_FIX_FOCAL_LENGTH |
+			 cv::CALIB_FIX_PRINCIPAL_POINT | cv::CALIB_USE_INTRINSIC_GUESS);
 
 	std::cout << "Re-projection error reported by calibrateCamera: " << rms << std::endl;
 
 	bool ok = checkRange(cameraMatrix) && checkRange(distCoeffs);
 
 	objectPoints.clear();
-	objectPoints.resize(imagePoints.size(), newObjPoints);
+	objectPoints.resize(imagePoints.size(), gridPoints);
 	totalAvgErr = computeReprojectionErrors(objectPoints, imagePoints, rvecs, tvecs, cameraMatrix,
 		distCoeffs, reprojErrs, s.useFisheye);
 
@@ -451,7 +203,7 @@ bool monoCamera::runCalibration(Settings& s, cv::Size& imageSize, cv::Mat& camer
 void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cameraMatrix, cv::Mat& distCoeffs,
 	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
 	const std::vector<float>& reprojErrs, const std::vector<std::vector<cv::Point2d> >& imagePoints,
-	double totalAvgErr, const std::vector<cv::Point3d>& newObjPoints)
+	double totalAvgErr, const std::vector<cv::Point3d>& gridPoints)
 {
 	cv::FileStorage fs(s.outputFileName, cv::FileStorage::WRITE);
 
@@ -560,10 +312,9 @@ void monoCamera::saveCameraParams(Settings& s, cv::Size& imageSize, cv::Mat& cam
 		fs << "image_points" << imagePtMat;
 	}
 
-	if (s.writeGrid && !newObjPoints.empty())
+	if (s.writeGrid && !gridPoints.empty())
 	{
-		fs << "grid_points" << newObjPoints;
-		gridPoints = newObjPoints;
+		fs << "grid_points" << gridPoints;
 	}
 }
 
@@ -573,19 +324,19 @@ bool monoCamera::runCalibrationAndSave(Settings& s, cv::Size imageSize, cv::Mat&
 {
 	std::vector<float> reprojErrs;
 	double totalAvgErr = 0;
-	std::vector<cv::Point3d> newObjPoints;
+	std::vector<cv::Point3d> gridPoints;
 
-	bool ok = runCalibration(s, imageSize, cameraMatrix, distCoeffs, imagePoints, rvecs, tvecs, reprojErrs,
-		totalAvgErr, newObjPoints, grid_width, release_object);
+	bool ok = runCalibration(reprojErrs,
+		totalAvgErr);
 	std::cout << (ok ? "Calibration succeeded" : "Calibration failed")
 		<< ". avg re projection error = " << totalAvgErr << std::endl;
 
 	if (ok)
 		saveCameraParams(s, imageSize, cameraMatrix, distCoeffs, rvecs, tvecs, reprojErrs, imagePoints,
-			totalAvgErr, newObjPoints);
+			totalAvgErr, gridPoints);
 	return ok;
 }
-//! [run_and_save]
+
 
 bool monoCamera::showCalibrationResults(DISPLAY displayMode)
 {
@@ -627,7 +378,29 @@ bool monoCamera::showCalibrationResults(DISPLAY displayMode)
 	return 0;
 }
 
-void monoCamera::readResultXml(const std::string& xmlFilename)
+void monoCamera::writeCornerDetectResultXml(const std::string& xmlFilename)
+{
+	cv::FileStorage fs(xmlFilename, cv::FileStorage::WRITE);
+	if (!fs.isOpened()) {
+		std::cerr << "Failed to open " << xmlFilename << std::endl;
+		return;
+	}
+	cv::Mat R = cv::Mat::ones(3, 3, CV_64F);
+	cv::Mat T = cv::Mat::zeros(3, 1, CV_64F);
+
+    // write data from the file
+	fs << "image_points" << imagePoints;  
+	fs << "image_Size" << imageSize;  
+	fs << "camera_matrix" << cameraMatrix;  
+	fs << "distortion_coefficients" << distCoeffs;
+	fs << "R" << R;
+	fs << "T" << T;
+
+	// Close the file storage
+	fs.release();
+}
+
+void monoCamera::readCornerDetectResultXml(const std::string& xmlFilename)
 {
 	cv::FileStorage fs(xmlFilename, cv::FileStorage::READ);
 	if (!fs.isOpened()) {
@@ -635,38 +408,15 @@ void monoCamera::readResultXml(const std::string& xmlFilename)
 		return;
 	}
 
-    // Read data from the file
-	cv::Mat bigmat, imagePtMat;
-
-	fs["grid_points"] >> gridPoints;
-	fs["extrinsic_parameters"] >> bigmat; 
-    fs["image_points"] >> imagePtMat;  
-
-	// Convert imagePtMat to std::vector<std::vector<cv::Point2d>>
-	imagePoints.resize(imagePtMat.rows);
-	for (int i = 0; i < imagePtMat.rows; i++) {
-		imagePoints[i] = imagePtMat.row(i);
-	}
-
-	// Convert bigmat to rvecs and tvecs
-	rvecs.resize(bigmat.rows);
-	tvecs.resize(bigmat.rows);
-	for (int i = 0; i < bigmat.rows; i++) {
-		rvecs[i] = bigmat(cv::Range(i, i + 1), cv::Range(0, 3));
-		tvecs[i] = bigmat(cv::Range(i, i + 1), cv::Range(3, 6));
-	}
-	
-    fs["image_width"] >> imageSize.width;
-    fs["image_height"] >> imageSize.height;
+    fs["image_points"] >> imagePoints;  
+    fs["image_Size"] >> imageSize;
     fs["camera_matrix"] >> cameraMatrix;
     fs["distortion_coefficients"] >> distCoeffs;
+    fs["R"] >> R;
+    fs["T"] >> T;
+
 	// Close the file storage
 	fs.release();
-
-	// You can print or process the variables as needed
-	//std::cout << "Image Size: " << imageSize << std::endl;
-	//std::cout << "Camera Matrix:\n" << cameraMatrix << std::endl;
-	//std::cout << "Distortion Coefficients:\n" << distCoeffs << std::endl;
 }
 
 std::vector<cv::Point2d> monoCamera::getImagePoint()
@@ -749,7 +499,39 @@ bool monoCamera::readCameraParams(std::string& filename)
 	return 0;
 }
 
+double monoCamera::computeReprojectionErrors(const std::vector<std::vector<cv::Point3d> >& objectPoints,
+	const std::vector<std::vector<cv::Point2d> >& imagePoints,
+	const std::vector<cv::Mat>& rvecs, const std::vector<cv::Mat>& tvecs,
+	const cv::Mat& cameraMatrix, const cv::Mat& distCoeffs,
+	std::vector<float>& perViewErrors, bool fisheye)
+{
+	std::vector<cv::Point2d> imagePoints2;
+	size_t totalPoints = 0;
+	double totalErr = 0, err;
+	perViewErrors.resize(objectPoints.size());
 
+	for (size_t i = 0; i < objectPoints.size(); ++i)
+	{
+		if (fisheye)
+		{
+			cv::fisheye::projectPoints(objectPoints[i], imagePoints2, rvecs[i], tvecs[i], cameraMatrix,
+				distCoeffs);
+		}
+		else
+		{
+			projectPoints(objectPoints[i], rvecs[i], tvecs[i], cameraMatrix, distCoeffs, imagePoints2);
+		}
+		err = norm(imagePoints[i], imagePoints2, cv::NORM_L2);
+
+		size_t n = objectPoints[i].size();
+		perViewErrors[i] = (float)std::sqrt(err * err / n);
+		totalErr += err * err;
+		totalPoints += n;
+	}
+
+	return std::sqrt(totalErr / totalPoints);
+}
+//! [compute_errors]
 cv::Mat monoCamera::getProjectMatrix()
 {
 	cv::Mat P;
@@ -758,4 +540,95 @@ cv::Mat monoCamera::getProjectMatrix()
 	P = cameraMatrix * RT;
 
 	return P;
+}
+
+std::string getFilename(const std::string& filepath) {
+	// 查找最后一个目录分隔符
+	// 在 Windows 上使用 '\\'，在 UNIX-like 系统上使用 '/'
+	size_t pos = filepath.find_last_of("/\\");
+
+	if (pos != std::string::npos) {
+		// 如果找到，返回分隔符之后的部分
+		return filepath.substr(pos + 1);
+	}
+	else {
+		// 如果没有找到分隔符，整个字符串就是文件名
+		return filepath;
+	}
+}
+
+void monoCamera::visProjImage(std::vector<cv::Point3d>& worldPoints)
+{
+	std::vector<std::string>& image_files = s.imageList;
+	double scale = 1.0;
+	int index = 0;
+
+	while (true) {
+		cv::Mat resized;
+		cv::Mat image = cv::imread(image_files[index]);
+
+		if (image.empty()) {
+			std::cerr << "can`t to load image: " << image_files[index] << std::endl;
+		}
+
+		// draw point
+		auto drawPoint = [&image](double x, double y, cv::Scalar color) {
+			cv::Point center(x, y); // 将圆心设置在图像中心
+			int radius = 3; // 圆的半径
+			cv::circle(image, center, radius, color, 0.5); // 线宽为 2	
+			};
+
+		// draw Text
+
+		auto drawText = [&image](double x, double y, std::string s, cv::Scalar color) {
+			int fontFace = cv::FONT_HERSHEY_SIMPLEX;
+			double fontScale = 0.25;
+			int thickness = 1.5;
+			int baseline = 0;
+			cv::Size textSize = cv::getTextSize(s, fontFace, fontScale, thickness, &baseline);
+			cv::Point textOrg(x, y);
+			cv::putText(image, s, textOrg, fontFace, fontScale, color, thickness);
+			};
+
+		// draw image point
+		cv::Scalar color(255, 0, 0); // 绿色
+		int imageindex = 0;
+		for (auto point : imagePoints[index])
+		{
+			double x = point.x / 4;
+			double y = point.y / 4;
+			drawPoint(x, y, color);
+			drawText(x, y+5, std::to_string(++imageindex), color);
+		}
+
+		// draw projection point
+		color = cv::Scalar(0, 0, 255);
+		cv::Mat projMatrix = getProjectMatrix();
+		cv::Mat homogeneous_point, homogeneous_proj;
+		imageindex = 0;
+		for (int i = index * 88; i < (index * 88 + 88); i++)
+		{
+			cv::Point3d point = worldPoints[i];
+			homogeneous_point = (cv::Mat_<double>(4, 1) << point.x, point.y, point.z, 1.0);
+			homogeneous_proj = projMatrix * homogeneous_point;	
+			double x = (homogeneous_proj.at<double>(0)/homogeneous_proj.at<double>(2)) / 4 ;
+			double y = (homogeneous_proj.at<double>(1)/homogeneous_proj.at<double>(2)) / 4 ;
+			drawPoint(x, y, color);
+			drawText(x+4, y, std::to_string(++imageindex), color);
+		}
+		std::string fn = getFilename(image_files[index]);
+		std::string path = R"(Z:\wangxiukia_23_12_06\tmp\)" + fn;
+		cv::imwrite(path, image);
+		index++;
+		if (index >= image_files.size()) exit(0);
+	}
+
+	cv::destroyAllWindows();
+}
+
+cv::Mat monoCamera::getExtrinsicMatrix()
+{
+	cv::Mat RT;
+	cv::hconcat(R, T, RT);
+	return RT;
 }

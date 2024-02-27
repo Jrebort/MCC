@@ -147,6 +147,8 @@ void OptimizeCameraAndPoints(
 	ceres::Solver::Options options;
 	options.linear_solver_type = ceres::SPARSE_SCHUR;
 	options.minimizer_progress_to_stdout = true;
+	options.max_num_iterations = 30;
+	options.num_threads = 5;
 
 	ceres::Solver::Summary summary;
 	ceres::Solve(options, &problem, &summary);

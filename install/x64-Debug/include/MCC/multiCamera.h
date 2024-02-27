@@ -12,7 +12,7 @@ namespace MCC {
 	public:
 		std::string dataPath;
 		std::vector<monoCamera> cameraMatrix;
-		std::vector<std::vector<cv::Point3f>> worldPoint;
+		std::vector<std::vector<cv::Point3d>> worldPoint;
 		std::vector<cv::Point3d> worldPointDouble;
 		unsigned int cameraNum;
 
@@ -20,28 +20,29 @@ namespace MCC {
 		multiCamera();
 		~multiCamera();
 		void addCamera(monoCamera& camera);
-		void readOptimalResult(const std::string& filename);
-		bool iterateDataFolder(const std::string& DataPath, std::vector<std::string>& viewFolders);
-		bool addCameraFromData(std::vector<std::string>& viewFolders);
+		bool initCameraFromData(std::vector<std::string>& viewFolders, double scale);
+		bool zhangCalibration(int firstindex, int secondindex);
+
 		void writeCameraParamter();
-		bool writePoint3D();
-		bool readPoint3D();
+		bool writeWorldPoint3D();
+		bool readWorldPoint3D();
 		void MVSTriangluationEval();
 		void readCameraParamter();
 		void evaluateReprojection();
 		void GlobalBA();
+		int checkResult();
 		void pnpOptimization();
 		void sfmCalibration(int firstindex, int secondindex);
+
+	public:
 		unsigned int getCameraNum() { return cameraMatrix.size(); }
 		unsigned int getPerCameraNum() { return cameraMatrix[1].getImagePointNum(); }
 		inline monoCamera& getCamera(unsigned int i) { return cameraMatrix[i]; }
-		std::vector<cv::Point3f> getWorldPointVec() const;
+		std::vector<cv::Point3d> getWorldPointVec() const;
 		cv::Mat getWorldPointMat() const;
-		void evaluate();
 		void visCameraPose();
 	};
 
-	void computeReprojectionError(monoCamera& camera1, monoCamera& camera2);
-	void computeProjectionMatrix(monoCamera& camera2, cv::Mat P2);
-
+	// P is return value 
+	void computeProjectionMatrix(monoCamera& camera2, cv::Mat P);
 } // MCC namespace 

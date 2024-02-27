@@ -39,13 +39,13 @@ include CMakeFiles\rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\
+cmake_ninja_workdir = C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\
 
 #############################################
 # Utility command for edit_cache
 
 build CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -56,7 +56,7 @@ build edit_cache: phony CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -74,7 +74,7 @@ build list_install_components: phony
 # Utility command for install
 
 build CMakeFiles\install.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -86,7 +86,7 @@ build install: phony CMakeFiles\install.util
 # Utility command for install/local
 
 build CMakeFiles\install\local.util: CUSTOM_COMMAND all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -107,9 +107,9 @@ build install\local: phony CMakeFiles\install\local.util
 
 build cmake_object_order_depends_target_mcc: phony || MCC\CMakeFiles\mcc.dir
 
-build MCC\CMakeFiles\mcc.dir\Dataset.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\Dataset.cpp || cmake_object_order_depends_target_mcc
+build MCC\CMakeFiles\mcc.dir\Loader.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\Loader.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -118,7 +118,7 @@ build MCC\CMakeFiles\mcc.dir\Dataset.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug 
 
 build MCC\CMakeFiles\mcc.dir\Settings.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\Settings.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -127,7 +127,7 @@ build MCC\CMakeFiles\mcc.dir\Settings.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug
 
 build MCC\CMakeFiles\mcc.dir\monoCamera.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\monoCamera.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -136,7 +136,7 @@ build MCC\CMakeFiles\mcc.dir\monoCamera.cpp.obj: CXX_COMPILER__mcc_unscanned_Deb
 
 build MCC\CMakeFiles\mcc.dir\multiCamera.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\multiCamera.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -145,7 +145,7 @@ build MCC\CMakeFiles\mcc.dir\multiCamera.cpp.obj: CXX_COMPILER__mcc_unscanned_De
 
 build MCC\CMakeFiles\mcc.dir\multiCameraBA.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\multiCameraBA.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -154,7 +154,7 @@ build MCC\CMakeFiles\mcc.dir\multiCameraBA.cpp.obj: CXX_COMPILER__mcc_unscanned_
 
 build MCC\CMakeFiles\mcc.dir\reprojectionError.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\reprojectionError.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -163,7 +163,7 @@ build MCC\CMakeFiles\mcc.dir\reprojectionError.cpp.obj: CXX_COMPILER__mcc_unscan
 
 build MCC\CMakeFiles\mcc.dir\typeConverter.cpp.obj: CXX_COMPILER__mcc_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC\typeConverter.cpp || cmake_object_order_depends_target_mcc
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -DH5_BUILT_AS_DYNAMIC_LIB -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   OBJECT_FILE_DIR = MCC\CMakeFiles\mcc.dir
@@ -178,8 +178,8 @@ build MCC\CMakeFiles\mcc.dir\typeConverter.cpp.obj: CXX_COMPILER__mcc_unscanned_
 #############################################
 # Link the static library MCC\mcc.lib
 
-build MCC\mcc.lib: CXX_STATIC_LIBRARY_LINKER__mcc_Debug MCC\CMakeFiles\mcc.dir\Dataset.cpp.obj MCC\CMakeFiles\mcc.dir\Settings.cpp.obj MCC\CMakeFiles\mcc.dir\monoCamera.cpp.obj MCC\CMakeFiles\mcc.dir\multiCamera.cpp.obj MCC\CMakeFiles\mcc.dir\multiCameraBA.cpp.obj MCC\CMakeFiles\mcc.dir\reprojectionError.cpp.obj MCC\CMakeFiles\mcc.dir\typeConverter.cpp.obj
-  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+build MCC\mcc.lib: CXX_STATIC_LIBRARY_LINKER__mcc_Debug MCC\CMakeFiles\mcc.dir\Loader.cpp.obj MCC\CMakeFiles\mcc.dir\Settings.cpp.obj MCC\CMakeFiles\mcc.dir\monoCamera.cpp.obj MCC\CMakeFiles\mcc.dir\multiCamera.cpp.obj MCC\CMakeFiles\mcc.dir\multiCameraBA.cpp.obj MCC\CMakeFiles\mcc.dir\reprojectionError.cpp.obj MCC\CMakeFiles\mcc.dir\typeConverter.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -MDd -ZI
   LINK_FLAGS = /machine:x64
   OBJECT_DIR = MCC\CMakeFiles\mcc.dir
   POST_BUILD = cd .
@@ -193,7 +193,7 @@ build MCC\mcc.lib: CXX_STATIC_LIBRARY_LINKER__mcc_Debug MCC\CMakeFiles\mcc.dir\D
 # Utility command for edit_cache
 
 build MCC\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -204,7 +204,7 @@ build MCC\edit_cache: phony MCC\CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build MCC\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -222,7 +222,7 @@ build MCC\list_install_components: phony
 # Utility command for install
 
 build MCC\CMakeFiles\install.util: CUSTOM_COMMAND MCC\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -234,7 +234,7 @@ build MCC\install: phony MCC\CMakeFiles\install.util
 # Utility command for install/local
 
 build MCC\CMakeFiles\install\local.util: CUSTOM_COMMAND MCC\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\MCC && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -257,16 +257,7 @@ build cmake_object_order_depends_target_demo: phony || cmake_object_order_depend
 
 build example\CMakeFiles\demo.dir\app.cpp.obj: CXX_COMPILER__demo_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\example\app.cpp || cmake_object_order_depends_target_demo
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
-  INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
-  OBJECT_DIR = example\CMakeFiles\demo.dir
-  OBJECT_FILE_DIR = example\CMakeFiles\demo.dir
-  TARGET_COMPILE_PDB = example\CMakeFiles\demo.dir\
-  TARGET_PDB = example\demo.pdb
-
-build example\CMakeFiles\demo.dir\lab.cpp.obj: CXX_COMPILER__demo_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\example\lab.cpp || cmake_object_order_depends_target_demo
-  DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = example\CMakeFiles\demo.dir
   OBJECT_FILE_DIR = example\CMakeFiles\demo.dir
@@ -281,12 +272,12 @@ build example\CMakeFiles\demo.dir\lab.cpp.obj: CXX_COMPILER__demo_unscanned_Debu
 #############################################
 # Link the executable example\demo.exe
 
-build example\demo.exe: CXX_EXECUTABLE_LINKER__demo_Debug example\CMakeFiles\demo.dir\app.cpp.obj example\CMakeFiles\demo.dir\lab.cpp.obj | MCC\mcc.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib || MCC\mcc.lib
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+build example\demo.exe: CXX_EXECUTABLE_LINKER__demo_Debug example\CMakeFiles\demo.dir\app.cpp.obj | MCC\mcc.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib || MCC\mcc.lib
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -MDd -ZI
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = MCC\mcc.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib  shlwapi.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = example\CMakeFiles\demo.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/demo.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out"
+  POST_BUILD = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/example/demo.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = example\CMakeFiles\demo.dir\
   TARGET_FILE = example\demo.exe
@@ -305,7 +296,7 @@ build cmake_object_order_depends_target_testMat: phony || cmake_object_order_dep
 
 build example\CMakeFiles\testMat.dir\testMat.cpp.obj: CXX_COMPILER__testMat_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\example\testMat.cpp || cmake_object_order_depends_target_testMat
   DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -D_USE_MATH_DEFINES
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd /Zc:__cplusplus
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
   INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
   OBJECT_DIR = example\CMakeFiles\testMat.dir
   OBJECT_FILE_DIR = example\CMakeFiles\testMat.dir
@@ -321,11 +312,11 @@ build example\CMakeFiles\testMat.dir\testMat.cpp.obj: CXX_COMPILER__testMat_unsc
 # Link the executable example\testMat.exe
 
 build example\testMat.exe: CXX_EXECUTABLE_LINKER__testMat_Debug example\CMakeFiles\testMat.dir\testMat.cpp.obj | MCC\mcc.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib || MCC\mcc.lib
-  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -MDd -ZI
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = MCC\mcc.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib  shlwapi.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = example\CMakeFiles\testMat.dir
-  POST_BUILD = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example/testMat.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out"
+  POST_BUILD = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/example/testMat.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = example\CMakeFiles\testMat.dir\
   TARGET_FILE = example\testMat.exe
@@ -333,12 +324,51 @@ build example\testMat.exe: CXX_EXECUTABLE_LINKER__testMat_Debug example\CMakeFil
   TARGET_PDB = example\testMat.pdb
   RSP_FILE = CMakeFiles\testMat.rsp
 
+# =============================================================================
+# Object build statements for EXECUTABLE target lab
+
+
+#############################################
+# Order-only phony target for lab
+
+build cmake_object_order_depends_target_lab: phony || cmake_object_order_depends_target_mcc
+
+build example\CMakeFiles\lab.dir\lab.cpp.obj: CXX_COMPILER__lab_unscanned_Debug C$:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\example\lab.cpp || cmake_object_order_depends_target_lab
+  DEFINES = -DFMT_SHARED -DGFLAGS_IS_A_DLL=1 -DGLOG_NO_ABBREVIATED_SEVERITIES -D_USE_MATH_DEFINES
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -ZI /Zc:__cplusplus
+  INCLUDES = -IC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\MCC -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include -external:IC:\Users\DELL\vcpkg\installed\x64-windows\include\eigen3 -external:W0
+  OBJECT_DIR = example\CMakeFiles\lab.dir
+  OBJECT_FILE_DIR = example\CMakeFiles\lab.dir
+  TARGET_COMPILE_PDB = example\CMakeFiles\lab.dir\
+  TARGET_PDB = example\lab.pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target lab
+
+
+#############################################
+# Link the executable example\lab.exe
+
+build example\lab.exe: CXX_EXECUTABLE_LINKER__lab_Debug example\CMakeFiles\lab.dir\lab.cpp.obj | MCC\mcc.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib C$:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib || MCC\mcc.lib
+  FLAGS = /DWIN32 /D_WINDOWS /GR /EHsc /Ob0 /Od /RTC1 -MDd -ZI
+  LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
+  LINK_LIBRARIES = MCC\mcc.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\boost_filesystem-vc140-mt-gd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\ceres-debug.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\fmtd.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stitching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_alphamat4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_aruco4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bgsegm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_bioinspired4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ccalib4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dpm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_face4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_fuzzy4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hdf4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_hfs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_img_hash4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_intensity_transform4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_line_descriptor4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_mcc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_quality4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_rapid4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_reg4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_saliency4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_sfm4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\glog.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\gflags_debug.lib  shlwapi.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_stereo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_structured_light4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_phase_unwrapping4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_superres4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_optflow4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_surface_matching4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_tracking4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_highgui4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_datasets4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_plot4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_text4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videostab4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_videoio4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_viz4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_wechat_qrcode4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xfeatures2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ml4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_shape4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_ximgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_video4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xobjdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgcodecs4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_objdetect4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_calib3d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_dnn4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_features2d4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_flann4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_xphoto4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_photo4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_imgproc4d.lib  C:\Users\DELL\vcpkg\installed\x64-windows\debug\lib\opencv_core4d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+  OBJECT_DIR = example\CMakeFiles\lab.dir
+  POST_BUILD = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\PowerShell\7\pwsh.exe" -noprofile -executionpolicy Bypass -file C:/Users/DELL/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/example/lab.exe -installedDir C:/Users/DELL/vcpkg/installed/x64-windows/debug/bin -OutVariable out"
+  PRE_LINK = cd .
+  TARGET_COMPILE_PDB = example\CMakeFiles\lab.dir\
+  TARGET_FILE = example\lab.exe
+  TARGET_IMPLIB = example\lab.lib
+  TARGET_PDB = example\lab.pdb
+  RSP_FILE = CMakeFiles\lab.rsp
+
 
 #############################################
 # Utility command for edit_cache
 
 build example\CMakeFiles\edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E echo "No interactive CMake dialog available.""
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -349,7 +379,7 @@ build example\edit_cache: phony example\CMakeFiles\edit_cache.util
 # Utility command for rebuild_cache
 
 build example\CMakeFiles\rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --regenerate-during-build -SC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc -BC:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug"
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -367,7 +397,7 @@ build example\list_install_components: phony
 # Utility command for install
 
 build example\CMakeFiles\install.util: CUSTOM_COMMAND example\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -P cmake_install.cmake"
   DESC = Install the project...
   pool = console
   restat = 1
@@ -379,7 +409,7 @@ build example\install: phony example\CMakeFiles\install.util
 # Utility command for install/local
 
 build example\CMakeFiles\install\local.util: CUSTOM_COMMAND example\all
-  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-Debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  COMMAND = cmd.exe /C "cd /D C:\Users\DELL\source\repos\Jrebort\Eye3D\vendor\mcc\build\x64-debug\example && "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
   DESC = Installing only the local directory...
   pool = console
   restat = 1
@@ -392,6 +422,10 @@ build example\install\local: phony example\CMakeFiles\install\local.util
 build demo: phony example\demo.exe
 
 build demo.exe: phony example\demo.exe
+
+build lab: phony example\lab.exe
+
+build lab.exe: phony example\lab.exe
 
 build mcc: phony MCC\mcc.lib
 
@@ -407,23 +441,23 @@ build testMat.exe: phony example\testMat.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug
+# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug
 
 build all: phony MCC\all example\all
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC
+# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC
 
 build MCC\all: phony MCC\mcc.lib
 
 # =============================================================================
 
 #############################################
-# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/example
+# Folder: C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/example
 
-build example\all: phony example\demo.exe example\testMat.exe
+build example\all: phony example\demo.exe example\testMat.exe example\lab.exe
 
 # =============================================================================
 # Built-in targets

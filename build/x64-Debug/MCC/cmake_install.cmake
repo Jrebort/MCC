@@ -33,7 +33,7 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/mcc.lib")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/mcc.lib")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -44,7 +44,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccTarget.cmake")
     file(DIFFERENT _cmake_export_file_changed FILES
          "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccTarget.cmake"
-         "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget.cmake")
+         "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget.cmake")
     if(_cmake_export_file_changed)
       file(GLOB _cmake_old_config_files "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/cmake/MCC/mccTarget-*.cmake")
       if(_cmake_old_config_files)
@@ -57,16 +57,16 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     endif()
     unset(_cmake_export_file_changed)
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget.cmake")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget.cmake")
   if(CMAKE_INSTALL_CONFIG_NAME MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget-debug.cmake")
+    file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/CMakeFiles/Export/8d67e6e9e4ba80710275bd321b1d9777/mccTarget-debug.cmake")
   endif()
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/cmake/MCC" TYPE FILE FILES
-    "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/mccConfig.cmake"
-    "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-Debug/MCC/mccConfigVersion.cmake"
+    "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/mccConfig.cmake"
+    "C:/Users/DELL/source/repos/Jrebort/Eye3D/vendor/mcc/build/x64-debug/MCC/mccConfigVersion.cmake"
     )
 endif()
 
